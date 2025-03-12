@@ -1,0 +1,109 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: system-ui;
+  color: #ddd;
+  background-color: #222;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: 0;
+}
+
+.u-container {
+  padding: 20px;
+  border: 1px solid #ddd;
+}
+
+.u-innerContainer {
+  display: flex;
+  padding: 0 5px;
+  gap: 5px
+}
+
+.u-hr {
+  margin: 20px 0
+}
+
+.AttributeIO {
+  /* width: 300px; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  margin: 5px 0;
+}
+
+.AttributeIO-label {
+  width: 100px;
+}
+
+.AttributeIO-output,
+.AttributeIO-input {
+  width: 40px;
+  text-align: center;
+}
+
+.AttributeIO-button {
+  width: 20px;
+  height: 20px;
+}
+
+.CharacterName {
+  /* width: 300px; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.CharacterName-label {
+  width: 150px;
+}
+
+.CharacterName-input {
+  width: 150px;
+  text-align: center;
+  font-style: italic;
+}
+
+.StartingClass {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.StartingClass-label {
+  width: 150px;
+}
+
+.StartingClass-select {
+  width: 150px;
+  text-align: center;
+}
+
+.Gender {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.Gender-label {
+  width: 150px;
+}
+
+.Gender-select {
+  width: 150px;
+  text-align: center;
+}
