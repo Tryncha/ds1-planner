@@ -1,0 +1,3 @@
+# Dark Souls 1 - Character Planner
+
+Work in progress...

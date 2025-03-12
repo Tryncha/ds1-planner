@@ -11,6 +11,7 @@ const characterInitialState = {
   startingClass: startingClassData.name,
   soulLevelBase: startingClassData.soulLevel,
   basePoints: startingClassData.basePoints,
+  humanity: 0,
   attributesBase: { ...startingClassData.attributesBase },
   attributes: { ...startingClassData.attributesBase }
 };
@@ -69,6 +70,9 @@ function characterReducer(state, action) {
           [action.payload.attribute]: action.payload.value
         }
       };
+
+    case 'SET_HUMANITY':
+      return { ...state, humanity: action.payload };
 
     default:
       return state;

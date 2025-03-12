@@ -1,18 +1,27 @@
+:root {
+  --backgroundColor: #060606;
+  --container-backgroundColor: #0b0d0e; 
+  --inner-backgroundColor: #cddce6;
+  --fontColor: #ddd;
+  --fontColor--em: #ffc788;
+  --borderColor: #464e57;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
-body{
+body {
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: system-ui;
-  color: #ddd;
-  background-color: #222;
+  color: var(--fontColor);
+  background-color: var(--backgroundColor);
 }
 
 input::-webkit-outer-spin-button,
@@ -22,8 +31,14 @@ input::-webkit-inner-spin-button {
 }
 
 .u-container {
-  padding: 20px;
-  border: 1px solid #ddd;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--container-backgroundColor);
+  padding: 10px;
+  border: 1px solid var(--borderColor);
+  border-radius: 5px;
+  margin: 5px;
 }
 
 .u-innerContainer {
@@ -33,77 +48,88 @@ input::-webkit-inner-spin-button {
 }
 
 .u-hr {
-  margin: 20px 0
+  border: 1px solid var(--borderColor);
+  margin: 10px 0;
 }
 
-.AttributeIO {
-  /* width: 300px; */
+.CharacterName,
+.Gender,
+.StartingClass,
+.SoulLevel,
+.AttributeIO,
+.Humanity {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 5px 10px;
-  border: 1px solid #ddd;
+  margin: 2px 0;
+}
+
+.CharacterName-label,
+.Gender-label,
+.StartingClass-label,
+.SoulLevel-label {
+  width: 120px;
+}
+
+.CharacterName-input,
+.Gender-select,
+.StartingClass-select {
+  width: 150px;
+  height: 20px;
+  text-align: center;
+  border: none;
+}
+
+.CharacterName-input::placeholder {
+  font-style: italic;
+}
+
+.SoulLevel-level {
+  width: 150px;
+  text-align: center;
+  border: 1px solid var(--borderColor);
+}
+
+.MiniCaption {
+  display: flex;
+  justify-content: space-around;
+  font-size: 10px;
+  color: var(--fontColor--em);
+  text-align: center;
   margin: 5px 0;
 }
 
-.AttributeIO-label {
+.MiniCaption-label,
+.AttributeIO-label,
+.Humanity-label  {
   width: 100px;
+  text-align: initial;
+}
+
+.MiniCaption-base,
+.MiniCaption-current {
+  width: 40px;
+}
+
+.MiniCaption-decrease,
+.MiniCaption-increase {
+  width: 20px;
 }
 
 .AttributeIO-output,
-.AttributeIO-input {
+.AttributeIO-input,
+.Humanity-input {
   width: 40px;
+  height: 20px;
   text-align: center;
 }
 
-.AttributeIO-button {
+.AttributeIO-button,
+.Humanity-button {
   width: 20px;
   height: 20px;
 }
 
-.CharacterName {
-  /* width: 300px; */
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.CharacterName-label {
-  width: 150px;
-}
-
-.CharacterName-input {
-  width: 150px;
-  text-align: center;
-  font-style: italic;
-}
-
-.StartingClass {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.StartingClass-label {
-  width: 150px;
-}
-
-.StartingClass-select {
-  width: 150px;
-  text-align: center;
-}
-
-.Gender {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.Gender-label {
-  width: 150px;
-}
-
-.Gender-select {
-  width: 150px;
-  text-align: center;
+.Humanity-input {
+  width: 90px;
 }
