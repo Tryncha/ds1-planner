@@ -1,0 +1,72 @@
+{
+  "characters" : [
+    {
+      "id": 1,
+      "name": "example1",
+      "gender": "male",
+      "startingClass": "warrior",
+      "soulLevel": {
+        "base": 4,
+        "current": 4
+      },
+      "basePoints": 86,
+      "humanity": 5,
+      "attributes": {
+        "base": {
+          "vitality": 11,
+          "attunement": 8,
+          "endurance": 12,
+          "strength": 13,
+          "dexterity": 13,
+          "resistance": 11,
+          "intelligence": 9,
+          "faith": 9
+        },
+        "current": {
+          "vitality": 11,
+          "attunement": 8,
+          "endurance": 12,
+          "strength": 13,
+          "dexterity": 13,
+          "resistance": 11,
+          "intelligence": 9,
+          "faith": 9
+        }
+      }
+    },
+    {
+      "id": 2,
+      "name": "example2",
+      "gender": "female",
+      "startingClass": "pyromancer",
+      "soulLevel": {
+        "base": 1,
+        "current": 709
+      },
+      "basePoints": 86,
+      "humanity": 5,
+      "attributes": {
+        "base": {
+          "vitality": 11,
+          "attunement": 8,
+          "endurance": 12,
+          "strength": 13,
+          "dexterity": 13,
+          "resistance": 11,
+          "intelligence": 9,
+          "faith": 9
+        },
+        "current": {
+          "vitality": 99,
+          "attunement": 99,
+          "endurance": 99,
+          "strength": 99,
+          "dexterity": 99,
+          "resistance": 99,
+          "intelligence": 99,
+          "faith": 99
+        }
+      }
+    }
+  ]
+}

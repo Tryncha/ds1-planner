@@ -1,18 +1,20 @@
 [ 
   {
     "name": "warrior",
-    "attributesBase": {
-      "vitality": 11,
-      "attunement": 8,
-      "endurance": 12,
-      "strength": 13,
-      "dexterity": 13,
-      "resistance": 11,
-      "intelligence": 9,
-      "faith": 9
+    "attributes": {
+      "base": {
+        "vitality": 11,
+        "attunement": 8,
+        "endurance": 12,
+        "strength": 13,
+        "dexterity": 13,
+        "resistance": 11,
+        "intelligence": 9,
+        "faith": 9
+      }
     },
-    "basePoints": 86,
     "soulLevel": 4,
+    "basePoints": 86,
     "equipment": {
       "handEquipment": [
         { "name": "longsword",         "upgrade": "regular", "upgradeLevel": 0, "weight": 3.0 },
@@ -60,18 +62,20 @@
   },
   {
     "name": "pyromancer",
-    "attributesBase": {
-      "vitality": 10,
-      "attunement": 12,
-      "endurance": 11,
-      "strength": 12,
-      "dexterity": 9,
-      "resistance": 12,
-      "intelligence": 10,
-      "faith": 8
+    "attributes": {
+      "base": {
+        "vitality": 10,
+        "attunement": 12,
+        "endurance": 11,
+        "strength": 12,
+        "dexterity": 9,
+        "resistance": 12,
+        "intelligence": 10,
+        "faith": 8
+      }
     },
-    "basePoints": 84,
     "soulLevel": 1,
+    "basePoints": 84,
     "equipment": {
       "handEquipment": [
         { "name": "hand_axe",        "type": "weapon",     "upgrade": "regular", "upgradeLevel": 0, "weight": 2.0 },
@@ -127,18 +131,20 @@
   },
   {
     "name": "deprived",
-    "attributesBase": {
-      "vitality": 11,
-      "attunement": 11,
-      "endurance": 11,
-      "strength": 11,
-      "dexterity": 11,
-      "resistance": 11,
-      "intelligence": 11,
-      "faith": 11
+    "attributes": {
+      "base": {
+        "vitality": 11,
+        "attunement": 11,
+        "endurance": 11,
+        "strength": 11,
+        "dexterity": 11,
+        "resistance": 11,
+        "intelligence": 11,
+        "faith": 11
+      }
     },
-    "basePoints": 88,
     "soulLevel": 6,
+    "basePoints": 88,
     "equipment": {
       "handEquipment": [
         { "name": "club",         "upgrade": "regular", "upgradeLevel": 0, "weight": 3.0 },

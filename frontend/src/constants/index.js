@@ -9,6 +9,7 @@ export const ATTRIBUTES = [
   'faith'
 ];
 
+export const DEFAULT_CLASS = 'warrior';
 export const STARTING_CLASSES = [
   'warrior',
   // 'knight',

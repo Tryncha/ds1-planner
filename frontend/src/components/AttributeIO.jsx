@@ -6,8 +6,8 @@ const AttributeIO = ({ attribute }) => {
   const id = useId();
   const { character, characterDispatch } = useContext(CharacterContext);
 
-  const value = character.attributes[attribute];
-  const minValue = character.attributesBase[attribute];
+  const value = character.attributes.current[attribute];
+  const minValue = character.attributes.base[attribute];
   const maxValue = 99;
 
   const [inputValue, setInputValue] = useState(String(value));

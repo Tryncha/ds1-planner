@@ -1,30 +1,20 @@
-import AttributeIO from './components/AttributeIO';
-import MiniCaption from './components/MiniCaption';
-import CharacterName from './components/CharacterName';
-import Gender from './components/Gender';
-import SoulLevel from './components/SoulLevel';
-import StartingClass from './components/StartingClass';
-import { ATTRIBUTES } from './constants';
-import Humanity from './components/Humanity';
+import { Link, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import Planner from './pages/Planner/Planner';
+import Explorer from './pages/Explorer/Explorer';
 
 const App = () => {
   return (
-    <>
-      <div className="u-container">
-        <CharacterName />
-        <Gender />
-        <StartingClass />
+    <Router>
+      <div>
+        <Link to="/">home</Link>
+        <Link to="/planner">to planner</Link>
+        <Link to="/explorer">to explorer</Link>
       </div>
-      <div className="u-container">
-        <SoulLevel />
-        <MiniCaption />
-        {ATTRIBUTES.map((atrr) => (
-          <AttributeIO key={atrr} attribute={atrr} />
-        ))}
-        <hr className="u-hr" />
-        <Humanity />
-      </div>
-    </>
+      <Routes>
+        <Route path="/planner" element={<Planner />} />
+        <Route path="/explorer" element={<Explorer />} />
+      </Routes>
+    </Router>
   );
 };
 

@@ -1,81 +1,97 @@
 import { createContext, useReducer } from 'react';
 import startingClasses from '../../starting-classes.json';
-import { ATTRIBUTES } from '../constants';
+import { ATTRIBUTES, DEFAULT_CLASS } from '../constants';
 
-const DEFAULT_CLASS = 'warrior';
 const startingClassData = startingClasses.find((cls) => cls.name === DEFAULT_CLASS);
-
 const characterInitialState = {
   name: 'Chosen Undead',
   gender: 'male',
   startingClass: startingClassData.name,
-  soulLevelBase: startingClassData.soulLevel,
-  basePoints: startingClassData.basePoints,
+  attributes: {
+    base: { ...startingClassData.attributes.base },
+    current: { ...startingClassData.attributes.base }
+  },
   humanity: 0,
-  attributesBase: { ...startingClassData.attributesBase },
-  attributes: { ...startingClassData.attributesBase }
+  soulLevel: {
+    base: startingClassData.soulLevel,
+    current: startingClassData.soulLevel
+  },
+  basePoints: startingClassData.basePoints
 };
 
-function characterReducer(state, action) {
+function characterReducer(characterState, action) {
   switch (action.type) {
     case 'SET_NAME':
-      return { ...state, name: action.payload };
+      return { ...characterState, name: action.payload };
 
     case 'SET_GENDER':
-      return { ...state, gender: action.payload };
+      return { ...characterState, gender: action.payload };
 
     case 'SET_STARTING_CLASS': {
       const newStartingClass = action.payload;
       const newStartingClassData = startingClasses.find((cls) => cls.name === newStartingClass);
 
-      const newAttributes = { ...state.attributes };
-      const newAttributesBase = { ...newStartingClassData.attributesBase };
+      const newAttributes = { ...characterState.attributes.current };
+      const newAttributesBase = { ...newStartingClassData.attributes.base };
 
       ATTRIBUTES.forEach((attr) => {
-        if (
-          state.attributes[attr] <= state.attributesBase[attr] ||
-          state.attributes[attr] === state.attributesBase[attr]
-        ) {
+        if (characterState.attributes.current[attr] <= characterState.attributes.base[attr]) {
+          // If the current value is less or equal than previous base, update to new base
           // Si el valor actual es igual o menor que el base anterior, actualizamos al nuevo base
           newAttributes[attr] = newAttributesBase[attr];
-        } else if (newAttributesBase[attr] > state.attributes[attr]) {
+        } else if (newAttributesBase[attr] > characterState.attributes.current[attr]) {
+          // If the new base is greater than current, update to new base
           // Si el nuevo base es mayor que el valor actual, actualizamos al nuevo base
           newAttributes[attr] = newAttributesBase[attr];
         }
+        // If it is not the case, we keep the current value (is already in newAttributes)
         // En otro caso, mantenemos el valor actual (ya está en newAttributes)
       });
 
       return {
-        ...state,
+        ...characterState,
         startingClass: newStartingClass,
-        attributesBase: newAttributesBase,
-        attributes: newAttributes
+        attributes: {
+          base: newAttributesBase,
+          current: newAttributes
+        },
+        soulLevel: {
+          ...characterState.soulLevel,
+          base: newStartingClassData.soulLevel
+        },
+        basePoints: newStartingClassData.basePoints
       };
     }
 
     case 'SET_ATTRIBUTE_BASE':
       return {
-        ...state,
-        attributesBase: {
-          ...state.attributesBase,
-          [action.payload.attribute]: action.payload.value
+        ...characterState,
+        attributes: {
+          ...characterState.attributes,
+          base: {
+            ...characterState.attributes.base,
+            [action.payload.attribute]: action.payload.value
+          }
         }
       };
 
     case 'SET_ATTRIBUTE':
       return {
-        ...state,
+        ...characterState,
         attributes: {
-          ...state.attributes,
-          [action.payload.attribute]: action.payload.value
+          ...characterState.attributes,
+          current: {
+            ...characterState.attributes.current,
+            [action.payload.attribute]: action.payload.value
+          }
         }
       };
 
     case 'SET_HUMANITY':
-      return { ...state, humanity: action.payload };
+      return { ...characterState, humanity: action.payload };
 
     default:
-      return state;
+      return characterState;
   }
 }
 
