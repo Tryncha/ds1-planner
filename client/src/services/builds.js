@@ -1,6 +1,10 @@
 import axios from 'axios';
-
 const baseUrl = '/api/builds';
+
+let token = null;
+function setToken(newToken) {
+  token = `Bearer ${newToken}`;
+}
 
 async function getOne(id) {
   const response = await axios.get(`${baseUrl}/${id}`);
@@ -13,7 +17,9 @@ async function getAll() {
 }
 
 async function save(newBuild) {
-  const response = await axios.post(baseUrl, newBuild);
+  const config = { headers: { Authorization: token } };
+
+  const response = await axios.post(baseUrl, newBuild, config);
   return response.data;
 }
 
@@ -27,4 +33,4 @@ async function remove(id) {
   return response.data;
 }
 
-export default { getOne, getAll, save, update, remove };
+export default { getOne, getAll, save, update, remove, setToken };
