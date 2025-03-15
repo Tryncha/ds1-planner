@@ -1,15 +1,15 @@
 import { useContext, useId } from 'react';
 import { capitalizeWord } from '../utils';
-import CharacterContext from '../context/CharacterContext';
+import BuildContext from '../context/BuildContext';
 import { STARTING_CLASSES } from '../constants';
 
 const StartingClass = () => {
   const id = useId();
-  const { character, characterDispatch } = useContext(CharacterContext);
+  const { build, buildDispatch } = useContext(BuildContext);
 
   function handleChange(event) {
     const newStartingClass = event.target.value;
-    characterDispatch({ type: 'SET_STARTING_CLASS', payload: newStartingClass });
+    buildDispatch({ type: 'SET_STARTING_CLASS', payload: newStartingClass });
   }
 
   return (
@@ -17,7 +17,7 @@ const StartingClass = () => {
       <label className="StartingClass-label" htmlFor={id}>
         Starting Class
       </label>
-      <select className="StartingClass-select" id={id} value={character.startingClass} onChange={handleChange}>
+      <select className="StartingClass-select" id={id} value={build.character.startingClass} onChange={handleChange}>
         {STARTING_CLASSES.map((cls) => (
           <option key={cls} value={cls}>
             {capitalizeWord(cls)}

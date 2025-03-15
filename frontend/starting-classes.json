@@ -1,19 +1,17 @@
 [ 
   {
     "name": "warrior",
-    "attributes": {
-      "base": {
-        "vitality": 11,
-        "attunement": 8,
-        "endurance": 12,
-        "strength": 13,
-        "dexterity": 13,
-        "resistance": 11,
-        "intelligence": 9,
-        "faith": 9
-      }
+    "baseAttributes": {
+      "vitality": 11,
+      "attunement": 8,
+      "endurance": 12,
+      "strength": 13,
+      "dexterity": 13,
+      "resistance": 11,
+      "intelligence": 9,
+      "faith": 9
     },
-    "soulLevel": 4,
+    "soulLevelBase": 4,
     "basePoints": 86,
     "equipment": {
       "handEquipment": [
@@ -62,19 +60,17 @@
   },
   {
     "name": "pyromancer",
-    "attributes": {
-      "base": {
-        "vitality": 10,
-        "attunement": 12,
-        "endurance": 11,
-        "strength": 12,
-        "dexterity": 9,
-        "resistance": 12,
-        "intelligence": 10,
-        "faith": 8
-      }
+    "baseAttributes": {
+      "vitality": 10,
+      "attunement": 12,
+      "endurance": 11,
+      "strength": 12,
+      "dexterity": 9,
+      "resistance": 12,
+      "intelligence": 10,
+      "faith": 8
     },
-    "soulLevel": 1,
+    "soulLevelBase": 1,
     "basePoints": 84,
     "equipment": {
       "handEquipment": [
@@ -131,19 +127,17 @@
   },
   {
     "name": "deprived",
-    "attributes": {
-      "base": {
-        "vitality": 11,
-        "attunement": 11,
-        "endurance": 11,
-        "strength": 11,
-        "dexterity": 11,
-        "resistance": 11,
-        "intelligence": 11,
-        "faith": 11
-      }
+    "baseAttributes": {
+      "vitality": 11,
+      "attunement": 11,
+      "endurance": 11,
+      "strength": 11,
+      "dexterity": 11,
+      "resistance": 11,
+      "intelligence": 11,
+      "faith": 11
     },
-    "soulLevel": 6,
+    "soulLevelBase": 6,
     "basePoints": 88,
     "equipment": {
       "handEquipment": [

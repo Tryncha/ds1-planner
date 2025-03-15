@@ -1,13 +1,13 @@
 import { useContext, useId } from 'react';
-import CharacterContext from '../context/CharacterContext';
+import BuildContext from '../context/BuildContext';
 
 const Gender = () => {
   const id = useId();
-  const { characterDispatch } = useContext(CharacterContext);
+  const { build, buildDispatch } = useContext(BuildContext);
 
   function handleChange(event) {
     const newGender = event.target.value;
-    characterDispatch({ type: 'SET_GENDER', payload: newGender });
+    buildDispatch({ type: 'SET_GENDER', payload: newGender });
   }
 
   return (
@@ -15,7 +15,7 @@ const Gender = () => {
       <label className="Gender-label" htmlFor={id}>
         Gender
       </label>
-      <select className="Gender-select" id={id} onChange={handleChange}>
+      <select className="Gender-select" id={id} value={build.character.gender} onChange={handleChange}>
         <option value="male">Male</option>
         <option value="female">Female</option>
       </select>

@@ -1,10 +1,10 @@
 import { useContext, useId } from 'react';
-import CharacterContext from '../context/CharacterContext';
+import BuildContext from '../context/BuildContext';
 import { calculateSoulLevel } from '../utils';
 
 const SoulLevel = () => {
   const id = useId();
-  const { character } = useContext(CharacterContext);
+  const { build } = useContext(BuildContext);
 
   return (
     <div className="SoulLevel">
@@ -12,7 +12,7 @@ const SoulLevel = () => {
         Soul Level
       </label>
       <output className="SoulLevel-level" id={id}>
-        {calculateSoulLevel(character)}
+        {calculateSoulLevel(build.character)}
       </output>
     </div>
   );

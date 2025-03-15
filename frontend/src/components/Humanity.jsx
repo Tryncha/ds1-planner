@@ -1,11 +1,11 @@
 import { useContext, useEffect, useId, useState } from 'react';
-import CharacterContext from '../context/CharacterContext';
+import BuildContext from '../context/BuildContext';
 
 const Humanity = () => {
   const id = useId();
-  const { character, characterDispatch } = useContext(CharacterContext);
+  const { build, buildDispatch } = useContext(BuildContext);
 
-  const humanity = character.humanity;
+  const humanity = build.character.humanity;
   const minValue = 0;
   const maxValue = 99;
 
@@ -13,7 +13,7 @@ const Humanity = () => {
   useEffect(() => setInputValue(String(humanity)), [humanity]);
 
   function updateValue(newValue) {
-    characterDispatch({ type: 'SET_HUMANITY', payload: newValue });
+    buildDispatch({ type: 'SET_HUMANITY', payload: newValue });
   }
 
   function validateAndSetValue(inputValue) {
@@ -27,12 +27,14 @@ const Humanity = () => {
     setInputValue(String(numValue));
   }
 
-  function decreaseValue() {
+  function decreaseValue(event) {
+    event.preventDefault();
     if (humanity <= minValue) return;
     updateValue(humanity - 1);
   }
 
-  function increaseValue() {
+  function increaseValue(event) {
+    event.preventDefault();
     if (humanity >= maxValue) return;
     updateValue(humanity + 1);
   }

@@ -1,50 +1,112 @@
 {
-  "characters" : [
+  "characters": [
     {
-      "id": 1,
-      "name": "example1",
+      "id": "f300",
+      "name": "Noctrus Vex",
+      "gender": "male",
+      "startingClass": "deprived",
+      "attributes": {
+        "base": {
+          "vitality": 11,
+          "attunement": 11,
+          "endurance": 11,
+          "strength": 11,
+          "dexterity": 11,
+          "resistance": 11,
+          "intelligence": 11,
+          "faith": 11
+        },
+        "current": {
+          "vitality": 40,
+          "attunement": 30,
+          "endurance": 40,
+          "strength": 11,
+          "dexterity": 45,
+          "resistance": 11,
+          "intelligence": 50,
+          "faith": 11
+        }
+      },
+      "humanity": 10,
+      "soulLevel": {
+        "base": 6,
+        "current": 4
+      },
+      "basePoints": 88
+    },
+    {
+      "id": "d67d",
+      "name": "Minnit",
+      "gender": "male",
+      "startingClass": "deprived",
+      "attributes": {
+        "base": {
+          "vitality": 11,
+          "attunement": 11,
+          "endurance": 11,
+          "strength": 11,
+          "dexterity": 11,
+          "resistance": 11,
+          "intelligence": 11,
+          "faith": 11
+        },
+        "current": {
+          "vitality": 50,
+          "attunement": 30,
+          "endurance": 40,
+          "strength": 11,
+          "dexterity": 45,
+          "resistance": 11,
+          "intelligence": 11,
+          "faith": 50
+        }
+      },
+      "humanity": 10,
+      "soulLevel": {
+        "base": 6,
+        "current": 4
+      },
+      "basePoints": 88
+    },
+    {
+      "id": "2388",
+      "name": "Yamako",
       "gender": "male",
       "startingClass": "warrior",
+      "attributes": {
+        "base": {
+          "vitality": 11,
+          "attunement": 8,
+          "endurance": 12,
+          "strength": 13,
+          "dexterity": 13,
+          "resistance": 11,
+          "intelligence": 9,
+          "faith": 9
+        },
+        "current": {
+          "vitality": 13,
+          "attunement": 13,
+          "endurance": 15,
+          "strength": 14,
+          "dexterity": 16,
+          "resistance": 17,
+          "intelligence": 14,
+          "faith": 10
+        }
+      },
+      "humanity": 5,
       "soulLevel": {
         "base": 4,
         "current": 4
       },
-      "basePoints": 86,
-      "humanity": 5,
-      "attributes": {
-        "base": {
-          "vitality": 11,
-          "attunement": 8,
-          "endurance": 12,
-          "strength": 13,
-          "dexterity": 13,
-          "resistance": 11,
-          "intelligence": 9,
-          "faith": 9
-        },
-        "current": {
-          "vitality": 11,
-          "attunement": 8,
-          "endurance": 12,
-          "strength": 13,
-          "dexterity": 13,
-          "resistance": 11,
-          "intelligence": 9,
-          "faith": 9
-        }
-      }
+      "basePoints": 86
     },
     {
-      "id": 2,
-      "name": "example2",
-      "gender": "female",
-      "startingClass": "pyromancer",
-      "soulLevel": {
-        "base": 1,
-        "current": 709
-      },
-      "basePoints": 86,
-      "humanity": 5,
+      "id": "4fbc",
+      "name": "will",
+      "gender": "male",
+      "startingClass": "warrior",
       "attributes": {
         "base": {
           "vitality": 11,
@@ -57,16 +119,56 @@
           "faith": 9
         },
         "current": {
-          "vitality": 99,
-          "attunement": 99,
-          "endurance": 99,
-          "strength": 99,
-          "dexterity": 99,
-          "resistance": 99,
-          "intelligence": 99,
-          "faith": 99
+          "vitality": 11,
+          "attunement": 8,
+          "endurance": 12,
+          "strength": 13,
+          "dexterity": 13,
+          "resistance": 11,
+          "intelligence": 9,
+          "faith": 9
         }
-      }
+      },
+      "humanity": 0,
+      "soulLevel": {
+        "base": 4,
+        "current": 4
+      },
+      "basePoints": 86
+    },
+    {
+      "id": "8bd2",
+      "name": "Chosen Undead",
+      "gender": "male",
+      "startingClass": "warrior",
+      "attributes": {
+        "base": {
+          "vitality": 11,
+          "attunement": 8,
+          "endurance": 12,
+          "strength": 13,
+          "dexterity": 13,
+          "resistance": 11,
+          "intelligence": 9,
+          "faith": 9
+        },
+        "current": {
+          "vitality": 11,
+          "attunement": 8,
+          "endurance": 12,
+          "strength": 13,
+          "dexterity": 13,
+          "resistance": 11,
+          "intelligence": 9,
+          "faith": 9
+        }
+      },
+      "humanity": 0,
+      "soulLevel": {
+        "base": 4,
+        "current": 4
+      },
+      "basePoints": 86
     }
   ]
 }

@@ -1,20 +1,22 @@
 import { useContext, useEffect, useId, useState } from 'react';
 import { capitalizeWord } from '../utils';
-import CharacterContext from '../context/CharacterContext';
+import BuildContext from '../context/BuildContext';
+import startingClasses from '../../starting-classes';
 
 const AttributeIO = ({ attribute }) => {
   const id = useId();
-  const { character, characterDispatch } = useContext(CharacterContext);
+  const { build, buildDispatch } = useContext(BuildContext);
+  const startingClassData = startingClasses.find((cls) => cls.name === build.character.startingClass);
 
-  const value = character.attributes.current[attribute];
-  const minValue = character.attributes.base[attribute];
+  const value = build.character.attributes[attribute];
+  const minValue = startingClassData.baseAttributes[attribute];
   const maxValue = 99;
 
   const [inputValue, setInputValue] = useState(String(value));
   useEffect(() => setInputValue(String(value)), [value]);
 
   function updateValue(newValue) {
-    characterDispatch({ type: 'SET_ATTRIBUTE', payload: { attribute, value: newValue } });
+    buildDispatch({ type: 'SET_ATTRIBUTE', payload: { attribute, value: newValue } });
   }
 
   function validateAndSetValue(inputValue) {
@@ -28,12 +30,14 @@ const AttributeIO = ({ attribute }) => {
     setInputValue(String(numValue));
   }
 
-  function decreaseValue() {
+  function decreaseValue(event) {
+    event.preventDefault();
     if (value <= minValue) return;
     updateValue(value - 1);
   }
 
-  function increaseValue() {
+  function increaseValue(event) {
+    event.preventDefault();
     if (value >= maxValue) return;
     updateValue(value + 1);
   }

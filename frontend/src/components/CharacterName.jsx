@@ -1,13 +1,12 @@
 import { useContext, useId } from 'react';
-import CharacterContext from '../context/CharacterContext';
+import BuildContext from '../context/BuildContext';
 
 const CharacterName = () => {
   const id = useId();
-  const { characterDispatch } = useContext(CharacterContext);
+  const { build, buildDispatch } = useContext(BuildContext);
 
   function handleChange(event) {
-    const newName = event.target.value || 'Chosen Undead';
-    characterDispatch({ type: 'SET_NAME', payload: newName });
+    buildDispatch({ type: 'SET_NAME', payload: event.target.value });
   }
 
   return (
@@ -20,6 +19,7 @@ const CharacterName = () => {
         className="CharacterName-input"
         type="text"
         maxLength={16} // This is the character name limit in game
+        value={build.character.name}
         onChange={handleChange}
         placeholder="Chosen Undead"
       />

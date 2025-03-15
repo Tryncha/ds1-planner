@@ -1,20 +1,28 @@
-import { Link, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import Planner from './pages/Planner/Planner';
-import Explorer from './pages/Explorer/Explorer';
+import { Link, Route, Routes } from 'react-router-dom';
+import Explorer from './pages/Explorer';
+import Profile from './pages/Profile';
+import PlannerLayout from './components/layouts/PlannerLayout';
+import Planner from './pages/Planner';
 
 const App = () => {
   return (
-    <Router>
+    <div>
       <div>
         <Link to="/">home</Link>
-        <Link to="/planner">to planner</Link>
+        <Link to="/profile">to profile</Link>
+        <Link to="/planner">to planner create</Link>
         <Link to="/explorer">to explorer</Link>
       </div>
       <Routes>
-        <Route path="/planner" element={<Planner />} />
+        <Route path="/" element={<div>Home</div>} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/planner" element={<PlannerLayout />}>
+          <Route index element={<Planner />} />
+          <Route path=":id" element={<Planner />} />
+        </Route>
         <Route path="/explorer" element={<Explorer />} />
       </Routes>
-    </Router>
+    </div>
   );
 };
 
