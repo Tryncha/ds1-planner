@@ -17,7 +17,7 @@ const BuildDetails = ({ build }) => {
 };
 
 const Explorer = () => {
-  const [builds, setBuilds] = useState([]);
+  const [communityBuilds, setCommunityBuilds] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Explorer = () => {
 
     async function fetchBuilds() {
       const loadedBuilds = await buildsService.getAll();
-      setBuilds(loadedBuilds);
+      setCommunityBuilds(loadedBuilds);
       setIsLoading(false);
     }
 
@@ -36,7 +36,7 @@ const Explorer = () => {
 
   return (
     <div>
-      {builds.map((build) => (
+      {communityBuilds.map((build) => (
         <BuildDetails key={build.id} build={build} />
       ))}
     </div>

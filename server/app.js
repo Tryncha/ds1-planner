@@ -17,15 +17,19 @@ mongoose
   .connect(config.MONGODB_URI)
   .then(() => {
     console.log('Connected to MongoDB!');
+    console.log('-----');
   })
-  .catch((err) => {
-    console.error('Error connection to MongoDB:', err.message);
+  .catch((error) => {
+    console.error('Error connection to MongoDB:', error.message);
   });
 
 app.use(cors());
 app.use(express.static('dist'));
 app.use(express.json());
 app.use(middleware.requestLogger);
+app.use(middleware.tokenExtractor);
+app.use(middleware.anonymousIdExtractor);
+app.use(middleware.authLogger);
 
 app.use('/api/builds', buildsRouter);
 app.use('/api/users', usersRouter);

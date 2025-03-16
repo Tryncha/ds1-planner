@@ -8,7 +8,7 @@ import Login from './pages/Login';
 const App = () => {
   return (
     <div>
-      <div>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
         <Link to="/">home</Link>
         <Link to="/login">to login</Link>
         <Link to="/profile">to profile</Link>

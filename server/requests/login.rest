@@ -1,0 +1,29 @@
+### Wrong username
+### Must respond: "invalid username or password"
+POST http://localhost:3001/api/login
+Content-Type: application/json
+
+{
+  "username": "mluukkaifake",
+  "password": "salaine"
+}
+
+### Wrong password
+### Must respond: "invalid username or password"
+POST http://localhost:3001/api/login
+Content-Type: application/json
+
+{
+  "username": "mluukkai",
+  "password": "salaine"
+}
+
+### Success login
+### Must respond: an object with token, username and name
+POST http://localhost:3001/api/login
+Content-Type: application/json
+
+{
+  "username": "mluukkai",
+  "password": "salainen"
+}

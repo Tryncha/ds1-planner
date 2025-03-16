@@ -1,16 +1,53 @@
-const requestLogger = (request, response, next) => {
-  console.log('Method:', request.method);
-  console.log('Path:  ', request.path);
-  console.log('Body:  ', request.body);
-  console.log('---');
+const jwt = require('jsonwebtoken');
+const User = require('../models/user');
+
+function requestLogger(request, response, next) {
+  console.log('Method:         ', request.method);
+  console.log('Path:           ', request.path);
+  console.log('Body:           ', request.body);
+  console.log('-----');
   next();
-};
+}
 
-const unknownEndpoint = (request, response) => {
+function unknownEndpoint(request, response) {
   response.status(404).send({ error: 'unknown endpoint' });
-};
+}
 
-const errorHandler = (error, request, response, next) => {
+function tokenExtractor(request, response, next) {
+  const authorization = request.get('Authorization');
+
+  request.token =
+    authorization && authorization.startsWith('Bearer ')
+      ? authorization.replace('Bearer ', '')
+      : (request.token = null);
+
+  next();
+}
+
+function anonymousIdExtractor(request, response, next) {
+  request.anonymousUserId = request.get('X-Anonymous-Session');
+  next();
+}
+
+async function userExtractor(request, response, next) {
+  if (request.token) {
+    const decodedToken = jwt.verify(request.token, process.env.SECRET);
+    if (!decodedToken.id) {
+      return response.status(401).json({ error: 'token invalid' });
+    }
+    request.user = await User.findById(decodedToken.id);
+  }
+  next();
+}
+
+function authLogger(request, response, next) {
+  console.log('Token:          ', request.token);
+  console.log('AnonymousUserId:', request.anonymousUserId);
+  console.log('-----');
+  next();
+}
+
+function errorHandler(error, request, response, next) {
   console.error(error.message);
 
   if (error.name === 'CastError') {
@@ -26,6 +63,14 @@ const errorHandler = (error, request, response, next) => {
   }
 
   next(error);
-};
+}
 
-module.exports = { requestLogger, unknownEndpoint, errorHandler };
+module.exports = {
+  requestLogger,
+  unknownEndpoint,
+  tokenExtractor,
+  anonymousIdExtractor,
+  userExtractor,
+  authLogger,
+  errorHandler
+};

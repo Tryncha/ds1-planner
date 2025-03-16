@@ -10,7 +10,7 @@ const Login = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState(null);
+  const [_user, setUser] = useState(null);
 
   function handleUsernameChange(event) {
     setUsername(event.target.value);

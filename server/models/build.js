@@ -65,12 +65,15 @@ const CommentsSchema = new mongoose.Schema(
 
 const BuildSchema = new mongoose.Schema(
   {
-    // title: String, // Build title, not the same as character name
+    title: String, // Build title, not the same as character name
     game: String,
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
+      ref: 'User',
+      required: false
     },
+    anonymousUserId: String,
+    expiresAt: Date,
     description: String, // Build info or notes about build by author
     externalUrl: String,
     videoUrl: String,
@@ -108,6 +111,8 @@ const BuildSchema = new mongoose.Schema(
     timestamps: true
   }
 );
+
+BuildSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 
 BuildSchema.set('toJSON', {
   transform: (document, returnedBuild) => {
