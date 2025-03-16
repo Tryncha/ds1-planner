@@ -2,11 +2,11 @@ const config = require('./utils/config');
 const express = require('express');
 require('express-async-errors');
 const cors = require('cors');
-const buildsRouter = require('./routes/builds');
 const mongoose = require('mongoose');
-const middleware = require('./utils/middleware');
+const middleware = require('./middleware/misc');
 const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
+const buildsRouter = require('./routes/builds');
 
 const app = express();
 
@@ -31,7 +31,8 @@ app.use(middleware.tokenExtractor);
 app.use(middleware.anonymousIdExtractor);
 app.use(middleware.authLogger);
 
-app.use('/api/builds', buildsRouter);
+app.use('/api/builds/dark-souls-1', buildsRouter.darkSouls1);
+app.use('/api/builds/dark-souls-2', buildsRouter.darkSouls2);
 app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
 

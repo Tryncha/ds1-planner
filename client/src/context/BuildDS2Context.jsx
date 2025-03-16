@@ -16,7 +16,7 @@ function createNewCharacter() {
 const startingClassData = getStartingClassData(DEFAULT_CLASS);
 const initialState = {
   title: '',
-  game: 'ds1',
+  game: 'ds2',
   description: '',
   externalUrl: '',
   videoUrl: '',

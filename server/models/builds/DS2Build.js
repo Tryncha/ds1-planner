@@ -2,14 +2,14 @@ const mongoose = require('mongoose');
 
 const AttributesSchema = new mongoose.Schema(
   {
-    vitality: Number,
-    attunement: Number,
-    endurance: Number,
-    strength: Number,
-    dexterity: Number,
-    resistance: Number,
-    intelligence: Number,
-    faith: Number
+    vit: { type: Number, min: 1, max: 99, required: true },
+    att: { type: Number, min: 1, max: 99, required: true },
+    end: { type: Number, min: 1, max: 99, required: true },
+    str: { type: Number, min: 1, max: 99, required: true },
+    dex: { type: Number, min: 1, max: 99, required: true },
+    res: { type: Number, min: 1, max: 99, required: true },
+    int: { type: Number, min: 1, max: 99, required: true },
+    fai: { type: Number, min: 1, max: 99, required: true }
   },
   {
     _id: false
@@ -63,10 +63,9 @@ const CommentsSchema = new mongoose.Schema(
   }
 );
 
-const BuildSchema = new mongoose.Schema(
+const DS2BuildSchema = new mongoose.Schema(
   {
     title: String, // Build title, not the same as character name
-    game: String,
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
@@ -87,7 +86,7 @@ const BuildSchema = new mongoose.Schema(
     character: {
       name: String,
       gender: String,
-      startingClass: String,
+      class: String,
       startingGift: String,
       covenant: String,
       humanity: Number,
@@ -112,9 +111,10 @@ const BuildSchema = new mongoose.Schema(
   }
 );
 
-BuildSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
+// Expiration configuration
+DS2BuildSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 
-BuildSchema.set('toJSON', {
+DS2BuildSchema.set('toJSON', {
   transform: (document, returnedBuild) => {
     returnedBuild.id = returnedBuild._id.toString();
     delete returnedBuild._id;
@@ -122,4 +122,4 @@ BuildSchema.set('toJSON', {
   }
 });
 
-module.exports = mongoose.model('Build', BuildSchema);
+module.exports = mongoose.model('DS2Build', DS2BuildSchema);

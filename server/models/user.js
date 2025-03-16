@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
     darkSouls1: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Build'
+        ref: 'DS1Build'
       }
     ]
   }

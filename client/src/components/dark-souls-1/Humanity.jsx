@@ -1,22 +1,19 @@
 import { useContext, useEffect, useId, useState } from 'react';
-import { capitalizeWord } from '../utils';
-import BuildContext from '../context/BuildContext';
-import startingClasses from '../../starting-classes';
+import BuildContext from '../../context/BuildContext';
 
-const AttributeIO = ({ attribute }) => {
+const Humanity = () => {
   const id = useId();
   const { build, buildDispatch } = useContext(BuildContext);
-  const startingClassData = startingClasses.find((cls) => cls.name === build.character.startingClass);
 
-  const value = build.character.attributes[attribute];
-  const minValue = startingClassData.baseAttributes[attribute];
+  const humanity = build.character.humanity;
+  const minValue = 0;
   const maxValue = 99;
 
-  const [inputValue, setInputValue] = useState(String(value));
-  useEffect(() => setInputValue(String(value)), [value]);
+  const [inputValue, setInputValue] = useState(0);
+  useEffect(() => setInputValue(String(humanity)), [humanity]);
 
   function updateValue(newValue) {
-    buildDispatch({ type: 'SET_ATTRIBUTE', payload: { attribute, value: newValue } });
+    buildDispatch({ type: 'SET_HUMANITY', payload: newValue });
   }
 
   function validateAndSetValue(inputValue) {
@@ -32,14 +29,14 @@ const AttributeIO = ({ attribute }) => {
 
   function decreaseValue(event) {
     event.preventDefault();
-    if (value <= minValue) return;
-    updateValue(value - 1);
+    if (humanity <= minValue) return;
+    updateValue(humanity - 1);
   }
 
   function increaseValue(event) {
     event.preventDefault();
-    if (value >= maxValue) return;
-    updateValue(value + 1);
+    if (humanity >= maxValue) return;
+    updateValue(humanity + 1);
   }
 
   function handleChange(event) {
@@ -60,14 +57,13 @@ const AttributeIO = ({ attribute }) => {
   }
 
   return (
-    <div className="AttributeIO">
-      <label htmlFor={id} className="AttributeIO-label">
-        {capitalizeWord(attribute)}
+    <div className="Humanity">
+      <label htmlFor={id} className="Humanity-label">
+        Humanity
       </label>
-      <output className="AttributeIO-output">{minValue}</output>
       <input
         id={id}
-        className="AttributeIO-input"
+        className="Humanity-input"
         type="number"
         min={minValue}
         max={maxValue}
@@ -78,10 +74,10 @@ const AttributeIO = ({ attribute }) => {
         onClick={(event) => event.target.select()}
       />
       <div className="u-innerContainer">
-        <button className="AttributeIO-button" onClick={decreaseValue} disabled={value <= minValue}>
+        <button className="Humanity-button" onClick={decreaseValue} disabled={humanity <= minValue}>
           -
         </button>
-        <button className="AttributeIO-button" onClick={increaseValue} disabled={value >= maxValue}>
+        <button className="Humanity-button" onClick={increaseValue} disabled={humanity >= maxValue}>
           +
         </button>
       </div>
@@ -89,4 +85,4 @@ const AttributeIO = ({ attribute }) => {
   );
 };
 
-export default AttributeIO;
+export default Humanity;

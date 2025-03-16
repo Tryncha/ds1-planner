@@ -1,0 +1,50 @@
+### Save with anonymous session
+POST http://localhost:3001/api/builds/dark-souls-1
+Content-Type: application/json
+X-Anonymous-Session: 934d0af9-aed9-42ba-9e50-ec9d1dea1f8c
+
+{
+  "title": "DS1BuildAnon",
+  "character": {
+    "name": "AnonymousDS1",
+    "gender": "male",
+    "class": "pyromancer",
+    "humanity": 10,
+    "attributes": {
+      "vit": 23,
+      "att": 12,
+      "end": 16,
+      "str": 17,
+      "dex": 16,
+      "res": 13,
+      "int": 16,
+      "fai": 99
+    }
+  }
+}
+
+### Save with logged session: mluukkai
+POST http://localhost:3001/api/builds/dark-souls-1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sdXVra2FpIiwiaWQiOiI2N2Q1MDNhOGZmMzRiNWMyMjc2MjIzNTgiLCJpYXQiOjE3NDIxNTEyMzksImV4cCI6MTc0MjE5NDQzOX0.WKjRWiIllByCfGrU9kiER-Z_sSYX5AAG1F3uTs6Y_ZE
+
+{
+  "title": "DS1BuildTest",
+  "character": {
+    "name": "mlukkaiDS1",
+    "gender": "male",
+    "class": "pyromancer",
+    "humanity": 10,
+    "attributes": {
+      "vit": 23,
+      "att": 12,
+      "end": 16,
+      "str": 17,
+      "dex": 16,
+      "res": 13,
+      "int": 16,
+      "fai": 99
+    }
+  }
+}
+

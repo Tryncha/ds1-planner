@@ -1,6 +1,6 @@
 import { useContext, useId } from 'react';
-import BuildContext from '../context/BuildContext';
-import { calculateSoulLevel } from '../utils';
+import BuildContext from '../../context/BuildContext';
+import { calculateSoulLevel } from '../../utils';
 
 const SoulLevel = () => {
   const id = useId();
