@@ -9,13 +9,13 @@ import SoulLevel from '../../../components/dark-souls-2/SoulLevel';
 import MiniCaption from '../../../components/dark-souls-2/MiniCaption';
 import AttributeIO from '../../../components/dark-souls-2/AttributeIO';
 import Humanity from '../../../components/dark-souls-2/Humanity';
-import BuildContext from '../../../context/BuildDS2Context';
+import DS2BuildContext from '../../../context/DS2BuildContext';
 
 const PlannerDS2 = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { build, buildDispatch, saveBuild, updateBuild } = useContext(BuildContext);
+  const { build, buildDispatch, saveBuild, updateBuild } = useContext(DS2BuildContext);
 
   useEffect(() => {
     async function loadCharacter(buildId) {

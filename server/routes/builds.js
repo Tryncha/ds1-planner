@@ -8,10 +8,13 @@ const allGames = express.Router();
 
 allGames.get('/', async (request, response) => {
   try {
-    const ds1Builds = await DS1Build.find({}).populate('user', { username: 1, name: 1 });
-    const ds2Builds = await DS2Build.find({}).populate('user', { username: 1, name: 1 });
+    const [ds1Builds, ds2Builds] = await Promise.all([
+      DS1Build.find({}).populate('user', { username: 1, name: 1 }),
+      DS2Build.find({}).populate('user', { username: 1, name: 1 })
+    ]);
 
     const builds = [...ds1Builds, ...ds2Builds];
+
     response.status(200).json(builds);
   } catch (error) {
     response.status(500).json({ error: 'internal server error' });
@@ -22,13 +25,13 @@ allGames.get('/user-builds', userExtractor, async (request, response) => {
   try {
     if (request.token) {
       const ds1Builds = await DS1Build.find({ user: request.user.id });
-      const ds2Builds = await DS1Build.find({ user: request.user.id });
+      const ds2Builds = await DS2Build.find({ user: request.user.id });
 
       const builds = [...ds1Builds, ...ds2Builds];
       return response.json(builds);
     } else if (request.anonymousUserId) {
       const ds1Builds = await DS1Build.find({ anonymousUserId: request.anonymousUserId });
-      const ds2Builds = await DS1Build.find({ anonymousUserId: request.anonymousUserId });
+      const ds2Builds = await DS2Build.find({ anonymousUserId: request.anonymousUserId });
 
       const builds = [...ds1Builds, ...ds2Builds];
       return response.json(builds);
@@ -78,14 +81,12 @@ function gameBuildsRouter(BuildModel) {
     try {
       const buildToSave = new BuildModel(request.body);
 
-      buildToSave.character.name = buildToSave.character.name || 'Chosen Undead';
-
       if (request.user) {
         buildToSave.user = request.user._id;
         delete buildToSave.anonymousUserId;
         delete buildToSave.expiresAt;
       } else if (request.anonymousUserId) {
-        // Set to 30 days -> days * hours * minutes * seconds * miliseconds
+        // Set to 30 days from the save -> days * hours * minutes * seconds * miliseconds
         // const expireDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
         const expireDate = new Date(Date.now() + 60 * 1000); // 1 minute for development & manual tests
 
@@ -127,8 +128,15 @@ function gameBuildsRouter(BuildModel) {
 
       const newBuild = request.body;
 
-      delete newBuild.anonymousUserId;
-      delete newBuild.expiresAt;
+      if (request.user) {
+        delete newBuild.anonymousUserId;
+        delete newBuild.expiresAt;
+      } else if (request.anonymousUserId) {
+        // Renewed to 30 days from the update -> days * hours * minutes * seconds * miliseconds
+        // const renewedExpireDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+        const renewedExpireDate = new Date(Date.now() + 60 * 1000); // 1 minute for development & manual tests
+        newBuild.expiresAt = renewedExpireDate;
+      }
 
       const updatedBuild = await BuildModel.findByIdAndUpdate(request.params.id, newBuild, {
         new: true,

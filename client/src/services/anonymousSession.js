@@ -1,18 +1,21 @@
 import { v4 as uuidv4 } from 'uuid';
 
-function getSessionId() {
-  let sessionId = localStorage.getItem('anonymousSessionId');
+export function generateAnonymousSession() {
+  const anonymousSession = uuidv4();
+  localStorage.setItem('anonymousSession', anonymousSession);
+  return anonymousSession;
+}
 
-  if (!sessionId) {
-    sessionId = uuidv4();
-    localStorage.setItem('anonymousSessionId', sessionId);
+export function getAnonymousSession() {
+  let anonymousSession = localStorage.getItem('anonymousSession');
+
+  if (!anonymousSession) {
+    anonymousSession = generateAnonymousSession();
   }
 
-  return sessionId;
+  return anonymousSession;
 }
 
-function clearSessionId() {
-  localStorage.removeItem('anonymousSessionId');
+export function clearAnonymousSession() {
+  localStorage.removeItem('anonymousSession');
 }
-
-export default { getSessionId, clearSessionId };

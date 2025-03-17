@@ -1,9 +1,9 @@
 import { useContext, useId } from 'react';
-import BuildContext from '../../../context/BuildContext';
+import DS1BuildContext from '../../../context/DS1BuildContext';
 
 const Gender = () => {
   const id = useId();
-  const { build, buildDispatch } = useContext(BuildContext);
+  const { build, buildDispatch } = useContext(DS1BuildContext);
 
   function handleChange(event) {
     const newGender = event.target.value;

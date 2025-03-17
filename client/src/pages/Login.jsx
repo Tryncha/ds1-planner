@@ -1,16 +1,18 @@
-import { useId, useState } from 'react';
+import { useContext, useId, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import loginService from '../services/login';
 import buildsService from '../services/builds';
+import AuthContext from '../context/AuthContext';
+import { clearAnonymousSession } from '../services/anonymousSession';
 
 const Login = () => {
   const navigate = useNavigate();
   const usernameInputId = useId();
   const passwordInputId = useId();
 
+  const { setAuth } = useContext(AuthContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [_user, setUser] = useState(null);
 
   function handleUsernameChange(event) {
     setUsername(event.target.value);
@@ -33,8 +35,11 @@ const Login = () => {
 
       window.localStorage.setItem('loggedUser', JSON.stringify(loggedUser));
 
+      clearAnonymousSession();
       buildsService.setToken(loggedUser.token);
-      setUser(loggedUser);
+      setAuth(loggedUser);
+
+      navigate('/');
     } catch (error) {
       console.log('Wrong credentials:', error);
     }

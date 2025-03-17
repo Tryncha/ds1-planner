@@ -16,7 +16,7 @@ function createNewCharacter() {
 const startingClassData = getStartingClassData(DEFAULT_CLASS);
 const initialState = {
   title: '',
-  game: 'ds1',
+  game: 'ds2',
   description: '',
   externalUrl: '',
   videoUrl: '',
@@ -144,9 +144,9 @@ function buildReducer(buildState, action) {
   }
 }
 
-const BuildContext = createContext();
+const DS2BuildContext = createContext();
 
-export function BuildProvider({ children }) {
+export function DS2BuildProvider({ children }) {
   const [build, buildDispatch] = useReducer(buildReducer, initialState);
 
   async function saveBuild(newBuild) {
@@ -168,7 +168,7 @@ export function BuildProvider({ children }) {
   }
 
   return (
-    <BuildContext.Provider
+    <DS2BuildContext.Provider
       value={{
         build,
         buildDispatch,
@@ -176,8 +176,8 @@ export function BuildProvider({ children }) {
         updateBuild
       }}>
       {children}
-    </BuildContext.Provider>
+    </DS2BuildContext.Provider>
   );
 }
 
-export default BuildContext;
+export default DS2BuildContext;

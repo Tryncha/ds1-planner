@@ -1,9 +1,9 @@
 import { useContext, useEffect, useId, useState } from 'react';
-import BuildContext from '../../../context/BuildContext';
+import DS1BuildContext from '../../../context/DS1BuildContext';
 
 const Humanity = () => {
   const id = useId();
-  const { build, buildDispatch } = useContext(BuildContext);
+  const { build, buildDispatch } = useContext(DS1BuildContext);
 
   const humanity = build.character.humanity;
   const minValue = 0;

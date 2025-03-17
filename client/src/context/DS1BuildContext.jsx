@@ -1,34 +1,38 @@
 import { createContext, useReducer } from 'react';
 import { ATTRIBUTES, DEFAULT_CLASS } from '../constants';
 import { getStartingClassData } from '../utils';
-import buildsService from '../services/builds';
+import buildService from '../services/builds';
 
-function createNewCharacter() {
-  return {
+// function createNewCharacter() {
+//   return {
+//     name: '',
+//     gender: 'male',
+//     startingClass: startingClassData.name,
+//     attributes: { ...startingClassData.baseAttributes },
+//     humanity: 0
+//   };
+// }
+
+const startingClassData = getStartingClassData(DEFAULT_CLASS);
+const initialState = {
+  title: '',
+  character: {
     name: '',
     gender: 'male',
     startingClass: startingClassData.name,
     attributes: { ...startingClassData.baseAttributes },
     humanity: 0
-  };
-}
-
-const startingClassData = getStartingClassData(DEFAULT_CLASS);
-const initialState = {
-  title: '',
-  game: 'ds2',
-  description: '',
-  externalUrl: '',
-  videoUrl: '',
-  screenshots: [],
-  isPublic: false,
-  tags: [],
-  url: '',
-  character: createNewCharacter()
+  }
 };
 
 function buildReducer(buildState, action) {
   switch (action.type) {
+    case 'SET_TITLE':
+      return {
+        ...buildState,
+        title: action.payload
+      };
+
     case 'SET_NAME':
       return {
         ...buildState,
@@ -107,51 +111,52 @@ function buildReducer(buildState, action) {
     case 'LOAD_BUILD':
       return action.payload;
 
-    case 'LOAD_CHARACTER':
-      return {
-        ...buildState,
-        character: action.payload
-      };
+    // case 'LOAD_CHARACTER':
+    //   return {
+    //     ...buildState,
+    //     character: action.payload
+    //   };
 
-    case 'SAVING_CHARACTER':
-      return {
-        ...buildState,
-        isSaving: true
-      };
+    // case 'SAVING_CHARACTER':
+    //   return {
+    //     ...buildState,
+    //     isSaving: true
+    //   };
 
-    case 'SAVE_SUCCESS':
-      return {
-        ...buildState,
-        isSaving: true
-      };
+    // case 'SAVE_SUCCESS':
+    //   return {
+    //     ...buildState,
+    //     isSaving: true
+    //   };
 
-    case 'SAVE_ERROR':
-      return {
-        ...buildState,
-        isSaving: true
-      };
+    // case 'SAVE_ERROR':
+    //   return {
+    //     ...buildState,
+    //     isSaving: true
+    //   };
 
-    case 'RESET_CHARACTER':
-      return {
-        ...buildState,
-        character: createNewCharacter(),
-        isEditing: false,
-        error: null
-      };
+    case 'RESET_BUILD':
+      return initialState;
+
+    // case 'RESET_CHARACTER':
+    //   return {
+    //     ...buildState,
+    //     character: createNewCharacter()
+    //   };
 
     default:
       return buildState;
   }
 }
 
-const BuildContext = createContext();
+const DS1BuildContext = createContext();
 
-export function BuildProvider({ children }) {
+export function DS1BuildProvider({ children }) {
   const [build, buildDispatch] = useReducer(buildReducer, initialState);
 
   async function saveBuild(newBuild) {
     try {
-      await buildsService.save(newBuild);
+      await buildService.saveGameBuild('dark-souls-1', newBuild);
       console.log('Character saved successfully!');
     } catch (error) {
       console.error('Error saving character', error);
@@ -160,15 +165,17 @@ export function BuildProvider({ children }) {
 
   async function updateBuild(id, updatedBuild) {
     try {
-      await buildsService.update(id, updatedBuild);
+      await buildService.updateGameBuild('dark-souls-1', id, updatedBuild);
       console.log('Character updated successfully!');
     } catch (error) {
       console.error('Error updating character', error);
     }
   }
 
+  console.log(build);
+
   return (
-    <BuildContext.Provider
+    <DS1BuildContext.Provider
       value={{
         build,
         buildDispatch,
@@ -176,8 +183,8 @@ export function BuildProvider({ children }) {
         updateBuild
       }}>
       {children}
-    </BuildContext.Provider>
+    </DS1BuildContext.Provider>
   );
 }
 
-export default BuildContext;
+export default DS1BuildContext;

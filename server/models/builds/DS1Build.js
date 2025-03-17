@@ -2,14 +2,54 @@ const mongoose = require('mongoose');
 
 const AttributesSchema = new mongoose.Schema(
   {
-    vit: { type: Number, min: 1, max: 99, required: true },
-    att: { type: Number, min: 1, max: 99, required: true },
-    end: { type: Number, min: 1, max: 99, required: true },
-    str: { type: Number, min: 1, max: 99, required: true },
-    dex: { type: Number, min: 1, max: 99, required: true },
-    res: { type: Number, min: 1, max: 99, required: true },
-    int: { type: Number, min: 1, max: 99, required: true },
-    fai: { type: Number, min: 1, max: 99, required: true }
+    vitality: {
+      type: Number,
+      min: 1,
+      max: 99,
+      required: true
+    },
+    attunement: {
+      type: Number,
+      min: 1,
+      max: 99,
+      required: true
+    },
+    endurance: {
+      type: Number,
+      min: 1,
+      max: 99,
+      required: true
+    },
+    strength: {
+      type: Number,
+      min: 1,
+      max: 99,
+      required: true
+    },
+    dexterity: {
+      type: Number,
+      min: 1,
+      max: 99,
+      required: true
+    },
+    resistance: {
+      type: Number,
+      min: 1,
+      max: 99,
+      required: true
+    },
+    intelligence: {
+      type: Number,
+      min: 1,
+      max: 99,
+      required: true
+    },
+    faith: {
+      type: Number,
+      min: 1,
+      max: 99,
+      required: true
+    }
   },
   {
     _id: false
@@ -87,6 +127,10 @@ const DS1BuildSchema = new mongoose.Schema(
     },
     anonymousUserId: String,
     expiresAt: Date,
+    game: {
+      type: String,
+      default: 'ds1'
+    },
     description: {
       // Build info or notes about build by author
       type: String,

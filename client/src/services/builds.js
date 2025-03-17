@@ -1,5 +1,5 @@
 import axios from 'axios';
-import anonymousSession from './anonymousSession';
+import { getAnonymousSession, clearAnonymousSession } from './anonymousSession';
 const baseUrl = '/api/builds';
 
 let token = null;
@@ -7,15 +7,17 @@ function setToken(newToken) {
   token = `Bearer ${newToken}`;
 }
 
-async function getOne(id) {
-  const response = await axios.get(`${baseUrl}/${id}`);
+async function getBuildById(game, id) {
+  const response = await axios.get(`${baseUrl}/${game}/${id}`);
   return response.data;
 }
 
 async function getUserBuilds() {
-  const sessionId = anonymousSession.getSessionId();
+  const anonymousSession = getAnonymousSession();
 
-  const config = token ? { headers: { Authorization: token } } : { headers: { 'X-Anonymous-Session': sessionId } };
+  const config = token
+    ? { headers: { Authorization: token } }
+    : { headers: { 'X-Anonymous-Session': anonymousSession } };
 
   const response = await axios.get(`${baseUrl}/user-builds`, config);
   return response.data;
@@ -26,27 +28,34 @@ async function getAll() {
   return response.data;
 }
 
-async function save(newBuild) {
-  const sessionId = anonymousSession.getSessionId();
-  const config = token ? { headers: { Authorization: token } } : { headers: { 'X-Anonymous-Session': sessionId } };
+async function saveGameBuild(game, newBuild) {
+  const anonymousSession = getAnonymousSession();
 
-  const response = await axios.post(baseUrl, newBuild, config);
+  const config = token
+    ? { headers: { Authorization: token } }
+    : { headers: { 'X-Anonymous-Session': anonymousSession } };
+
+  const response = await axios.post(`${baseUrl}/${game}`, newBuild, config);
   return response.data;
 }
 
-async function update(id, newBuild) {
-  const sessionId = anonymousSession.getSessionId();
-  const config = token ? { headers: { Authorization: token } } : { headers: { 'X-Anonymous-Session': sessionId } };
+async function updateGameBuild(game, id, newBuild) {
+  const anonymousSession = getAnonymousSession();
+  const config = token
+    ? { headers: { Authorization: token } }
+    : { headers: { 'X-Anonymous-Session': anonymousSession } };
 
-  const response = await axios.put(`${baseUrl}/${id}`, newBuild, config);
+  const response = await axios.put(`${baseUrl}/${game}/${id}`, newBuild, config);
   return response.data;
 }
 
-async function remove(id) {
-  const sessionId = anonymousSession.getSessionId();
-  const config = token ? { headers: { Authorization: token } } : { headers: { 'X-Anonymous-Session': sessionId } };
+async function deleteGameBuild(game, id) {
+  const anonymousSession = getAnonymousSession();
+  const config = token
+    ? { headers: { Authorization: token } }
+    : { headers: { 'X-Anonymous-Session': anonymousSession } };
 
-  const response = await axios.delete(`${baseUrl}/${id}`, config);
+  const response = await axios.delete(`${baseUrl}/${game}/${id}`, config);
   return response.data;
 }
 
@@ -54,7 +63,7 @@ async function remove(id) {
 async function migrateAnonymousBuilds() {
   if (!token) return null;
 
-  const sessionId = anonymousSession.getSessionId();
+  const sessionId = getAnonymousSession();
   const config = {
     headers: {
       'Authorization': token,
@@ -64,8 +73,17 @@ async function migrateAnonymousBuilds() {
 
   const response = await axios.post(`${baseUrl}/migrate-anonymous`, {}, config);
   // After successful migration, clear the anonymous session
-  anonymousSession.clearSessionId();
+  clearAnonymousSession();
   return response.data;
 }
 
-export default { getOne, getAll, getUserBuilds, save, update, remove, setToken, migrateAnonymousBuilds };
+export default {
+  getBuildById,
+  getAll,
+  getUserBuilds,
+  saveGameBuild,
+  updateGameBuild,
+  deleteGameBuild,
+  setToken,
+  migrateAnonymousBuilds
+};

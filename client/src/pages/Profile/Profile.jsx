@@ -8,12 +8,14 @@ const Profile = () => {
 
   useEffect(() => {
     async function fetchBuilds() {
-      const builds = buildsService.getUserBuilds();
+      const builds = await buildsService.getUserBuilds();
       setUserBuilds(builds);
     }
 
     fetchBuilds();
   }, []);
+
+  console.log(userBuilds);
 
   return (
     <main className="Profile">

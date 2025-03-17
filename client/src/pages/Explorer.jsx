@@ -3,15 +3,21 @@ import { calculateSoulLevel, capitalizeWord } from '../utils';
 import { Link } from 'react-router-dom';
 import buildsService from '../services/builds';
 
+const GAME_PARAMS = {
+  ds1: 'dark-souls-1',
+  ds2: 'dark-souls-2',
+  ds3: 'dark-souls-3'
+};
+
 const BuildDetails = ({ build }) => {
   return (
     <div className="u-container">
+      <strong>{build.title}</strong>
       <span>Name: {build.character.name}</span>
       <span>Class: {capitalizeWord(build.character.startingClass)}</span>
       <span>Soul Level: {calculateSoulLevel(build.character)}</span>
-      <Link to={`/planner/${build.id}`}>
-        <button>Edit this character</button>
-      </Link>
+      <span>Expires at: {build.expiresAt}</span>
+      <Link to={`/planner/${GAME_PARAMS[build.game]}/${build.id}`}>Edit this character</Link>
     </div>
   );
 };
