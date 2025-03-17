@@ -1,7 +1,7 @@
 import { useContext, useId } from 'react';
-import { capitalizeWord } from '../../utils';
-import BuildContext from '../../context/BuildContext';
-import { STARTING_CLASSES } from '../../constants';
+import { capitalizeWord } from '../../../utils';
+import BuildContext from '../../../context/BuildContext';
+import { STARTING_CLASSES } from '../../../constants';
 
 const StartingClass = () => {
   const id = useId();

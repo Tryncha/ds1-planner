@@ -1,5 +1,5 @@
 import { useContext, useId } from 'react';
-import BuildContext from '../../context/BuildContext';
+import BuildContext from '../../../context/BuildContext';
 
 const Gender = () => {
   const id = useId();

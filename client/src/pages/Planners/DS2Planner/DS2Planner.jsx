@@ -1,15 +1,15 @@
 import { useContext, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import buildsService from '../services/builds';
-import { ATTRIBUTES } from '../constants';
-import CharacterName from '../components/dark-souls-2/CharacterName';
-import Gender from '../components/dark-souls-2/Gender';
-import StartingClass from '../components/dark-souls-2/StartingClass';
-import SoulLevel from '../components/dark-souls-2/SoulLevel';
-import MiniCaption from '../components/dark-souls-2/MiniCaption';
-import AttributeIO from '../components/dark-souls-2/AttributeIO';
-import Humanity from '../components/dark-souls-2/Humanity';
-import BuildContext from '../context/BuildDS2Context';
+import buildsService from '../../../services/builds';
+import { ATTRIBUTES } from '../../../constants';
+import CharacterName from '../../../components/dark-souls-2/CharacterName';
+import Gender from '../../../components/dark-souls-2/Gender';
+import StartingClass from '../../../components/dark-souls-2/StartingClass';
+import SoulLevel from '../../../components/dark-souls-2/SoulLevel';
+import MiniCaption from '../../../components/dark-souls-2/MiniCaption';
+import AttributeIO from '../../../components/dark-souls-2/AttributeIO';
+import Humanity from '../../../components/dark-souls-2/Humanity';
+import BuildContext from '../../../context/BuildDS2Context';
 
 const PlannerDS2 = () => {
   const { id } = useParams();
@@ -46,8 +46,7 @@ const PlannerDS2 = () => {
 
   return (
     <div>
-      <h1>DS2</h1>
-      <h2>{id ? 'Edit' : 'Create'} Character</h2>
+      <h2>{id ? 'Edit' : 'Create'} DS2 Character</h2>
       <form onSubmit={handleSubmit}>
         <div className="u-container">
           <CharacterName />

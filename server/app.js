@@ -31,6 +31,7 @@ app.use(middleware.tokenExtractor);
 app.use(middleware.anonymousIdExtractor);
 app.use(middleware.authLogger);
 
+app.use('/api/builds', buildsRouter.allGames);
 app.use('/api/builds/dark-souls-1', buildsRouter.darkSouls1);
 app.use('/api/builds/dark-souls-2', buildsRouter.darkSouls2);
 app.use('/api/users', usersRouter);

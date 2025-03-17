@@ -1,0 +1,14 @@
+.BuildCard {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--container-backgroundColor);
+  padding: 10px;
+  border: 1px solid var(--borderColor);
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.BuildCard-title {
+  margin-bottom: 5px;
+}

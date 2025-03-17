@@ -1,13 +1,15 @@
 :root {
   --backgroundColor: #060606;
-  --container-backgroundColor: #0b0d0e; 
+  --container-backgroundColor: #0b0d0e;
   --inner-backgroundColor: #cddce6;
   --fontColor: #ddd;
   --fontColor--em: #ffc788;
   --borderColor: #464e57;
 }
 
-* {
+*,
+::after,
+::before {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -15,13 +17,15 @@
 
 body {
   width: 100vw;
-  /* height: 100vh; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-family: system-ui;
   color: var(--fontColor);
   background-color: var(--backgroundColor);
+}
+
+#root {
+  width: 100vw;
+  display: flex;
+  align-items: center;
 }
 
 input::-webkit-outer-spin-button,
@@ -44,7 +48,7 @@ input::-webkit-inner-spin-button {
 .u-innerContainer {
   display: flex;
   padding: 0 5px;
-  gap: 5px
+  gap: 5px;
 }
 
 .u-hr {
@@ -52,7 +56,6 @@ input::-webkit-inner-spin-button {
   margin: 10px 0;
 }
 
-.CharacterName,
 .Gender,
 .StartingClass,
 .SoulLevel,
@@ -64,24 +67,18 @@ input::-webkit-inner-spin-button {
   margin: 2px 0;
 }
 
-.CharacterName-label,
 .Gender-label,
 .StartingClass-label,
 .SoulLevel-label {
   width: 120px;
 }
 
-.CharacterName-input,
 .Gender-select,
 .StartingClass-select {
   width: 150px;
   height: 20px;
   text-align: center;
   border: none;
-}
-
-.CharacterName-input::placeholder {
-  font-style: italic;
 }
 
 .SoulLevel-level {
@@ -101,7 +98,7 @@ input::-webkit-inner-spin-button {
 
 .MiniCaption-label,
 .AttributeIO-label,
-.Humanity-label  {
+.Humanity-label {
   width: 100px;
   text-align: initial;
 }

@@ -4,6 +4,42 @@ const { getAllBuilds } = require('../middleware/builds');
 const DS1Build = require('../models/builds/DS1Build');
 const DS2Build = require('../models/builds/DS2Build');
 
+const allGames = express.Router();
+
+allGames.get('/', async (request, response) => {
+  try {
+    const ds1Builds = await DS1Build.find({}).populate('user', { username: 1, name: 1 });
+    const ds2Builds = await DS2Build.find({}).populate('user', { username: 1, name: 1 });
+
+    const builds = [...ds1Builds, ...ds2Builds];
+    response.status(200).json(builds);
+  } catch (error) {
+    response.status(500).json({ error: 'internal server error' });
+  }
+});
+
+allGames.get('/user-builds', userExtractor, async (request, response) => {
+  try {
+    if (request.token) {
+      const ds1Builds = await DS1Build.find({ user: request.user.id });
+      const ds2Builds = await DS1Build.find({ user: request.user.id });
+
+      const builds = [...ds1Builds, ...ds2Builds];
+      return response.json(builds);
+    } else if (request.anonymousUserId) {
+      const ds1Builds = await DS1Build.find({ anonymousUserId: request.anonymousUserId });
+      const ds2Builds = await DS1Build.find({ anonymousUserId: request.anonymousUserId });
+
+      const builds = [...ds1Builds, ...ds2Builds];
+      return response.json(builds);
+    }
+
+    response.status(401).json({ error: 'unauthorized' });
+  } catch (error) {
+    response.status(500).json({ error: 'internal server error' });
+  }
+});
+
 function gameBuildsRouter(BuildModel) {
   const gameRouter = express.Router();
 
@@ -140,4 +176,4 @@ const darkSouls2 = gameBuildsRouter(DS2Build);
 // const darkSouls3 = gameBuildsRouter(DS2Build);
 // const eldenRing = gameBuildsRouter(DS2Build);
 
-module.exports = { darkSouls1, darkSouls2 };
+module.exports = { allGames, darkSouls1, darkSouls2 };

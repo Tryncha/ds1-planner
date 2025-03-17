@@ -17,7 +17,7 @@ async function getUserBuilds() {
 
   const config = token ? { headers: { Authorization: token } } : { headers: { 'X-Anonymous-Session': sessionId } };
 
-  const response = await axios.get(`${baseUrl}/my-builds`, config);
+  const response = await axios.get(`${baseUrl}/user-builds`, config);
   return response.data;
 }
 

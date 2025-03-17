@@ -1,5 +1,6 @@
 import { useContext, useId } from 'react';
 import BuildContext from '../../../context/BuildContext';
+import './CharacterName.css';
 
 const CharacterName = () => {
   const id = useId();

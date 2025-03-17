@@ -127,7 +127,7 @@ const DS1BuildSchema = new mongoose.Schema(
         enum: ['male', 'female'],
         required: true
       },
-      class: {
+      startingClass: {
         type: String,
         required: true
       },

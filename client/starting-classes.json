@@ -1,4 +1,4 @@
-[ 
+[
   {
     "name": "warrior",
     "baseAttributes": {
@@ -15,10 +15,10 @@
     "basePoints": 86,
     "equipment": {
       "handEquipment": [
-        { "name": "longsword",         "upgrade": "regular", "upgradeLevel": 0, "weight": 3.0 },
-        { "name": "none",         "upgrade": "regular", "upgradeLevel": 0, "weight": 0.0 },
+        { "name": "longsword", "upgrade": "regular", "upgradeLevel": 0, "weight": 3.0 },
+        { "name": "none", "upgrade": "regular", "upgradeLevel": 0, "weight": 0.0 },
         { "name": "heater_shield", "upgrade": "regular", "upgradeLevel": 0, "weight": 1.5 },
-        { "name": "none",         "upgrade": "regular", "upgradeLevel": 0, "weight": 0.0 }
+        { "name": "none", "upgrade": "regular", "upgradeLevel": 0, "weight": 0.0 }
       ],
       "armor": [
         {
@@ -29,7 +29,7 @@
           "defense": { "physical": 0, "strike": 0, "slash": 0, "thrust": 0, "magic": 0, "fire": 0, "lightning": 0 },
           "resistance": { "bleed": 0, "poison": 0, "curse": 0 }
         },
-         {
+        {
           "name": "none",
           "level": 0,
           "isUnique": false,
@@ -37,7 +37,7 @@
           "defense": { "physical": 0, "strike": 0, "slash": 0, "thrust": 0, "magic": 0, "fire": 0, "lightning": 0 },
           "resistance": { "bleed": 0, "poison": 0, "curse": 0 }
         },
-         {
+        {
           "name": "none",
           "level": 0,
           "isUnique": false,
@@ -74,10 +74,10 @@
     "basePoints": 84,
     "equipment": {
       "handEquipment": [
-        { "name": "hand_axe",        "type": "weapon",     "upgrade": "regular", "upgradeLevel": 0, "weight": 2.0 },
-        { "name": "none",            "type": "none",       "upgrade": "regular", "upgradeLevel": 0, "weight": 0.0 },
+        { "name": "hand_axe", "type": "weapon", "upgrade": "regular", "upgradeLevel": 0, "weight": 2.0 },
+        { "name": "none", "type": "none", "upgrade": "regular", "upgradeLevel": 0, "weight": 0.0 },
         { "name": "pyromancy_flame", "type": "spell_tool", "upgrade": "regular", "upgradeLevel": 0, "weight": 0.0 },
-        { "name": "none",            "type": "none",       "upgrade": "regular", "upgradeLevel": 0, "weight": 0.0 }
+        { "name": "none", "type": "none", "upgrade": "regular", "upgradeLevel": 0, "weight": 0.0 }
       ],
       "armor": [
         {
@@ -87,27 +87,51 @@
           "weight": 1.1,
           "poise": 0,
           "durability": 400,
-          "defense": { "physical": 19.4, "strike": 21.5, "slash": 19.4, "thrust": 19.4, "magic": 21.8, "fire": 29, "lightning": 14.5 },
+          "defense": {
+            "physical": 19.4,
+            "strike": 21.5,
+            "slash": 19.4,
+            "thrust": 19.4,
+            "magic": 21.8,
+            "fire": 29,
+            "lightning": 14.5
+          },
           "resistance": { "bleed": 12.6, "poison": 32.2, "curse": 1.4 }
         },
-         {
+        {
           "name": "tattered_cloth_robe",
           "level": 0,
           "isUnique": false,
           "weight": 2.7,
           "poise": 0,
           "durability": 400,
-          "defense": { "physical": 50.8, "strike": 56.4, "slash": 50.8, "thrust": 50.8,  "magic": 55.7, "fire": 72.6, "lightning": 41.1 },
+          "defense": {
+            "physical": 50.8,
+            "strike": 56.4,
+            "slash": 50.8,
+            "thrust": 50.8,
+            "magic": 55.7,
+            "fire": 72.6,
+            "lightning": 41.1
+          },
           "resistance": { "bleed": 32.2, "poison": 82.6, "curse": 2.8 }
         },
-         {
+        {
           "name": "tattered_cloth_manchette",
           "level": 0,
           "isUnique": false,
           "weight": 1.6,
           "poise": 0,
           "durability": 400,
-          "defense": { "physical": 29, "strike": 32.2, "slash": 29, "thrust": 29, "magic": 33.9, "fire": 43.6, "lightning": 24.2 },
+          "defense": {
+            "physical": 29,
+            "strike": 32.2,
+            "slash": 29,
+            "thrust": 29,
+            "magic": 33.9,
+            "fire": 43.6,
+            "lightning": 24.2
+          },
           "resistance": { "bleed": 19.6, "poison": 49, "curse": 1.4 }
         },
         {
@@ -117,7 +141,15 @@
           "weight": 1.6,
           "poise": 0,
           "durability": 400,
-          "defense": { "physical": 29, "strike": 32.2, "slash": 29, "thrust": 29, "magic": 33.9, "fire": 43.6, "lightning": 24.2 },
+          "defense": {
+            "physical": 29,
+            "strike": 32.2,
+            "slash": 29,
+            "thrust": 29,
+            "magic": 33.9,
+            "fire": 43.6,
+            "lightning": 24.2
+          },
           "resistance": { "bleed": 19.6, "poison": 49, "curse": 1.4 }
         }
       ],
@@ -141,10 +173,10 @@
     "basePoints": 88,
     "equipment": {
       "handEquipment": [
-        { "name": "club",         "upgrade": "regular", "upgradeLevel": 0, "weight": 3.0 },
-        { "name": "none",         "upgrade": "regular", "upgradeLevel": 0, "weight": 0.0 },
+        { "name": "club", "upgrade": "regular", "upgradeLevel": 0, "weight": 3.0 },
+        { "name": "none", "upgrade": "regular", "upgradeLevel": 0, "weight": 0.0 },
         { "name": "plank_shield", "upgrade": "regular", "upgradeLevel": 0, "weight": 1.5 },
-        { "name": "none",         "upgrade": "regular", "upgradeLevel": 0, "weight": 0.0 }
+        { "name": "none", "upgrade": "regular", "upgradeLevel": 0, "weight": 0.0 }
       ],
       "armor": [
         {
@@ -155,7 +187,7 @@
           "defense": { "physical": 0, "strike": 0, "slash": 0, "thrust": 0, "magic": 0, "fire": 0, "lightning": 0 },
           "resistance": { "bleed": 0, "poison": 0, "curse": 0 }
         },
-         {
+        {
           "name": "none",
           "level": 0,
           "isUnique": false,
@@ -163,7 +195,7 @@
           "defense": { "physical": 0, "strike": 0, "slash": 0, "thrust": 0, "magic": 0, "fire": 0, "lightning": 0 },
           "resistance": { "bleed": 0, "poison": 0, "curse": 0 }
         },
-         {
+        {
           "name": "none",
           "level": 0,
           "isUnique": false,
