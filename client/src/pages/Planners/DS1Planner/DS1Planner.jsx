@@ -58,7 +58,7 @@ const DS1Planner = () => {
   }
 
   return (
-    <div>
+    <main className="u-mainPage">
       <h2>{id ? 'Edit' : 'Create'} DS1 Character</h2>
       <form onSubmit={handleSubmit}>
         <div className="u-container">
@@ -82,7 +82,7 @@ const DS1Planner = () => {
         <button onClick={handleDelete}>Delete</button>
         <button onClick={handleCancel}>Cancel</button>
       </form>
-    </div>
+    </main>
   );
 };
 

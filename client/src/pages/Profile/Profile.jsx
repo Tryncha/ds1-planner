@@ -15,12 +15,10 @@ const Profile = () => {
     fetchBuilds();
   }, []);
 
-  console.log(userBuilds);
-
   return (
-    <main className="Profile">
+    <main className="u-mainPage">
       <h2>Saved Builds</h2>
-      <hr />
+      <hr className="u-hr" />
       {userBuilds.length > 0 ? (
         <div>
           {userBuilds.map((build) => (

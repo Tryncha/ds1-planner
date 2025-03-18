@@ -1,5 +1,5 @@
-import { Link, Route, Routes } from 'react-router-dom';
-import Explorer from './pages/Explorer';
+import { Route, Routes } from 'react-router-dom';
+import Explorer from './pages/Explorer/Explorer';
 import Profile from './pages/Profile/Profile';
 import Login from './pages/Login';
 import DS1Planner from './pages/Planners/DS1Planner/DS1Planner';

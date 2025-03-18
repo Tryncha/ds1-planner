@@ -1,16 +1,41 @@
-.SideBar {
-  min-width: 200px;
+.Sidebar {
+  min-width: 280px;
   height: 100vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  background-color: #060606;
+  background-color: #0b0d0e;
   padding: 20px;
   border-right: 1px solid var(--borderColor);
 }
 
-.SideBar-container {
+.Sidebar-mainContainer {
+  width: 100%;
+  height: 650px;
   display: flex;
   flex-direction: column;
+  gap: 5px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.Sidebar-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.Sidebar-Link {
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+}
+
+.Sidebar-Link:hover {
+  background-color: #32383e;
 }

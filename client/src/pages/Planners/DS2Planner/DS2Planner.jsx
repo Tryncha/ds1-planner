@@ -45,7 +45,7 @@ const PlannerDS2 = () => {
   }
 
   return (
-    <div>
+    <main className="u-mainPage">
       <h2>{id ? 'Edit' : 'Create'} DS2 Character</h2>
       <form onSubmit={handleSubmit}>
         <div className="u-container">
@@ -65,7 +65,7 @@ const PlannerDS2 = () => {
         <button type="submit">{id ? 'Update' : 'Create'}</button>
         <button onClick={handleCancel}>Cancel</button>
       </form>
-    </div>
+    </main>
   );
 };
 

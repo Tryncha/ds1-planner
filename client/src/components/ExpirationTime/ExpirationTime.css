@@ -1,0 +1,23 @@
+.ExpirationTime {
+  width: 80px;
+  height: 40px;
+  position: absolute;
+  right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fce1c2;
+  background-color: #2e1b05;
+  padding: 5px;
+  border: 1px solid #fce1c2;
+  border-radius: 5px;
+}
+
+.ExpirationTime--toLow {
+  color: #ff9a9a;
+  background-color: #2e0505;
+  border: 1px solid #ff9a9a;
+}

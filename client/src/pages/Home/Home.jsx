@@ -1,5 +1,5 @@
 const Home = () => {
-  return <div>Home</div>;
+  return <main className="u-mainPage">Home</main>;
 };
 
 export default Home;
