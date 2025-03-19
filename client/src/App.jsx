@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import Explorer from './pages/Explorer/Explorer';
 import Profile from './pages/Profile/Profile';
-import Login from './pages/Login';
+import Login from './pages/Login/Login';
 import DS1Planner from './pages/Planners/DS1Planner/DS1Planner';
 import DS2Planner from './pages/Planners/DS2Planner/DS2Planner';
 import DS1PlannerLayout from './components/layouts/DS1PlannerLayout';
@@ -12,26 +12,28 @@ import { useContext, useEffect } from 'react';
 import AuthContext from './context/AuthContext';
 import buildsService from './services/builds';
 import { getAnonymousSession } from './services/anonymousSession';
+import Register from './pages/Register/Register';
 
 const App = () => {
-  const { auth, setAuth } = useContext(AuthContext);
+  const { setAuthInfo } = useContext(AuthContext);
 
   useEffect(() => {
-    const loggedUser = window.localStorage.getItem('loggedUser');
-    if (loggedUser) {
-      const auth = JSON.parse(loggedUser);
-      setAuth(auth);
-      buildsService.setToken(auth.token);
+    const userInfo = window.localStorage.getItem('userInfo');
+    if (userInfo) {
+      const newAuthInfo = JSON.parse(userInfo);
+      setAuthInfo(newAuthInfo);
+      buildsService.setToken(newAuthInfo.token);
     } else {
       getAnonymousSession();
     }
-  }, [auth.token, setAuth]);
+  }, [setAuthInfo]);
 
   return (
     <>
       <SideBar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/planner/dark-souls-1" element={<DS1PlannerLayout />}>

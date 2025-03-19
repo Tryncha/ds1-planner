@@ -6,7 +6,7 @@ import './Sidebar.css';
 
 const Sidebar = () => {
   const navigate = useNavigate();
-  const { auth } = useContext(AuthContext);
+  const { authInfo } = useContext(AuthContext);
 
   function handleLogout() {
     window.localStorage.clear();
@@ -47,9 +47,10 @@ const Sidebar = () => {
         </Link>
       </div>
       <hr className="u-hr" />
-      {auth.username ? (
+      {authInfo.username ? (
         <div>
-          <strong>{auth.username}</strong>
+          <span>{authInfo.displayName}</span>
+          <strong>{authInfo.username}</strong>
           <button onClick={handleLogout}>Logout</button>
         </div>
       ) : (

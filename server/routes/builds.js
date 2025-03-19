@@ -146,7 +146,7 @@ function gameBuildsRouter(BuildModel) {
 
       response.json(updatedBuild);
     } catch (error) {
-      response.status(400).json({ error: 'failed to update build' });
+      response.status(400).json({ error: 'failed to update build', error });
     }
   });
 

@@ -22,11 +22,11 @@ const Explorer = () => {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="u-mainPage">
+    <main className="u-mainPage">
       {communityBuilds.map((build) => (
         <BuildCard key={build.id} build={build} />
       ))}
-    </div>
+    </main>
   );
 };
 

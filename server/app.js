@@ -5,7 +5,6 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const middleware = require('./middleware/misc');
 const usersRouter = require('./routes/users');
-const loginRouter = require('./routes/login');
 const buildsRouter = require('./routes/builds');
 
 const app = express();
@@ -35,7 +34,6 @@ app.use('/api/builds', buildsRouter.allGames);
 app.use('/api/builds/dark-souls-1', buildsRouter.darkSouls1);
 app.use('/api/builds/dark-souls-2', buildsRouter.darkSouls2);
 app.use('/api/users', usersRouter);
-app.use('/api/login', loginRouter);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);

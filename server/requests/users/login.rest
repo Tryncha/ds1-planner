@@ -1,6 +1,6 @@
 ### Wrong username
 ### Must respond: "invalid username or password"
-POST http://localhost:3001/api/login
+POST http://localhost:3001/api/users/login
 Content-Type: application/json
 
 {
@@ -10,7 +10,7 @@ Content-Type: application/json
 
 ### Wrong password
 ### Must respond: "invalid username or password"
-POST http://localhost:3001/api/login
+POST http://localhost:3001/api/users/login
 Content-Type: application/json
 
 {
@@ -20,7 +20,7 @@ Content-Type: application/json
 
 ### Success login
 ### Must respond: an object with token, username and name
-POST http://localhost:3001/api/login
+POST http://localhost:3001/api/users/login
 Content-Type: application/json
 
 {

@@ -1,30 +1,5 @@
-### Save with anonymous session
-POST http://localhost:3001/api/builds/dark-souls-1
-Content-Type: application/json
-X-Anonymous-Session: 934d0af9-aed9-42ba-9e50-ec9d1dea1f8c
-
-{
-  "title": "DS1BuildAnon",
-  "character": {
-    "name": "AnonymousDS1",
-    "gender": "male",
-    "startingClass": "pyromancer",
-    "humanity": 10,
-    "attributes": {
-      "vitality": 23,
-      "attunement": 12,
-      "endurance": 16,
-      "strength": 17,
-      "dexterity": 16,
-      "resistance": 13,
-      "intelligence": 16,
-      "faith": 99
-    }
-  }
-}
-
 ### Save with logged session: mluukkai
-POST http://localhost:3001/api/builds/dark-souls-1
+PUT http://localhost:3001/api/builds/dark-souls-1/67db0beda577d3e061a69eb2
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sdXVra2FpIiwiaWQiOiI2N2Q1MDNhOGZmMzRiNWMyMjc2MjIzNTgiLCJpYXQiOjE3NDI0MDg2NjUsImV4cCI6MTc0MjQ1MTg2NX0.X-pnx9CE_UIzLwd_G9HOIDRj20b1alpfM07WD_HhHno
 
@@ -36,7 +11,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sd
     "startingClass": "pyromancer",
     "humanity": 10,
     "attributes": {
-      "vitality": 23,
+      "vitality": 30,
       "attunement": 12,
       "endurance": 16,
       "strength": 17,

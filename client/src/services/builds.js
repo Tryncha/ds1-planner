@@ -13,11 +13,14 @@ async function getBuildById(game, id) {
 }
 
 async function getUserBuilds() {
-  const anonymousSession = getAnonymousSession();
+  const config = {};
 
-  const config = token
-    ? { headers: { Authorization: token } }
-    : { headers: { 'X-Anonymous-Session': anonymousSession } };
+  if (token) {
+    config.headers = { Authorization: token };
+  } else {
+    const anonymousSession = getAnonymousSession();
+    config.headers = { 'X-Anonymous-Session': anonymousSession };
+  }
 
   const response = await axios.get(`${baseUrl}/user-builds`, config);
   return response.data;
@@ -29,31 +32,42 @@ async function getAll() {
 }
 
 async function saveGameBuild(game, newBuild) {
-  const anonymousSession = getAnonymousSession();
+  const config = {};
 
-  const config = token
-    ? { headers: { Authorization: token } }
-    : { headers: { 'X-Anonymous-Session': anonymousSession } };
+  if (token) {
+    config.headers = { Authorization: token };
+  } else {
+    const anonymousSession = getAnonymousSession();
+    config.headers = { 'X-Anonymous-Session': anonymousSession };
+  }
 
   const response = await axios.post(`${baseUrl}/${game}`, newBuild, config);
   return response.data;
 }
 
 async function updateGameBuild(game, id, newBuild) {
-  const anonymousSession = getAnonymousSession();
-  const config = token
-    ? { headers: { Authorization: token } }
-    : { headers: { 'X-Anonymous-Session': anonymousSession } };
+  const config = {};
+
+  if (token) {
+    config.headers = { Authorization: token };
+  } else {
+    const anonymousSession = getAnonymousSession();
+    config.headers = { 'X-Anonymous-Session': anonymousSession };
+  }
 
   const response = await axios.put(`${baseUrl}/${game}/${id}`, newBuild, config);
   return response.data;
 }
 
 async function deleteGameBuild(game, id) {
-  const anonymousSession = getAnonymousSession();
-  const config = token
-    ? { headers: { Authorization: token } }
-    : { headers: { 'X-Anonymous-Session': anonymousSession } };
+  const config = {};
+
+  if (token) {
+    config.headers = { Authorization: token };
+  } else {
+    const anonymousSession = getAnonymousSession();
+    config.headers = { 'X-Anonymous-Session': anonymousSession };
+  }
 
   const response = await axios.delete(`${baseUrl}/${game}/${id}`, config);
   return response.data;

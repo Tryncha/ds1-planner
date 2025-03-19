@@ -1,6 +1,7 @@
 import { createContext, useState } from 'react';
 
 const initialState = {
+  displayName: null,
   username: null,
   name: null
 };
@@ -8,9 +9,9 @@ const initialState = {
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [auth, setAuth] = useState(initialState);
-  console.log(auth);
-  return <AuthContext.Provider value={{ auth, setAuth }}>{children}</AuthContext.Provider>;
+  const [authInfo, setAuthInfo] = useState(initialState);
+  console.log('AuthInfo', authInfo);
+  return <AuthContext.Provider value={{ authInfo, setAuthInfo }}>{children}</AuthContext.Provider>;
 }
 
 export default AuthContext;
