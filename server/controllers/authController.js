@@ -1,33 +1,21 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const User = require('../models/user');
+const User = require('../models/UserModel');
+const jwt = require('jsonwebtoken');
 
-const usersRouter = express.Router();
-
-usersRouter.get('/', async (request, response) => {
-  const users = await User.find({});
-  response.json(users);
-});
-
-usersRouter.get('/:id', async (request, response) => {
-  const user = await User.find(request.params.id);
-  response.json(user);
-});
-
-usersRouter.post('/register', async (request, response) => {
+const register = async (request, response) => {
+  // Add email later
   const { username, password } = request.body;
 
-  const saltRounds = 10;
+  const saltRounds = await bcrypt.genSalt(10);
   const passwordHash = await bcrypt.hash(password, saltRounds);
 
   const newUser = new User({ username, passwordHash });
 
   const savedUser = await newUser.save();
   response.status(201).json(savedUser);
-});
+};
 
-usersRouter.post('/login', async (request, response) => {
+const login = async (request, response) => {
   const { username, password } = request.body;
 
   const userToAuth = await User.findOne({ username });
@@ -46,11 +34,6 @@ usersRouter.post('/login', async (request, response) => {
   const token = jwt.sign(userForToken, process.env.SECRET, { expiresIn: 30 * 24 * 60 * 60 });
 
   response.status(200).send({ token, username: userToAuth.username, id: userToAuth._id });
-});
+};
 
-usersRouter.delete('/:id', async (request, response) => {
-  await User.findByIdAndDelete(request.params.id);
-  response.status(204).end();
-});
-
-module.exports = usersRouter;
+module.exports = { register, login };

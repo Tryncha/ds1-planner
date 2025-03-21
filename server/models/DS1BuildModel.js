@@ -180,4 +180,6 @@ DS1BuildSchema.set('toJSON', {
   }
 });
 
-module.exports = mongoose.model('DS1Build', DS1BuildSchema);
+const DS1BuildModel = mongoose.model('DS1Build', DS1BuildSchema);
+
+module.exports = DS1BuildModel;

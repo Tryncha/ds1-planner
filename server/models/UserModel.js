@@ -6,7 +6,10 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  passwordHash: String,
+  passwordHash: {
+    type: String,
+    required: true
+  },
   builds: {
     darkSouls1: [
       {
@@ -14,7 +17,9 @@ const UserSchema = new mongoose.Schema({
         ref: 'DS1Build'
       }
     ]
-  }
+  },
+  followers: [String],
+  following: [String]
 });
 
 UserSchema.set('toJSON', {
@@ -26,4 +31,6 @@ UserSchema.set('toJSON', {
   }
 });
 
-module.exports = mongoose.model('User', UserSchema);
+const UserModel = mongoose.model('User', UserSchema);
+
+module.exports = UserModel;

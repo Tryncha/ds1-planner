@@ -1,16 +1,16 @@
 const express = require('express');
 const { userExtractor } = require('../middleware/misc');
 const { getAllBuilds } = require('../middleware/builds');
-const DS1Build = require('../models/builds/DS1Build');
-const DS2Build = require('../models/builds/DS2Build');
+const DS1BuildModel = require('../models/DS1BuildModel');
+const DS2BuildModel = require('../models/DS2BuildModel');
 
 const allGames = express.Router();
 
 allGames.get('/', async (request, response) => {
   try {
     const [ds1Builds, ds2Builds] = await Promise.all([
-      DS1Build.find({}).populate('user', { username: 1, name: 1 }),
-      DS2Build.find({}).populate('user', { username: 1, name: 1 })
+      DS1BuildModel.find({}).populate('user', { username: 1, name: 1 }),
+      DS2BuildModel.find({}).populate('user', { username: 1, name: 1 })
     ]);
 
     const builds = [...ds1Builds, ...ds2Builds];
@@ -24,14 +24,14 @@ allGames.get('/', async (request, response) => {
 allGames.get('/user-builds', userExtractor, async (request, response) => {
   try {
     if (request.token) {
-      const ds1Builds = await DS1Build.find({ user: request.user.id });
-      const ds2Builds = await DS2Build.find({ user: request.user.id });
+      const ds1Builds = await DS1BuildModel.find({ user: request.user.id });
+      const ds2Builds = await DS2BuildModel.find({ user: request.user.id });
 
       const builds = [...ds1Builds, ...ds2Builds];
       return response.json(builds);
     } else if (request.anonymousUserId) {
-      const ds1Builds = await DS1Build.find({ anonymousUserId: request.anonymousUserId });
-      const ds2Builds = await DS2Build.find({ anonymousUserId: request.anonymousUserId });
+      const ds1Builds = await DS1BuildModel.find({ anonymousUserId: request.anonymousUserId });
+      const ds2Builds = await DS2BuildModel.find({ anonymousUserId: request.anonymousUserId });
 
       const builds = [...ds1Builds, ...ds2Builds];
       return response.json(builds);
@@ -179,8 +179,8 @@ function gameBuildsRouter(BuildModel) {
   return gameRouter;
 }
 
-const darkSouls1 = gameBuildsRouter(DS1Build);
-const darkSouls2 = gameBuildsRouter(DS2Build);
+const darkSouls1 = gameBuildsRouter(DS1BuildModel);
+const darkSouls2 = gameBuildsRouter(DS2BuildModel);
 // const darkSouls3 = gameBuildsRouter(DS2Build);
 // const eldenRing = gameBuildsRouter(DS2Build);
 
