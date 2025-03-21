@@ -24,8 +24,8 @@ function tokenExtractor(request, response, next) {
   next();
 }
 
-function anonymousIdExtractor(request, response, next) {
-  request.anonymousUserId = request.get('X-Anonymous-Session');
+function anonymousUserIdExtractor(request, response, next) {
+  request.anonymousUserId = request.get('X-Anonymous-User-Id');
   next();
 }
 
@@ -69,7 +69,7 @@ module.exports = {
   requestLogger,
   unknownEndpoint,
   tokenExtractor,
-  anonymousIdExtractor,
+  anonymousUserIdExtractor,
   userExtractor,
   authLogger,
   errorHandler

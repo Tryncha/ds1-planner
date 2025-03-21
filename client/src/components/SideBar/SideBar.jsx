@@ -1,19 +1,11 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import AuthContext from '../../context/AuthContext';
-import { generateAnonymousSession } from '../../services/anonymousSession';
 import './Sidebar.css';
+import UserInfo from '../UserInfo/UserInfo';
 
 const Sidebar = () => {
-  const navigate = useNavigate();
   const { authInfo } = useContext(AuthContext);
-
-  function handleLogout() {
-    window.localStorage.clear();
-    generateAnonymousSession();
-    navigate('/');
-    window.location.reload();
-  }
 
   return (
     <nav className="Sidebar">
@@ -47,12 +39,8 @@ const Sidebar = () => {
         </Link>
       </div>
       <hr className="u-hr" />
-      {authInfo.username ? (
-        <div>
-          <span>{authInfo.displayName}</span>
-          <strong>{authInfo.username}</strong>
-          <button onClick={handleLogout}>Logout</button>
-        </div>
+      {authInfo.id ? (
+        <UserInfo />
       ) : (
         <div className="Sidebar-container">
           <Link to="/login" className="Sidebar-Link">

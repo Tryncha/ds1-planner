@@ -1,0 +1,10 @@
+.UserInfo {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.UserInfo-data {
+  display: flex;
+  flex-direction: column;
+}

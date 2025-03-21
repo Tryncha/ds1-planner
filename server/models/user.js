@@ -6,7 +6,6 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  displayName: String,
   passwordHash: String,
   builds: {
     darkSouls1: [

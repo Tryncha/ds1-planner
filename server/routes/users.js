@@ -16,12 +16,12 @@ usersRouter.get('/:id', async (request, response) => {
 });
 
 usersRouter.post('/register', async (request, response) => {
-  const { displayName, username, password } = request.body;
+  const { username, password } = request.body;
 
   const saltRounds = 10;
   const passwordHash = await bcrypt.hash(password, saltRounds);
 
-  const newUser = new User({ displayName, username, passwordHash });
+  const newUser = new User({ username, passwordHash });
 
   const savedUser = await newUser.save();
   response.status(201).json(savedUser);
@@ -42,10 +42,10 @@ usersRouter.post('/login', async (request, response) => {
     id: userToAuth._id
   };
 
-  // Expires in 12 * 60 * 60 = 12 hours
-  const token = jwt.sign(userForToken, process.env.SECRET, { expiresIn: 12 * 60 * 60 });
+  // Expires in 30 * 24 * 60 * 60 = 30 days
+  const token = jwt.sign(userForToken, process.env.SECRET, { expiresIn: 30 * 24 * 60 * 60 });
 
-  response.status(200).send({ token, username: userToAuth.username, displayName: userToAuth.displayName });
+  response.status(200).send({ token, username: userToAuth.username, id: userToAuth._id });
 });
 
 usersRouter.delete('/:id', async (request, response) => {

@@ -13,17 +13,47 @@ import buildService from '../services/builds';
 //   };
 // }
 
+function createNewBuild(startingClassData) {
+  return {
+    title: '',
+    description: '',
+    isPublic: false,
+    tags: [],
+    character: {
+      name: '',
+      gender: 'male',
+      startingClass: startingClassData.name,
+      attributes: { ...startingClassData.baseAttributes },
+      humanity: 0
+    }
+  };
+}
+
 const startingClassData = getStartingClassData(DEFAULT_CLASS);
-const initialState = {
-  title: '',
-  character: {
-    name: '',
-    gender: 'male',
-    startingClass: startingClassData.name,
-    attributes: { ...startingClassData.baseAttributes },
-    humanity: 0
-  }
-};
+const initialState = createNewBuild(startingClassData);
+
+// const initialState = {
+//   title: '',
+//   description: '',
+//   user: {
+//     username: null,
+//     id: null
+//   },
+//   anonymousUserId: null,
+//   game: 'DS1',
+//   isPublic: false,
+//   tags: [],
+//   character: {
+//     name: '',
+//     gender: 'male',
+//     startingClass: startingClassData.name,
+//     attributes: { ...startingClassData.baseAttributes },
+//     humanity: 0
+//   },
+//   createdAt: null,
+//   updatedAt: null,
+//   expiresAt: null
+// };
 
 function buildReducer(buildState, action) {
   switch (action.type) {
@@ -31,6 +61,24 @@ function buildReducer(buildState, action) {
       return {
         ...buildState,
         title: action.payload
+      };
+
+    case 'SET_DESCRIPTION':
+      return {
+        ...buildState,
+        description: action.payload
+      };
+
+    case 'TOGGLE_VISIBILITY':
+      return {
+        ...buildState,
+        isPublic: !buildState.isPublic
+      };
+
+    case 'SET_TAG':
+      return {
+        ...buildState,
+        tags: buildState.tags.concat(action.payload)
       };
 
     case 'SET_NAME':

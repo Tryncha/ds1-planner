@@ -89,33 +89,11 @@ const EquipmentSchema = new mongoose.Schema(
   }
 );
 
-const CommentsSchema = new mongoose.Schema(
-  {
-    author: {
-      type: String,
-      required: true
-    },
-    content: {
-      type: String,
-      required: true,
-      maxLength: 50 // Propense to changes
-    },
-    votes: Number
-  },
-  {
-    timestamps: true
-  },
-  {
-    _id: false
-  }
-);
-
 const DS1BuildSchema = new mongoose.Schema(
   {
     title: {
       // Build name !== Character name
       type: String,
-      default: 'Untitled',
       trim: true,
       minLength: 1,
       maxLength: 50, // Propense to changes
@@ -129,7 +107,7 @@ const DS1BuildSchema = new mongoose.Schema(
     expiresAt: Date,
     game: {
       type: String,
-      default: 'ds1'
+      default: 'DS1'
     },
     description: {
       // Build info or notes about build by author
@@ -137,15 +115,6 @@ const DS1BuildSchema = new mongoose.Schema(
       trim: true,
       maxLength: 50 // Propense to changes
     },
-    externalUrl: {
-      type: String,
-      trim: true
-    },
-    videoUrl: {
-      type: String,
-      trim: true
-    },
-    screenshots: [String],
     isPublic: {
       type: Boolean,
       default: false,
@@ -159,7 +128,6 @@ const DS1BuildSchema = new mongoose.Schema(
     },
     views: Number,
     votes: Number,
-    comments: [CommentsSchema],
     character: {
       name: {
         type: String,
@@ -177,24 +145,23 @@ const DS1BuildSchema = new mongoose.Schema(
       },
       startingGift: String,
       covenant: {
-        type: String,
-        default: 'noCovenant'
+        type: String
       },
       humanity: Number,
       attributes: AttributesSchema,
       equipment: EquipmentSchema,
-      spells: [String],
-      conditions: [
-        // Like: Low health, Full HP, Cursed, etc.
-        {
-          name: String,
-          isActive: Boolean
-        }
-      ],
-      metadata: {
-        isPvP: Boolean,
-        isTwoHanded: Boolean
-      }
+      spells: [String]
+      // conditions: [
+      //   // Like: Low health, Full HP, Cursed, etc.
+      //   {
+      //     name: String,
+      //     isActive: Boolean
+      //   }
+      // ],
+      // metadata: {
+      //   isPvP: Boolean,
+      //   isTwoHanded: Boolean
+      // }
     }
   },
   {

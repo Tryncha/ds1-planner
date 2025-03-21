@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import loginService from '../../services/login';
 import buildService from '../../services/builds';
 import AuthContext from '../../context/AuthContext';
-import { clearAnonymousSession } from '../../services/anonymousSession';
+import { clearAnonymousUserId } from '../../services/anonymousUserId';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const Login = () => {
 
       window.localStorage.setItem('userInfo', JSON.stringify(userInfo));
 
-      clearAnonymousSession();
+      clearAnonymousUserId();
       buildService.setToken(userInfo.token);
       setAuthInfo(userInfo);
 

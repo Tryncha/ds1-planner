@@ -1,16 +1,16 @@
 import { createContext, useState } from 'react';
 
 const initialState = {
-  displayName: null,
+  token: null,
   username: null,
-  name: null
+  id: null
 };
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [authInfo, setAuthInfo] = useState(initialState);
-  console.log('AuthInfo', authInfo);
+  console.log('AuthInfo:', authInfo);
   return <AuthContext.Provider value={{ authInfo, setAuthInfo }}>{children}</AuthContext.Provider>;
 }
 

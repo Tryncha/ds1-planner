@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAnonymousSession, clearAnonymousSession } from './anonymousSession';
+import { getAnonymousUserId, clearAnonymousUserId } from './anonymousUserId';
 const baseUrl = '/api/builds';
 
 let token = null;
@@ -18,8 +18,8 @@ async function getUserBuilds() {
   if (token) {
     config.headers = { Authorization: token };
   } else {
-    const anonymousSession = getAnonymousSession();
-    config.headers = { 'X-Anonymous-Session': anonymousSession };
+    const anonymousUserId = getAnonymousUserId();
+    config.headers = { 'X-Anonymous-User-Id': anonymousUserId };
   }
 
   const response = await axios.get(`${baseUrl}/user-builds`, config);
@@ -37,8 +37,8 @@ async function saveGameBuild(game, newBuild) {
   if (token) {
     config.headers = { Authorization: token };
   } else {
-    const anonymousSession = getAnonymousSession();
-    config.headers = { 'X-Anonymous-Session': anonymousSession };
+    const anonymousUserId = getAnonymousUserId();
+    config.headers = { 'X-Anonymous-User-Id': anonymousUserId };
   }
 
   const response = await axios.post(`${baseUrl}/${game}`, newBuild, config);
@@ -51,8 +51,8 @@ async function updateGameBuild(game, id, newBuild) {
   if (token) {
     config.headers = { Authorization: token };
   } else {
-    const anonymousSession = getAnonymousSession();
-    config.headers = { 'X-Anonymous-Session': anonymousSession };
+    const anonymousUserId = getAnonymousUserId();
+    config.headers = { 'X-Anonymous-User-Id': anonymousUserId };
   }
 
   const response = await axios.put(`${baseUrl}/${game}/${id}`, newBuild, config);
@@ -65,8 +65,8 @@ async function deleteGameBuild(game, id) {
   if (token) {
     config.headers = { Authorization: token };
   } else {
-    const anonymousSession = getAnonymousSession();
-    config.headers = { 'X-Anonymous-Session': anonymousSession };
+    const anonymousUserId = getAnonymousUserId();
+    config.headers = { 'X-Anonymous-User-Id': anonymousUserId };
   }
 
   const response = await axios.delete(`${baseUrl}/${game}/${id}`, config);
@@ -77,17 +77,17 @@ async function deleteGameBuild(game, id) {
 async function migrateAnonymousBuilds() {
   if (!token) return null;
 
-  const sessionId = getAnonymousSession();
+  const anonymousUserId = getAnonymousUserId();
   const config = {
     headers: {
       'Authorization': token,
-      'X-Anonymous-Session': sessionId
+      'X-Anonymous-User-Id': anonymousUserId
     }
   };
 
   const response = await axios.post(`${baseUrl}/migrate-anonymous`, {}, config);
-  // After successful migration, clear the anonymous session
-  clearAnonymousSession();
+  // After successful migration, clear the anonymous id
+  clearAnonymousUserId();
   return response.data;
 }
 

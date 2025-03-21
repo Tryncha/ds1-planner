@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import buildsService from '../../services/builds';
-import BuildCard from '../../components/dark-souls-1/BuildCard/BuildCard';
+import BuildsTable from '../../components/BuildsTable/BuildsTable';
 import './Explorer.css';
 
 const Explorer = () => {
@@ -23,9 +23,9 @@ const Explorer = () => {
 
   return (
     <main className="u-mainPage">
-      {communityBuilds.map((build) => (
-        <BuildCard key={build.id} build={build} />
-      ))}
+      <h2>Community Builds</h2>
+      <hr className="u-hr" />
+      <BuildsTable builds={communityBuilds} />
     </main>
   );
 };

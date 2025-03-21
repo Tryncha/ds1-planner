@@ -1,0 +1,8 @@
+.Title {
+  display: flex;
+  margin: 5px;
+}
+
+.Title-input {
+  width: 100%;
+}

@@ -4,13 +4,11 @@ import loginService from '../../services/login';
 
 const Register = () => {
   const navigate = useNavigate();
-  const displayNameInputId = useId();
   const usernameInputId = useId();
   const passwordInputId = useId();
   const confirmPasswordInputId = useId();
 
   const [registerData, setRegisterData] = useState({
-    displayName: '',
     username: '',
     password: '',
     confirmPassword: ''
@@ -50,17 +48,6 @@ const Register = () => {
   return (
     <main>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor={displayNameInputId}>Display Name</label>
-          <input
-            id={displayNameInputId}
-            name="displayName"
-            type="text"
-            value={registerData.displayName}
-            onChange={handleChange}
-            required
-          />
-        </div>
         <div>
           <label htmlFor={usernameInputId}>Username</label>
           <input

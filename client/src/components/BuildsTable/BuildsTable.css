@@ -1,0 +1,11 @@
+.BuildsTable {
+  text-align: center;
+  border: 1px solid var(--borderColor);
+  border-collapse: collapse;
+}
+
+.BuildsTable th,
+.BuildsTable td {
+  padding: 5px 10px;
+  border: 1px solid var(--borderColor);
+}

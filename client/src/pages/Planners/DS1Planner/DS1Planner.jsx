@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import buildService from '../../../services/builds';
 import DS1BuildContext from '../../../context/DS1BuildContext';
@@ -11,25 +11,55 @@ import MiniCaption from '../../../components/dark-souls-1/MiniCaption/MiniCaptio
 import AttributeIO from '../../../components/dark-souls-1/AttributeIO/AttributeIO';
 import Humanity from '../../../components/dark-souls-1/Humanity/Humanity';
 import Title from '../../../components/dark-souls-1/Title/Title';
+import AuthContext from '../../../context/AuthContext';
+import { getAnonymousUserId } from '../../../services/anonymousUserId';
 
 const DS1Planner = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const { authInfo } = useContext(AuthContext);
   const { build, buildDispatch, saveBuild, updateBuild } = useContext(DS1BuildContext);
+  const [buildOwner, setBuildOwner] = useState({ username: null, id: null });
   // const [originalBuild, setOriginalBuild] = useState(null);
 
   useEffect(() => {
+    if (authInfo.id) {
+      setBuildOwner({ username: authInfo.username, id: authInfo.id });
+    } else {
+      const anonymousUserId = getAnonymousUserId();
+      setBuildOwner({ username: 'Anonymous', id: anonymousUserId });
+    }
+
     async function loadCharacter(id) {
-      const loadedBuild = await buildService.getBuildById('dark-souls-1', id);
-      buildDispatch({ type: 'LOAD_BUILD', payload: loadedBuild });
+      try {
+        const loadedBuild = await buildService.getBuildById('dark-souls-1', id);
 
-      // Deep copy of the original build to compare later
-      // const newOriginalBuild = {
-      //   ...loadedBuild.character,
-      // }
+        if (loadedBuild.user) {
+          setBuildOwner({ username: loadedBuild.user.username, id: loadedBuild.user.id });
+        } else {
+          setBuildOwner({ username: 'Anonymous', id: loadedBuild.anonymousUserId });
+        }
 
-      // setOriginalBuild(JSON.parse(JSON.stringify(loadedBuildClone)));
+        const buildData = {
+          title: loadedBuild.title,
+          description: loadedBuild.description,
+          isPublic: loadedBuild.isPublic,
+          tags: loadedBuild.tags,
+          character: loadedBuild.character
+        };
+
+        buildDispatch({ type: 'LOAD_BUILD', payload: buildData });
+
+        // Deep copy of the original build to compare later
+        // const newOriginalBuild = {
+        //   ...loadedBuild.character,
+        // }
+
+        // setOriginalBuild(JSON.parse(JSON.stringify(loadedBuildClone)));
+      } catch (error) {
+        console.log('There was an error loading the build:', error);
+      }
     }
 
     function resetCharacter() {
@@ -38,7 +68,7 @@ const DS1Planner = () => {
     }
 
     id ? loadCharacter(id) : resetCharacter();
-  }, [id, buildDispatch]);
+  }, [id, buildDispatch, authInfo]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -57,13 +87,25 @@ const DS1Planner = () => {
     id ? navigate('/explorer') : navigate('/');
   }
 
+  let isUserOwner = false;
+
+  if (authInfo.id) {
+    isUserOwner = authInfo.id === buildOwner.id;
+  } else {
+    const anonymousUserId = getAnonymousUserId();
+    isUserOwner = anonymousUserId === buildOwner.id;
+  }
+
   return (
     <main className="u-mainPage">
       <h2>{id ? 'Edit' : 'Create'} DS1 Character</h2>
+      {isUserOwner ? null : (
+        <span>
+          Viewing <strong>{buildOwner.username}</strong> build
+        </span>
+      )}
       <form onSubmit={handleSubmit}>
-        <div className="u-container">
-          <Title />
-        </div>
+        <Title />
         <div className="u-container">
           <CharacterName />
           <Gender />
@@ -78,8 +120,12 @@ const DS1Planner = () => {
           <hr className="u-hr" />
           <Humanity />
         </div>
-        <button type="submit">{id ? 'Update' : 'Create'}</button>
-        <button onClick={handleDelete}>Delete</button>
+        {isUserOwner ? (
+          <div>
+            <button type="submit">{id ? 'Update' : 'Create'}</button>
+            <button onClick={handleDelete}>Delete</button>
+          </div>
+        ) : null}
         <button onClick={handleCancel}>Cancel</button>
       </form>
     </main>

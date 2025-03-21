@@ -11,7 +11,7 @@ import SideBar from './components/SideBar/SideBar';
 import { useContext, useEffect } from 'react';
 import AuthContext from './context/AuthContext';
 import buildsService from './services/builds';
-import { getAnonymousSession } from './services/anonymousSession';
+import { clearAnonymousUserId, getAnonymousUserId } from './services/anonymousUserId';
 import Register from './pages/Register/Register';
 
 const App = () => {
@@ -23,8 +23,9 @@ const App = () => {
       const newAuthInfo = JSON.parse(userInfo);
       setAuthInfo(newAuthInfo);
       buildsService.setToken(newAuthInfo.token);
+      clearAnonymousUserId();
     } else {
-      getAnonymousSession();
+      getAnonymousUserId();
     }
   }, [setAuthInfo]);
 
