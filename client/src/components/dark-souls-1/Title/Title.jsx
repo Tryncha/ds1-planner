@@ -1,8 +1,9 @@
-import { useContext } from 'react';
+import { useContext, useId } from 'react';
 import DS1BuildContext from '../../../context/DS1BuildContext';
 import './Title.css';
 
 const Title = () => {
+  const inputId = useId();
   const { build, buildDispatch } = useContext(DS1BuildContext);
 
   function handleChange(event) {
@@ -12,6 +13,7 @@ const Title = () => {
   return (
     <div className="Title">
       <input
+        id={inputId}
         className="Title-input"
         type="text"
         value={build.title}

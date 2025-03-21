@@ -20,11 +20,8 @@ const Sidebar = () => {
         <Link to="/profile" className="Sidebar-Link">
           Profile
         </Link>
-        <Link to="/planner/dark-souls-1" className="Sidebar-Link">
-          Planner DS1
-        </Link>
-        <Link to="/planner/dark-souls-2" className="Sidebar-Link">
-          Planner DS2
+        <Link to="/planner" className="Sidebar-Link">
+          Planner
         </Link>
         <Link to="/explorer" className="Sidebar-Link">
           Explorer
@@ -34,7 +31,7 @@ const Sidebar = () => {
         <Link to="/" className="Sidebar-Link">
           Settings
         </Link>
-        <Link to="/profile" className="Sidebar-Link">
+        <Link to="/" className="Sidebar-Link">
           Help
         </Link>
       </div>

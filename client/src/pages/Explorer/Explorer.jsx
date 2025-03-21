@@ -19,7 +19,14 @@ const Explorer = () => {
     fetchBuilds();
   }, []);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <main className="u-mainPage">
+        <h2>Community Builds</h2>
+        <hr className="u-hr" />
+        <div>Loading...</div>
+      </main>
+    );
 
   return (
     <main className="u-mainPage">

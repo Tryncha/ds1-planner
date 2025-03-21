@@ -13,6 +13,7 @@ import AuthContext from './context/AuthContext';
 import buildsService from './services/builds';
 import { clearAnonymousUserId, getAnonymousUserId } from './services/anonymousUserId';
 import Register from './pages/Register/Register';
+import SelectPlanner from './pages/Planners/SelectPlanner/SelectPlanner';
 
 const App = () => {
   const { setAuthInfo } = useContext(AuthContext);
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/planner" element={<SelectPlanner />} />
         <Route path="/planner/dark-souls-1" element={<DS1PlannerLayout />}>
           <Route index element={<DS1Planner />} />
           <Route path=":id" element={<DS1Planner />} />

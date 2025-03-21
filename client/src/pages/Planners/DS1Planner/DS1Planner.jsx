@@ -84,7 +84,7 @@ const DS1Planner = () => {
 
   function handleCancel(event) {
     event.preventDefault();
-    id ? navigate('/explorer') : navigate('/');
+    id ? navigate('/explorer') : navigate('/planner');
   }
 
   let isUserOwner = false;
@@ -99,6 +99,7 @@ const DS1Planner = () => {
   return (
     <main className="u-mainPage">
       <h2>{id ? 'Edit' : 'Create'} DS1 Character</h2>
+      <hr className="u-hr" />
       {isUserOwner ? null : (
         <span>
           Viewing <strong>{buildOwner.username}</strong> build
@@ -122,11 +123,11 @@ const DS1Planner = () => {
         </div>
         {isUserOwner ? (
           <div>
-            <button type="submit">{id ? 'Update' : 'Create'}</button>
-            <button onClick={handleDelete}>Delete</button>
+            <button type="submit">{id ? 'Update' : 'Save'}</button>
+            {id && <button onClick={handleDelete}>Delete</button>}
           </div>
         ) : null}
-        <button onClick={handleCancel}>Cancel</button>
+        <button onClick={handleCancel}>Go back</button>
       </form>
     </main>
   );
