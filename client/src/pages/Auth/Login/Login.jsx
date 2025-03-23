@@ -1,9 +1,9 @@
 import { useContext, useId, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import loginService from '../../services/login';
-import buildService from '../../services/builds';
-import AuthContext from '../../context/AuthContext';
-import { clearAnonymousUserId } from '../../services/anonymousUserId';
+import loginService from '../../../services/login';
+import buildService from '../../../services/builds';
+import AuthContext from '../../../context/AuthContext';
+import { clearAnonymousUserId } from '../../../services/anonymousUserId';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -46,7 +46,9 @@ const Login = () => {
   }
 
   return (
-    <main>
+    <main className="u-mainPage">
+      <h2>Login</h2>
+      <hr className="u-hr" />
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor={usernameInputId}>Username</label>

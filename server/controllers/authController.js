@@ -6,6 +6,22 @@ const register = async (request, response) => {
   // Add email later
   const { username, password } = request.body;
 
+  if (username.length < 3) {
+    return response.status(400).json({ error: 'username must have at least 3 characters' });
+  }
+
+  if (password.length < 8) {
+    return response.status(400).json({ error: 'password must have at least 8 characters' });
+  }
+
+  if (!/[A-Z]/.test(password)) {
+    return response.status(400).json({ error: 'password must have at least 1 uppercase letter' });
+  }
+
+  if (!/\d/.test(password)) {
+    return response.status(400).json({ error: 'password must have at least 1 digit' });
+  }
+
   const saltRounds = await bcrypt.genSalt(10);
   const passwordHash = await bcrypt.hash(password, saltRounds);
 
@@ -30,8 +46,7 @@ const login = async (request, response) => {
     id: userToAuth._id
   };
 
-  // Expires in 30 * 24 * 60 * 60 = 30 days
-  const token = jwt.sign(userForToken, process.env.SECRET, { expiresIn: 30 * 24 * 60 * 60 });
+  const token = jwt.sign(userForToken, process.env.SECRET, { expiresIn: '30d' });
 
   response.status(200).send({ token, username: userToAuth.username, id: userToAuth._id });
 };

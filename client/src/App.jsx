@@ -1,7 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 import Explorer from './pages/Explorer/Explorer';
 import Profile from './pages/Profile/Profile';
-import Login from './pages/Login/Login';
+import Register from './pages/Auth/Register/Register';
+import Login from './pages/Auth/Login/Login';
 import DS1Planner from './pages/Planners/DS1Planner/DS1Planner';
 import DS2Planner from './pages/Planners/DS2Planner/DS2Planner';
 import DS1PlannerLayout from './components/layouts/DS1PlannerLayout';
@@ -12,7 +13,6 @@ import { useContext, useEffect } from 'react';
 import AuthContext from './context/AuthContext';
 import buildsService from './services/builds';
 import { clearAnonymousUserId, getAnonymousUserId } from './services/anonymousUserId';
-import Register from './pages/Register/Register';
 import SelectPlanner from './pages/Planners/SelectPlanner/SelectPlanner';
 
 const App = () => {

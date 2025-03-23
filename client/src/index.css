@@ -66,6 +66,25 @@ input::-webkit-inner-spin-button {
   margin: 10px 0;
 }
 
+.u-authFormContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.u-authButtonsContainer {
+  width: 250px;
+  display: flex;
+  justify-content: space-around;
+  margin: 10px;
+}
+
+.u-formError {
+  color: rgb(245, 151, 151);
+  font-size: 13px;
+  font-style: italic;
+}
+
 .Gender,
 .StartingClass,
 .SoulLevel,

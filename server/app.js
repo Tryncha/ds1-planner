@@ -3,10 +3,10 @@ const express = require('express');
 require('express-async-errors');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const middleware = require('./middleware/misc');
+const middleware = require('./middleware');
 const usersRouter = require('./routes/usersRouter');
-const buildsRouter = require('./routes/buildsRouter');
 const authRouter = require('./routes/authRouter');
+const { allGamesRouter, darkSouls1Router, darkSouls2Router } = require('./routes/buildsRouter');
 
 const app = express();
 
@@ -31,9 +31,10 @@ app.use(middleware.tokenExtractor);
 app.use(middleware.anonymousUserIdExtractor);
 app.use(middleware.authLogger);
 
-app.use('/api/builds', buildsRouter.allGames);
-app.use('/api/builds/dark-souls-1', buildsRouter.darkSouls1);
-app.use('/api/builds/dark-souls-2', buildsRouter.darkSouls2);
+app.use('/api/builds', allGamesRouter);
+app.use('/api/builds/dark-souls-1', darkSouls1Router);
+app.use('/api/builds/dark-souls-2', darkSouls2Router);
+
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
 

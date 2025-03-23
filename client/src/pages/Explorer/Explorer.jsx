@@ -5,11 +5,9 @@ import './Explorer.css';
 
 const Explorer = () => {
   const [communityBuilds, setCommunityBuilds] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(true);
-
     async function fetchBuilds() {
       const loadedBuilds = await buildsService.getAll();
       setCommunityBuilds(loadedBuilds);

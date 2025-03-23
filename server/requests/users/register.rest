@@ -1,0 +1,48 @@
+### Invalid register
+### Must respond: "password must have at least 8 characters"
+POST http://localhost:3001/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "root",
+  "password": "root"
+}
+
+### Invalid register
+### Must respond: "password must have at least 1 uppercase letter"
+POST http://localhost:3001/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "root",
+  "password": "superroot"
+}
+
+### Invalid register
+### Must respond: "password must have at least 1 digit"
+POST http://localhost:3001/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "root",
+  "password": "superRoot"
+}
+
+### Invalid register
+### Must respond: "username must have at least 3 characters"
+POST http://localhost:3001/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "rt",
+  "password": "superRoot3"
+}
+
+### Valid register
+POST http://localhost:3001/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "root",
+  "password": "superRoot3"
+}

@@ -6,11 +6,9 @@ import { Link } from 'react-router-dom';
 
 const Profile = () => {
   const [userBuilds, setUserBuilds] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(true);
-
     async function fetchBuilds() {
       const builds = await buildsService.getUserBuilds();
       setUserBuilds(builds);
