@@ -1,4 +1,4 @@
-import startingClasses from '../../starting-classes.json';
+import startingClasses from '../../assets/starting-classes.json';
 
 export function capitalizeWord(word) {
   return word[0].toUpperCase() + word.slice(1);

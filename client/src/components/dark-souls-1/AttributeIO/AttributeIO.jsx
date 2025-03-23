@@ -1,7 +1,7 @@
 import { useContext, useEffect, useId, useState } from 'react';
 import { capitalizeWord } from '../../../utils';
 import DS1BuildContext from '../../../context/DS1BuildContext';
-import startingClasses from '../../../../starting-classes';
+import startingClasses from '../../../assets/starting-classes.json';
 import './AttributeIO.css';
 
 const AttributeIO = ({ attribute }) => {

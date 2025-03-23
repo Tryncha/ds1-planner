@@ -21,6 +21,7 @@ const DS1Planner = () => {
   const { authInfo } = useContext(AuthContext);
   const { build, buildDispatch, saveBuild, updateBuild } = useContext(DS1BuildContext);
   const [buildOwner, setBuildOwner] = useState({ username: null, id: null });
+  const [isLoading, setIsLoading] = useState(true);
   // const [originalBuild, setOriginalBuild] = useState(null);
 
   useEffect(() => {
@@ -50,6 +51,7 @@ const DS1Planner = () => {
         };
 
         buildDispatch({ type: 'LOAD_BUILD', payload: buildData });
+        setIsLoading(false);
 
         // Deep copy of the original build to compare later
         // const newOriginalBuild = {
@@ -64,6 +66,7 @@ const DS1Planner = () => {
 
     function resetCharacter() {
       buildDispatch({ type: 'RESET_BUILD' });
+      setIsLoading(false);
       // setOriginalBuild(null);
     }
 
@@ -95,6 +98,15 @@ const DS1Planner = () => {
     const anonymousUserId = getAnonymousUserId();
     isUserOwner = anonymousUserId === buildOwner.id;
   }
+
+  if (isLoading)
+    return (
+      <main className="u-mainPage">
+        <h2>{id ? 'Edit' : 'Create'} DS1 Character</h2>
+        <hr className="u-hr" />
+        <div>Loading...</div>
+      </main>
+    );
 
   return (
     <main className="u-mainPage">
