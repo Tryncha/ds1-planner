@@ -24,6 +24,7 @@ const Register = () => {
   const [isFormValid, setIsFormValid] = useState(true);
 
   useEffect(() => {
+    // This validation prevents the browser from sending error messages to the user.
     setIsFormValid(true);
     setFormErrors({
       username: '',
@@ -99,7 +100,7 @@ const Register = () => {
   }
 
   return (
-    <main className="Register u-mainPage">
+    <main className="u-mainPage">
       <h2>Register</h2>
       <hr className="u-hr" />
       <form onSubmit={handleSubmit}>
@@ -107,8 +108,8 @@ const Register = () => {
           <label htmlFor={usernameInputId}>Username</label>
           <input
             id={usernameInputId}
-            name="username"
             type="text"
+            name="username"
             value={formData.username}
             onChange={handleChange}
             required
@@ -119,8 +120,8 @@ const Register = () => {
           <label htmlFor={passwordInputId}>Password</label>
           <input
             id={passwordInputId}
-            name="password"
             type="password"
+            name="password"
             value={formData.password}
             onChange={handleChange}
             required
@@ -131,8 +132,8 @@ const Register = () => {
           <label htmlFor={confirmPasswordInputId}>Confirm password</label>
           <input
             id={confirmPasswordInputId}
-            name="confirmPassword"
             type="password"
+            name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleChange}
             required

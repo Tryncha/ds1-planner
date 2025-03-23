@@ -11,15 +11,16 @@ const Login = () => {
   const passwordInputId = useId();
 
   const { setAuthInfo } = useContext(AuthContext);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    username: '',
+    password: ''
+  });
 
-  function handleUsernameChange(event) {
-    setUsername(event.target.value);
-  }
+  const [formError, setFormError] = useState('');
 
-  function handlePasswordChange(event) {
-    setPassword(event.target.value);
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
   }
 
   function handleCancelClick(event) {
@@ -31,7 +32,7 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      const userInfo = await loginService.login({ username, password });
+      const userInfo = await loginService.login(formData);
 
       window.localStorage.setItem('userInfo', JSON.stringify(userInfo));
 
@@ -41,7 +42,8 @@ const Login = () => {
 
       navigate('/');
     } catch (error) {
-      console.log('Wrong credentials:', error);
+      console.error(error.message);
+      setFormError('Wrong username or password');
     }
   }
 
@@ -49,17 +51,34 @@ const Login = () => {
     <main className="u-mainPage">
       <h2>Login</h2>
       <hr className="u-hr" />
+      <span className="u-formError">{formError}</span>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="u-authFormContainer">
           <label htmlFor={usernameInputId}>Username</label>
-          <input id={usernameInputId} type="text" value={username} onChange={handleUsernameChange} required />
+          <input
+            id={usernameInputId}
+            type="text"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            required
+          />
         </div>
-        <div>
+        <div className="u-authFormContainer">
           <label htmlFor={passwordInputId}>Password</label>
-          <input id={passwordInputId} type="password" value={password} onChange={handlePasswordChange} required />
+          <input
+            id={passwordInputId}
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
         </div>
-        <button type="submit">Login</button>
-        <button onClick={handleCancelClick}>Cancel</button>
+        <div className="u-authButtonsContainer">
+          <button type="submit">Login</button>
+          <button onClick={handleCancelClick}>Cancel</button>
+        </div>
       </form>
     </main>
   );
