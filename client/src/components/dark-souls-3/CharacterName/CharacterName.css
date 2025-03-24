@@ -1,0 +1,21 @@
+.CharacterName {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 2px 0;
+}
+
+.CharacterName-label {
+  width: 120px;
+}
+
+.CharacterName-input {
+  width: 150px;
+  height: 20px;
+  text-align: center;
+  border: none;
+}
+
+.CharacterName-input::placeholder {
+  font-style: italic;
+}

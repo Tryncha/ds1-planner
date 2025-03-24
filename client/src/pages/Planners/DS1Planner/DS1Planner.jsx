@@ -1,18 +1,22 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import buildService from '../../../services/builds';
-import DS1BuildContext from '../../../context/DS1BuildContext';
-import { ATTRIBUTES } from '../../../constants';
-import CharacterName from '../../../components/dark-souls-1/CharacterName/CharacterName';
-import Gender from '../../../components/dark-souls-1/Gender/Gender';
-import StartingClass from '../../../components/dark-souls-1/StartingClass/StartingClass';
-import SoulLevel from '../../../components/dark-souls-1/SoulLevel/SoulLevel';
-import MiniCaption from '../../../components/dark-souls-1/MiniCaption/MiniCaption';
-import AttributeIO from '../../../components/dark-souls-1/AttributeIO/AttributeIO';
-import Humanity from '../../../components/dark-souls-1/Humanity/Humanity';
-import Title from '../../../components/dark-souls-1/Title/Title';
-import AuthContext from '../../../context/AuthContext';
-import { getAnonymousUserId } from '../../../services/anonymousUserId';
+
+import { getAnonymousUserId } from '../../../services/anonymousUserId.js';
+import buildService from '../../../services/builds.js';
+
+import AuthContext from '../../../context/AuthContext.jsx';
+import DS1BuildContext from '../../../context/DS1BuildContext.jsx';
+
+import { ATTRIBUTES } from '../../../constants/darkSouls1.js';
+
+import CharacterName from '../../../components/dark-souls-1/CharacterName/CharacterName.jsx';
+import Gender from '../../../components/dark-souls-1/Gender/Gender.jsx';
+import StartingClass from '../../../components/dark-souls-1/StartingClass/StartingClass.jsx';
+import SoulLevel from '../../../components/dark-souls-1/SoulLevel/SoulLevel.jsx';
+import MiniCaption from '../../../components/dark-souls-1/MiniCaption/MiniCaption.jsx';
+import AttributeIO from '../../../components/dark-souls-1/AttributeIO/AttributeIO.jsx';
+import Humanity from '../../../components/dark-souls-1/Humanity/Humanity.jsx';
+import Title from '../../../components/dark-souls-1/Title/Title.jsx';
 
 const DS1Planner = () => {
   const { id } = useParams();

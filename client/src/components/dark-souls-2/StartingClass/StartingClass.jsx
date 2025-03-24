@@ -1,11 +1,11 @@
 import { useContext, useId } from 'react';
-import { capitalizeWord } from '../../../utils';
-import DS1BuildContext from '../../../context/DS1BuildContext.jsx';
-import { STARTING_CLASSES } from '../../../constants/darkSouls1.js';
+import { capitalizeWord } from '../../../utils/index.js';
+import DS2BuildContext from '../../../context/DS2BuildContext.jsx';
+import { STARTING_CLASSES } from '../../../constants/darkSouls2.js';
 
 const StartingClass = () => {
   const id = useId();
-  const { build, buildDispatch } = useContext(DS1BuildContext);
+  const { build, buildDispatch } = useContext(DS2BuildContext);
 
   function handleChange(event) {
     const newStartingClass = event.target.value;

@@ -1,0 +1,152 @@
+[
+  {
+    "name": "hero",
+    "baseAttributes": {
+      "vigor": 14,
+      "mind": 9,
+      "endurance": 12,
+      "strength": 16,
+      "dexterity": 9,
+      "intelligence": 7,
+      "faith": 8,
+      "arcane": 11
+    },
+    "runeLevelBase": 7,
+    "basePoints": 86
+  },
+  {
+    "name": "bandit",
+    "baseAttributes": {
+      "vigor": 10,
+      "mind": 11,
+      "endurance": 10,
+      "strength": 9,
+      "dexterity": 13,
+      "intelligence": 9,
+      "faith": 8,
+      "arcane": 14
+    },
+    "runeLevelBase": 5,
+    "basePoints": 84
+  },
+  {
+    "name": "astrologer",
+    "baseAttributes": {
+      "vigor": 9,
+      "mind": 15,
+      "endurance": 9,
+      "strength": 8,
+      "dexterity": 12,
+      "intelligence": 16,
+      "faith": 7,
+      "arcane": 9
+    },
+    "runeLevelBase": 6,
+    "basePoints": 85
+  },
+  {
+    "name": "warrior",
+    "baseAttributes": {
+      "vigor": 11,
+      "mind": 12,
+      "endurance": 11,
+      "strength": 10,
+      "dexterity": 16,
+      "intelligence": 10,
+      "faith": 8,
+      "arcane": 9
+    },
+    "runeLevelBase": 8,
+    "basePoints": 87
+  },
+  {
+    "name": "prisoner",
+    "baseAttributes": {
+      "vigor": 11,
+      "mind": 12,
+      "endurance": 11,
+      "strength": 11,
+      "dexterity": 14,
+      "intelligence": 14,
+      "faith": 6,
+      "arcane": 9
+    },
+    "runeLevelBase": 9,
+    "basePoints": 88
+  },
+  {
+    "name": "confessor",
+    "baseAttributes": {
+      "vigor": 10,
+      "mind": 13,
+      "endurance": 10,
+      "strength": 12,
+      "dexterity": 12,
+      "intelligence": 9,
+      "faith": 14,
+      "arcane": 9
+    },
+    "runeLevelBase": 10,
+    "basePoints": 89
+  },
+  {
+    "name": "wretch",
+    "baseAttributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 10,
+      "dexterity": 10,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "runeLevelBase": 1,
+    "basePoints": 80
+  },
+  {
+    "name": "vagabond",
+    "baseAttributes": {
+      "vigor": 15,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 14,
+      "dexterity": 13,
+      "intelligence": 9,
+      "faith": 9,
+      "arcane": 7
+    },
+    "runeLevelBase": 9,
+    "basePoints": 88
+  },
+  {
+    "name": "prophet",
+    "baseAttributes": {
+      "vigor": 10,
+      "mind": 14,
+      "endurance": 8,
+      "strength": 11,
+      "dexterity": 10,
+      "intelligence": 7,
+      "faith": 16,
+      "arcane": 10
+    },
+    "runeLevelBase": 7,
+    "basePoints": 86
+  },
+  {
+    "name": "samurai",
+    "baseAttributes": {
+      "vigor": 12,
+      "mind": 11,
+      "endurance": 13,
+      "strength": 12,
+      "dexterity": 15,
+      "intelligence": 9,
+      "faith": 8,
+      "arcane": 8
+    },
+    "runeLevelBase": 9,
+    "basePoints": 88
+  }
+]

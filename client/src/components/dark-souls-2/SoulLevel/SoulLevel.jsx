@@ -1,6 +1,6 @@
 import { useContext, useId } from 'react';
-import DS2BuildContext from '../../context/DS2BuildContext';
-import { calculateSoulLevel } from '../../utils';
+import DS2BuildContext from '../../../context/DS2BuildContext.jsx';
+import { calculateSoulLevel } from '../../../utils/darkSouls2.js';
 
 const SoulLevel = () => {
   const id = useId();

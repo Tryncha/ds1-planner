@@ -1,9 +1,9 @@
 import { capitalizeWord } from '../../../utils/index.js';
-import { calculateSoulLevel } from '../../../utils/darkSouls1.js';
+import { calculateSoulLevel } from '../../../utils/darkSouls3.js';
 import { useNavigate } from 'react-router-dom';
 import './BuildCard.css';
 import { GAME_PARAMS } from '../../../constants';
-import { ATTRIBUTES } from '../../../constants/darkSouls1.js';
+import { ATTRIBUTES } from '../../../constants/darkSouls3.js';
 import ExpirationTime from '../../ExpirationTime/ExpirationTime';
 import buildService from '../../../services/builds';
 

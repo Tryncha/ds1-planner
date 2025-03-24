@@ -1,11 +1,12 @@
 import { useContext, useEffect, useId, useState } from 'react';
-import { capitalizeWord } from '../../utils';
-import DS2BuildContext from '../../context/DS2BuildContext';
-import startingClasses from '../../../starting-classes';
+import { capitalizeWord } from '../../../utils';
+import ERBuildContext from '../../../context/ERBuildContext';
+import startingClasses from '../../../assets/elden-ring/starting-classes.json';
+import './AttributeIO.css';
 
 const AttributeIO = ({ attribute }) => {
   const id = useId();
-  const { build, buildDispatch } = useContext(DS2BuildContext);
+  const { build, buildDispatch } = useContext(ERBuildContext);
   const startingClassData = startingClasses.find((cls) => cls.name === build.character.startingClass);
 
   const value = build.character.attributes[attribute];

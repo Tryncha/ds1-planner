@@ -1,11 +1,11 @@
 import { useContext, useId } from 'react';
-import { capitalizeWord } from '../../utils';
-import DS2BuildContext from '../../context/DS2BuildContext';
-import { STARTING_CLASSES } from '../../constants';
+import { capitalizeWord } from '../../../utils/index.js';
+import ERBuildContext from '../../../context/ERBuildContext.jsx';
+import { STARTING_CLASSES } from '../../../constants/eldenRing.js';
 
 const StartingClass = () => {
   const id = useId();
-  const { build, buildDispatch } = useContext(DS2BuildContext);
+  const { build, buildDispatch } = useContext(ERBuildContext);
 
   function handleChange(event) {
     const newStartingClass = event.target.value;

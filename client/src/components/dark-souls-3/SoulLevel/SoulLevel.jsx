@@ -1,10 +1,10 @@
 import { useContext, useId } from 'react';
-import DS1BuildContext from '../../../context/DS1BuildContext.jsx';
-import { calculateSoulLevel } from '../../../utils/darkSouls1.js';
+import DS3BuildContext from '../../../context/DS3BuildContext.jsx';
+import { calculateSoulLevel } from '../../../utils/darkSouls3.js';
 
 const SoulLevel = () => {
   const id = useId();
-  const { build } = useContext(DS1BuildContext);
+  const { build } = useContext(DS3BuildContext);
 
   return (
     <div className="SoulLevel">

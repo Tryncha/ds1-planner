@@ -1,0 +1,130 @@
+[
+  {
+    "name": "warrior",
+    "baseAttributes": {
+      "vigor": 7,
+      "endurance": 6,
+      "vitality": 6,
+      "attunement": 5,
+      "strength": 15,
+      "dexterity": 11,
+      "adaptability": 5,
+      "intelligence": 5,
+      "faith": 5
+    },
+    "soulLevelBase": 12,
+    "basePoints": 65
+  },
+  {
+    "name": "knight",
+    "baseAttributes": {
+      "vigor": 12,
+      "endurance": 6,
+      "vitality": 7,
+      "attunement": 4,
+      "strength": 11,
+      "dexterity": 8,
+      "adaptability": 9,
+      "intelligence": 3,
+      "faith": 6
+    },
+    "soulLevelBase": 13,
+    "basePoints": 66
+  },
+  {
+    "name": "swordsman",
+    "baseAttributes": {
+      "vigor": 4,
+      "endurance": 8,
+      "vitality": 4,
+      "attunement": 6,
+      "strength": 9,
+      "dexterity": 16,
+      "adaptability": 6,
+      "intelligence": 7,
+      "faith": 5
+    },
+    "soulLevelBase": 12,
+    "basePoints": 65
+  },
+  {
+    "name": "bandit",
+    "baseAttributes": {
+      "vigor": 9,
+      "endurance": 7,
+      "vitality": 11,
+      "attunement": 2,
+      "strength": 9,
+      "dexterity": 14,
+      "adaptability": 3,
+      "intelligence": 1,
+      "faith": 8
+    },
+    "soulLevelBase": 11,
+    "basePoints": 64
+  },
+  {
+    "name": "cleric",
+    "baseAttributes": {
+      "vigor": 10,
+      "endurance": 3,
+      "vitality": 8,
+      "attunement": 10,
+      "strength": 11,
+      "dexterity": 5,
+      "adaptability": 4,
+      "intelligence": 4,
+      "faith": 12
+    },
+    "soulLevelBase": 14,
+    "basePoints": 64
+  },
+  {
+    "name": "sorcerer",
+    "baseAttributes": {
+      "vigor": 5,
+      "endurance": 6,
+      "vitality": 5,
+      "attunement": 12,
+      "strength": 3,
+      "dexterity": 7,
+      "adaptability": 8,
+      "intelligence": 14,
+      "faith": 4
+    },
+    "soulLevelBase": 11,
+    "basePoints": 64
+  },
+  {
+    "name": "explorer",
+    "baseAttributes": {
+      "vigor": 7,
+      "endurance": 6,
+      "vitality": 9,
+      "attunement": 7,
+      "strength": 6,
+      "dexterity": 6,
+      "adaptability": 12,
+      "intelligence": 5,
+      "faith": 5
+    },
+    "soulLevelBase": 10,
+    "basePoints": 63
+  },
+  {
+    "name": "deprived",
+    "baseAttributes": {
+      "vigor": 6,
+      "endurance": 6,
+      "vitality": 6,
+      "attunement": 6,
+      "strength": 6,
+      "dexterity": 6,
+      "adaptability": 6,
+      "intelligence": 6,
+      "faith": 6
+    },
+    "soulLevelBase": 1,
+    "basePoints": 54
+  }
+]

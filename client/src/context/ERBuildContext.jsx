@@ -1,17 +1,7 @@
 import { createContext, useReducer } from 'react';
-import { ATTRIBUTES, DEFAULT_CLASS } from '../constants/darkSouls1.js';
-import { getStartingClassData } from '../utils/darkSouls1.js';
+import { ATTRIBUTES, DEFAULT_CLASS } from '../constants/eldenRing.js';
+import { getStartingClassData } from '../utils/eldenRing.js';
 import buildService from '../services/builds.js';
-
-// function createNewCharacter() {
-//   return {
-//     name: '',
-//     gender: 'male',
-//     startingClass: startingClassData.name,
-//     attributes: { ...startingClassData.baseAttributes },
-//     humanity: 0
-//   };
-// }
 
 function createNewBuild(startingClassData) {
   return {
@@ -23,37 +13,13 @@ function createNewBuild(startingClassData) {
       name: '',
       gender: 'male',
       startingClass: startingClassData.name,
-      attributes: { ...startingClassData.baseAttributes },
-      humanity: 0
+      attributes: { ...startingClassData.baseAttributes }
     }
   };
 }
 
 const startingClassData = getStartingClassData(DEFAULT_CLASS);
 const initialState = createNewBuild(startingClassData);
-
-// const initialState = {
-//   title: '',
-//   description: '',
-//   user: {
-//     username: null,
-//     id: null
-//   },
-//   anonymousUserId: null,
-//   game: 'DS1',
-//   isPublic: false,
-//   tags: [],
-//   character: {
-//     name: '',
-//     gender: 'male',
-//     startingClass: startingClassData.name,
-//     attributes: { ...startingClassData.baseAttributes },
-//     humanity: 0
-//   },
-//   createdAt: null,
-//   updatedAt: null,
-//   expiresAt: null
-// };
 
 function buildReducer(buildState, action) {
   switch (action.type) {
@@ -110,16 +76,10 @@ function buildReducer(buildState, action) {
 
       ATTRIBUTES.forEach((attr) => {
         if (currentAttributes[attr] <= baseAttributes[attr]) {
-          // If the current value is less or equal than previous base, update to new base
-          // Si el valor actual es igual o menor que el base anterior, actualizamos al nuevo base
           currentAttributes[attr] = newBaseAttributes[attr];
         } else if (newBaseAttributes[attr] > currentAttributes[attr]) {
-          // If the new base is greater than current, update to new base
-          // Si el nuevo base es mayor que el valor actual, actualizamos al nuevo base
           currentAttributes[attr] = newBaseAttributes[attr];
         }
-        // If it is not the case, we keep the current value (is already in newAttributes)
-        // En otro caso, mantenemos el valor actual (ya está en newAttributes)
       });
 
       return {
@@ -128,7 +88,6 @@ function buildReducer(buildState, action) {
           ...buildState.character,
           startingClass: newStartingClass,
           attributes: currentAttributes,
-          // soulLevel: calculateSoulLevel(buildState.character),
           basePoints: newStartingClassData.basePoints
         }
       };
@@ -143,68 +102,28 @@ function buildReducer(buildState, action) {
             ...buildState.character.attributes,
             [action.payload.attribute]: action.payload.value
           }
-          // soulLevel: calculateSoulLevel(buildState.character)
-        }
-      };
-
-    case 'SET_HUMANITY':
-      return {
-        ...buildState,
-        character: {
-          ...buildState.character,
-          humanity: action.payload
         }
       };
 
     case 'LOAD_BUILD':
       return action.payload;
 
-    // case 'LOAD_CHARACTER':
-    //   return {
-    //     ...buildState,
-    //     character: action.payload
-    //   };
-
-    // case 'SAVING_CHARACTER':
-    //   return {
-    //     ...buildState,
-    //     isSaving: true
-    //   };
-
-    // case 'SAVE_SUCCESS':
-    //   return {
-    //     ...buildState,
-    //     isSaving: true
-    //   };
-
-    // case 'SAVE_ERROR':
-    //   return {
-    //     ...buildState,
-    //     isSaving: true
-    //   };
-
     case 'RESET_BUILD':
       return initialState;
-
-    // case 'RESET_CHARACTER':
-    //   return {
-    //     ...buildState,
-    //     character: createNewCharacter()
-    //   };
 
     default:
       return buildState;
   }
 }
 
-const DS1BuildContext = createContext();
+const ERBuildContext = createContext();
 
-export function DS1BuildProvider({ children }) {
+export function ERBuildProvider({ children }) {
   const [build, buildDispatch] = useReducer(buildReducer, initialState);
 
   async function saveBuild(newBuild) {
     try {
-      await buildService.saveGameBuild('dark-souls-1', newBuild);
+      await buildService.saveGameBuild('elden-ring', newBuild);
       console.log('Character saved successfully!');
     } catch (error) {
       console.error('Error saving character', error);
@@ -213,7 +132,7 @@ export function DS1BuildProvider({ children }) {
 
   async function updateBuild(id, updatedBuild) {
     try {
-      await buildService.updateGameBuild('dark-souls-1', id, updatedBuild);
+      await buildService.updateGameBuild('elden-ring', id, updatedBuild);
       console.log('Character updated successfully!');
     } catch (error) {
       console.error('Error updating character', error);
@@ -223,7 +142,7 @@ export function DS1BuildProvider({ children }) {
   console.log(build);
 
   return (
-    <DS1BuildContext.Provider
+    <ERBuildContext.Provider
       value={{
         build,
         buildDispatch,
@@ -231,8 +150,8 @@ export function DS1BuildProvider({ children }) {
         updateBuild
       }}>
       {children}
-    </DS1BuildContext.Provider>
+    </ERBuildContext.Provider>
   );
 }
 
-export default DS1BuildContext;
+export default ERBuildContext;

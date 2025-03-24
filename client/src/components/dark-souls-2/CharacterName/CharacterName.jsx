@@ -1,5 +1,6 @@
 import { useContext, useId } from 'react';
-import DS2BuildContext from '../../context/DS2BuildContext';
+import DS2BuildContext from '../../../context/DS2BuildContext';
+import './CharacterName.css';
 
 const CharacterName = () => {
   const id = useId();
@@ -21,7 +22,7 @@ const CharacterName = () => {
         maxLength={16} // This is the character name limit in game
         value={build.character.name}
         onChange={handleChange}
-        placeholder="Chosen Undead"
+        placeholder="Bearer of the Curse"
       />
     </div>
   );

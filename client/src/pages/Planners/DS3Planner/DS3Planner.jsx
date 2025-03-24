@@ -5,24 +5,24 @@ import { getAnonymousUserId } from '../../../services/anonymousUserId.js';
 import buildService from '../../../services/builds.js';
 
 import AuthContext from '../../../context/AuthContext.jsx';
-import DS2BuildContext from '../../../context/DS2BuildContext.jsx';
+import DS3BuildContext from '../../../context/DS3BuildContext.jsx';
 
-import { ATTRIBUTES } from '../../../constants/darkSouls2.js';
+import { ATTRIBUTES } from '../../../constants/darkSouls3.js';
 
-import CharacterName from '../../../components/dark-souls-2/CharacterName/CharacterName.jsx';
-import Gender from '../../../components/dark-souls-2/Gender/Gender.jsx';
-import StartingClass from '../../../components/dark-souls-2/StartingClass/StartingClass.jsx';
-import SoulLevel from '../../../components/dark-souls-2/SoulLevel/SoulLevel.jsx';
-import MiniCaption from '../../../components/dark-souls-2/MiniCaption/MiniCaption.jsx';
-import AttributeIO from '../../../components/dark-souls-2/AttributeIO/AttributeIO.jsx';
-import Title from '../../../components/dark-souls-2/Title/Title.jsx';
+import CharacterName from '../../../components/dark-souls-3/CharacterName/CharacterName.jsx';
+import Gender from '../../../components/dark-souls-3/Gender/Gender.jsx';
+import StartingClass from '../../../components/dark-souls-3/StartingClass/StartingClass.jsx';
+import SoulLevel from '../../../components/dark-souls-3/SoulLevel/SoulLevel.jsx';
+import MiniCaption from '../../../components/dark-souls-3/MiniCaption/MiniCaption.jsx';
+import AttributeIO from '../../../components/dark-souls-3/AttributeIO/AttributeIO.jsx';
+import Title from '../../../components/dark-souls-3/Title/Title.jsx';
 
-const DS2Planner = () => {
+const DS3Planner = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
   const { authInfo } = useContext(AuthContext);
-  const { build, buildDispatch, saveBuild, updateBuild } = useContext(DS2BuildContext);
+  const { build, buildDispatch, saveBuild, updateBuild } = useContext(DS3BuildContext);
   const [buildOwner, setBuildOwner] = useState({ username: null, id: null });
   const [isLoading, setIsLoading] = useState(true);
 
@@ -36,7 +36,7 @@ const DS2Planner = () => {
 
     async function loadCharacter(id) {
       try {
-        const loadedBuild = await buildService.getBuildById('dark-souls-2', id);
+        const loadedBuild = await buildService.getBuildById('dark-souls-3', id);
 
         if (loadedBuild.user) {
           setBuildOwner({ username: loadedBuild.user.username, id: loadedBuild.user.id });
@@ -75,7 +75,7 @@ const DS2Planner = () => {
 
   function handleDelete(event) {
     event.preventDefault();
-    buildService.deleteGameBuild('dark-souls-2', id);
+    buildService.deleteGameBuild('dark-souls-3', id);
     navigate('/');
   }
 
@@ -96,7 +96,7 @@ const DS2Planner = () => {
   if (isLoading)
     return (
       <main className="u-mainPage">
-        <h2>{id ? 'Edit' : 'Create'} DS2 Character</h2>
+        <h2>{id ? 'Edit' : 'Create'} DS3 Character</h2>
         <hr className="u-hr" />
         <div>Loading...</div>
       </main>
@@ -104,7 +104,7 @@ const DS2Planner = () => {
 
   return (
     <main className="u-mainPage">
-      <h2>{id ? 'Edit' : 'Create'} DS2 Character</h2>
+      <h2>{id ? 'Edit' : 'Create'} DS3 Character</h2>
       <hr className="u-hr" />
       {isUserOwner ? null : (
         <span>
@@ -138,4 +138,4 @@ const DS2Planner = () => {
   );
 };
 
-export default DS2Planner;
+export default DS3Planner;

@@ -1,0 +1,23 @@
+.AttributeIO {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 2px 0;
+}
+
+.AttributeIO-label {
+  width: 100px;
+  text-align: initial;
+}
+
+.AttributeIO-output,
+.AttributeIO-input {
+  width: 40px;
+  height: 20px;
+  text-align: center;
+}
+
+.AttributeIO-button {
+  width: 20px;
+  height: 20px;
+}

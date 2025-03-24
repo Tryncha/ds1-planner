@@ -11,6 +11,12 @@ const SelectPlanner = () => {
       <Link to="/planner/dark-souls-2" className="Sidebar-Link">
         Dark Souls 2
       </Link>
+      <Link to="/planner/dark-souls-3" className="Sidebar-Link">
+        Dark Souls 3
+      </Link>
+      <Link to="/planner/elden-ring" className="Sidebar-Link">
+        Elden Ring
+      </Link>
     </div>
   );
 };

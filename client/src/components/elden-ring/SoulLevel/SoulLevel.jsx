@@ -1,10 +1,10 @@
 import { useContext, useId } from 'react';
-import DS1BuildContext from '../../../context/DS1BuildContext.jsx';
-import { calculateSoulLevel } from '../../../utils/darkSouls1.js';
+import ERBuildContext from '../../../context/ERBuildContext.jsx';
+import { calculateRuneLevel } from '../../../utils/eldenRing.js';
 
 const SoulLevel = () => {
   const id = useId();
-  const { build } = useContext(DS1BuildContext);
+  const { build } = useContext(ERBuildContext);
 
   return (
     <div className="SoulLevel">
@@ -12,7 +12,7 @@ const SoulLevel = () => {
         Soul Level
       </label>
       <output className="SoulLevel-level" id={id}>
-        {calculateSoulLevel(build.character)}
+        {calculateRuneLevel(build.character)}
       </output>
     </div>
   );

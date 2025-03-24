@@ -1,12 +1,12 @@
 import { useContext, useEffect, useId, useState } from 'react';
 import { capitalizeWord } from '../../../utils';
-import DS1BuildContext from '../../../context/DS1BuildContext';
-import startingClasses from '../../../assets/dark-souls-1/starting-classes.json';
+import DS2BuildContext from '../../../context/DS2BuildContext';
+import startingClasses from '../../../assets/dark-souls-2/starting-classes.json';
 import './AttributeIO.css';
 
 const AttributeIO = ({ attribute }) => {
   const id = useId();
-  const { build, buildDispatch } = useContext(DS1BuildContext);
+  const { build, buildDispatch } = useContext(DS2BuildContext);
   const startingClassData = startingClasses.find((cls) => cls.name === build.character.startingClass);
 
   const value = build.character.attributes[attribute];

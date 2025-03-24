@@ -1,34 +1,52 @@
 import { createContext, useReducer } from 'react';
-import { ATTRIBUTES, DEFAULT_CLASS } from '../constants';
-import { getStartingClassData } from '../utils';
-import buildsService from '../services/builds';
+import { ATTRIBUTES, DEFAULT_CLASS } from '../constants/darkSouls2.js';
+import { getStartingClassData } from '../utils/darkSouls2.js';
+import buildService from '../services/builds.js';
 
-function createNewCharacter() {
+function createNewBuild(startingClassData) {
   return {
-    name: '',
-    gender: 'male',
-    startingClass: startingClassData.name,
-    attributes: { ...startingClassData.baseAttributes },
-    humanity: 0
+    title: '',
+    description: '',
+    isPublic: false,
+    tags: [],
+    character: {
+      name: '',
+      gender: 'male',
+      startingClass: startingClassData.name,
+      attributes: { ...startingClassData.baseAttributes }
+    }
   };
 }
 
 const startingClassData = getStartingClassData(DEFAULT_CLASS);
-const initialState = {
-  title: '',
-  game: 'ds2',
-  description: '',
-  externalUrl: '',
-  videoUrl: '',
-  screenshots: [],
-  isPublic: false,
-  tags: [],
-  url: '',
-  character: createNewCharacter()
-};
+const initialState = createNewBuild(startingClassData);
 
 function buildReducer(buildState, action) {
   switch (action.type) {
+    case 'SET_TITLE':
+      return {
+        ...buildState,
+        title: action.payload
+      };
+
+    case 'SET_DESCRIPTION':
+      return {
+        ...buildState,
+        description: action.payload
+      };
+
+    case 'TOGGLE_VISIBILITY':
+      return {
+        ...buildState,
+        isPublic: !buildState.isPublic
+      };
+
+    case 'SET_TAG':
+      return {
+        ...buildState,
+        tags: buildState.tags.concat(action.payload)
+      };
+
     case 'SET_NAME':
       return {
         ...buildState,
@@ -58,16 +76,10 @@ function buildReducer(buildState, action) {
 
       ATTRIBUTES.forEach((attr) => {
         if (currentAttributes[attr] <= baseAttributes[attr]) {
-          // If the current value is less or equal than previous base, update to new base
-          // Si el valor actual es igual o menor que el base anterior, actualizamos al nuevo base
           currentAttributes[attr] = newBaseAttributes[attr];
         } else if (newBaseAttributes[attr] > currentAttributes[attr]) {
-          // If the new base is greater than current, update to new base
-          // Si el nuevo base es mayor que el valor actual, actualizamos al nuevo base
           currentAttributes[attr] = newBaseAttributes[attr];
         }
-        // If it is not the case, we keep the current value (is already in newAttributes)
-        // En otro caso, mantenemos el valor actual (ya está en newAttributes)
       });
 
       return {
@@ -76,7 +88,6 @@ function buildReducer(buildState, action) {
           ...buildState.character,
           startingClass: newStartingClass,
           attributes: currentAttributes,
-          // soulLevel: calculateSoulLevel(buildState.character),
           basePoints: newStartingClassData.basePoints
         }
       };
@@ -91,53 +102,14 @@ function buildReducer(buildState, action) {
             ...buildState.character.attributes,
             [action.payload.attribute]: action.payload.value
           }
-          // soulLevel: calculateSoulLevel(buildState.character)
-        }
-      };
-
-    case 'SET_HUMANITY':
-      return {
-        ...buildState,
-        character: {
-          ...buildState.character,
-          humanity: action.payload
         }
       };
 
     case 'LOAD_BUILD':
       return action.payload;
 
-    case 'LOAD_CHARACTER':
-      return {
-        ...buildState,
-        character: action.payload
-      };
-
-    case 'SAVING_CHARACTER':
-      return {
-        ...buildState,
-        isSaving: true
-      };
-
-    case 'SAVE_SUCCESS':
-      return {
-        ...buildState,
-        isSaving: true
-      };
-
-    case 'SAVE_ERROR':
-      return {
-        ...buildState,
-        isSaving: true
-      };
-
-    case 'RESET_CHARACTER':
-      return {
-        ...buildState,
-        character: createNewCharacter(),
-        isEditing: false,
-        error: null
-      };
+    case 'RESET_BUILD':
+      return initialState;
 
     default:
       return buildState;
@@ -151,7 +123,7 @@ export function DS2BuildProvider({ children }) {
 
   async function saveBuild(newBuild) {
     try {
-      await buildsService.save(newBuild);
+      await buildService.saveGameBuild('dark-souls-2', newBuild);
       console.log('Character saved successfully!');
     } catch (error) {
       console.error('Error saving character', error);
@@ -160,12 +132,14 @@ export function DS2BuildProvider({ children }) {
 
   async function updateBuild(id, updatedBuild) {
     try {
-      await buildsService.update(id, updatedBuild);
+      await buildService.updateGameBuild('dark-souls-2', id, updatedBuild);
       console.log('Character updated successfully!');
     } catch (error) {
       console.error('Error updating character', error);
     }
   }
+
+  console.log(build);
 
   return (
     <DS2BuildContext.Provider
