@@ -8,19 +8,13 @@ const AttributesSchema = new mongoose.Schema(
       max: 99,
       required: true
     },
+    mind: {
+      type: Number,
+      min: 1,
+      max: 99,
+      required: true
+    },
     endurance: {
-      type: Number,
-      min: 1,
-      max: 99,
-      required: true
-    },
-    vitality: {
-      type: Number,
-      min: 1,
-      max: 99,
-      required: true
-    },
-    attunement: {
       type: Number,
       min: 1,
       max: 99,
@@ -38,12 +32,6 @@ const AttributesSchema = new mongoose.Schema(
       max: 99,
       required: true
     },
-    adaptability: {
-      type: Number,
-      min: 1,
-      max: 99,
-      required: true
-    },
     intelligence: {
       type: Number,
       min: 1,
@@ -51,6 +39,12 @@ const AttributesSchema = new mongoose.Schema(
       required: true
     },
     faith: {
+      type: Number,
+      min: 1,
+      max: 99,
+      required: true
+    },
+    arcane: {
       type: Number,
       min: 1,
       max: 99,
@@ -95,7 +89,7 @@ const EquipmentSchema = new mongoose.Schema(
   }
 );
 
-const DS2BuildSchema = new mongoose.Schema(
+const ERBuildSchema = new mongoose.Schema(
   {
     title: {
       // Build name !== Character name
@@ -113,7 +107,7 @@ const DS2BuildSchema = new mongoose.Schema(
     expiresAt: Date,
     game: {
       type: String,
-      default: 'DS2'
+      default: 'ER'
     },
     description: {
       // Build info or notes about build by author
@@ -165,9 +159,9 @@ const DS2BuildSchema = new mongoose.Schema(
 );
 
 // Expiration configuration
-DS2BuildSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
+ERBuildSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 
-DS2BuildSchema.set('toJSON', {
+ERBuildSchema.set('toJSON', {
   transform: (document, returnedBuild) => {
     returnedBuild.id = returnedBuild._id.toString();
     delete returnedBuild._id;
@@ -175,6 +169,6 @@ DS2BuildSchema.set('toJSON', {
   }
 });
 
-const DS2BuildModel = mongoose.model('DS2Build', DS2BuildSchema);
+const ERBuildModel = mongoose.model('ERBuild', ERBuildSchema);
 
-module.exports = DS2BuildModel;
+module.exports = ERBuildModel;

@@ -6,7 +6,11 @@ const mongoose = require('mongoose');
 const middleware = require('./middleware');
 const usersRouter = require('./routes/usersRouter');
 const authRouter = require('./routes/authRouter');
-const { allGamesRouter, darkSouls1Router, darkSouls2Router } = require('./routes/buildsRouter');
+const gamesRouter = require('./routes/gamesRouter');
+const darkSouls1Router = require('./routes/darkSouls1Router');
+const darkSouls2Router = require('./routes/darkSouls2Router');
+const darkSouls3Router = require('./routes/darkSouls3Router');
+const eldenRingRouter = require('./routes/eldenRingRouter');
 
 const app = express();
 
@@ -31,9 +35,11 @@ app.use(middleware.tokenExtractor);
 app.use(middleware.anonymousUserIdExtractor);
 app.use(middleware.authLogger);
 
-app.use('/api/builds', allGamesRouter);
+app.use('/api/builds', gamesRouter);
 app.use('/api/builds/dark-souls-1', darkSouls1Router);
 app.use('/api/builds/dark-souls-2', darkSouls2Router);
+app.use('/api/builds/dark-souls-3', darkSouls3Router);
+app.use('/api/builds/elden-ring', eldenRingRouter);
 
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);

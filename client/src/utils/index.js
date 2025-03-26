@@ -12,3 +12,10 @@ export function calculateSoulLevel(soulLevelBase, basePoints, attributes) {
 
   return soulLevel;
 }
+
+export function calculateRuneLevel(runeLevelBase, basePoints, attributes) {
+  const totalValues = Object.values(attributes).reduce((acc, sum) => sum + acc, 0);
+  const runeLevel = totalValues - basePoints + runeLevelBase;
+
+  return runeLevel;
+}

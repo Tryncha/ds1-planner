@@ -14,9 +14,10 @@ import Title from '../../../components/planners/common/Title/Title.jsx';
 import CharacterName from '../../../components/planners/common/CharacterName/CharacterName.jsx';
 import Gender from '../../../components/planners/common/Gender/Gender.jsx';
 import StartingClass from '../../../components/planners/common/StartingClass/StartingClass.jsx';
-import SoulLevel from '../../../components/planners/common/SoulLevel/SoulLevel.jsx';
+import RuneLevel from '../../../components/planners/elden-ring/RuneLevel/RuneLevel.jsx';
 import MiniCaption from '../../../components/planners/common/MiniCaption/MiniCaption.jsx';
 import AttributeIO from '../../../components/planners/common/AttributeIO/AttributeIO.jsx';
+import { getStartingClassData } from '../../../utils/index.js';
 
 const DS2Planner = () => {
   const { id } = useParams();
@@ -28,6 +29,8 @@ const DS2Planner = () => {
 
   const [buildOwner, setBuildOwner] = useState({ username: null, id: null });
   const [isLoading, setIsLoading] = useState(true);
+
+  const startingClassData = getStartingClassData(startingClasses, build.character.startingClass);
 
   const checkOwner = useCallback(() => {
     if (authInfo.id) {
@@ -151,7 +154,11 @@ const DS2Planner = () => {
           <StartingClass value={build.character.startingClass} onChange={setStartingClass} options={STARTING_CLASSES} />
         </div>
         <div className="u-container">
-          {/* <SoulLevel character={build.character} /> */}
+          <RuneLevel
+            runeLevelBase={startingClassData.runeLevelBase}
+            basePoints={startingClassData.basePoints}
+            attributes={build.character.attributes}
+          />
           <MiniCaption />
           {ATTRIBUTES.map((attr) => (
             <AttributeIO
