@@ -89,13 +89,16 @@ const Register = () => {
         delete registerDataClone.confirmPassword;
 
         await loginService.register(registerDataClone);
+        setFormData({
+          username: '',
+          password: '',
+          confirmPassword: ''
+        });
 
         navigate('/');
       } catch (error) {
-        console.log('Wrong credentials:', error);
+        console.error({ error: error.message });
       }
-    } else {
-      console.log("Passwords don't match!");
     }
   }
 

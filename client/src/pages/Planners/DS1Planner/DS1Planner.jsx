@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { getAnonymousUserId } from '../../../services/anonymousUserId.js';
@@ -7,36 +7,62 @@ import buildService from '../../../services/builds.js';
 import AuthContext from '../../../context/AuthContext.jsx';
 import DS1BuildContext from '../../../context/DS1BuildContext.jsx';
 
-import { ATTRIBUTES } from '../../../constants/darkSouls1.js';
+import { ATTRIBUTES, STARTING_CLASSES } from '../../../constants/darkSouls1.js';
+import startingClasses from '../../../assets/dark-souls-1/starting-classes.json';
+import { getStartingClassData } from '../../../utils/index.js';
 
-import CharacterName from '../../../components/dark-souls-1/CharacterName/CharacterName.jsx';
-import Gender from '../../../components/dark-souls-1/Gender/Gender.jsx';
-import StartingClass from '../../../components/dark-souls-1/StartingClass/StartingClass.jsx';
-import SoulLevel from '../../../components/dark-souls-1/SoulLevel/SoulLevel.jsx';
-import MiniCaption from '../../../components/dark-souls-1/MiniCaption/MiniCaption.jsx';
-import AttributeIO from '../../../components/dark-souls-1/AttributeIO/AttributeIO.jsx';
-import Humanity from '../../../components/dark-souls-1/Humanity/Humanity.jsx';
-import Title from '../../../components/dark-souls-1/Title/Title.jsx';
+import Title from '../../../components/planners/common/Title/Title.jsx';
+import CharacterName from '../../../components/planners/common/CharacterName/CharacterName.jsx';
+import Gender from '../../../components/planners/common/Gender/Gender.jsx';
+import StartingClass from '../../../components/planners/common/StartingClass/StartingClass.jsx';
+import SoulLevel from '../../../components/planners/common/SoulLevel/SoulLevel.jsx';
+import MiniCaption from '../../../components/planners/common/MiniCaption/MiniCaption.jsx';
+import AttributeIO from '../../../components/planners/common/AttributeIO/AttributeIO.jsx';
+
+import Humanity from '../../../components/planners/dark-souls-1/Humanity/Humanity.jsx';
 
 const DS1Planner = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
   const { authInfo } = useContext(AuthContext);
-  const { build, buildDispatch, saveBuild, updateBuild } = useContext(DS1BuildContext);
+  const { build, buildDispatch, setTitle, setCharacterName, setGender, setStartingClass, setAttribute } =
+    useContext(DS1BuildContext);
+
   const [buildOwner, setBuildOwner] = useState({ username: null, id: null });
   const [isLoading, setIsLoading] = useState(true);
-  // const [originalBuild, setOriginalBuild] = useState(null);
 
-  useEffect(() => {
+  const startingClassData = getStartingClassData(startingClasses, build.character.startingClass);
+
+  const checkOwner = useCallback(() => {
     if (authInfo.id) {
       setBuildOwner({ username: authInfo.username, id: authInfo.id });
     } else {
       const anonymousUserId = getAnonymousUserId();
       setBuildOwner({ username: 'Anonymous', id: anonymousUserId });
     }
+  }, [authInfo.id, authInfo.username]);
 
-    async function loadCharacter(id) {
+  async function saveBuild(newBuild) {
+    try {
+      await buildService.saveGameBuild('dark-souls-1', newBuild);
+      console.log('Character saved successfully!');
+    } catch (error) {
+      console.error('Error saving character', error);
+    }
+  }
+
+  async function updateBuild(id, updatedBuild) {
+    try {
+      await buildService.updateGameBuild('dark-souls-1', id, updatedBuild);
+      console.log('Character updated successfully!');
+    } catch (error) {
+      console.error('Error updating character', error);
+    }
+  }
+
+  const loadBuild = useCallback(
+    async (id) => {
       try {
         const loadedBuild = await buildService.getBuildById('dark-souls-1', id);
 
@@ -56,26 +82,22 @@ const DS1Planner = () => {
 
         buildDispatch({ type: 'LOAD_BUILD', payload: buildData });
         setIsLoading(false);
-
-        // Deep copy of the original build to compare later
-        // const newOriginalBuild = {
-        //   ...loadedBuild.character,
-        // }
-
-        // setOriginalBuild(JSON.parse(JSON.stringify(loadedBuildClone)));
       } catch (error) {
         console.log('There was an error loading the build:', error);
       }
-    }
+    },
+    [buildDispatch]
+  );
 
-    function resetCharacter() {
-      buildDispatch({ type: 'RESET_BUILD' });
-      setIsLoading(false);
-      // setOriginalBuild(null);
-    }
+  const resetBuild = useCallback(() => {
+    buildDispatch({ type: 'RESET_BUILD' });
+    setIsLoading(false);
+  }, [buildDispatch]);
 
-    id ? loadCharacter(id) : resetCharacter();
-  }, [id, buildDispatch, authInfo]);
+  useEffect(() => {
+    checkOwner();
+    id ? loadBuild(id) : resetBuild();
+  }, [id, checkOwner, loadBuild, resetBuild]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -122,17 +144,32 @@ const DS1Planner = () => {
         </span>
       )}
       <form onSubmit={handleSubmit}>
-        <Title />
+        <Title value={build.title} onChange={setTitle} />
         <div className="u-container">
-          <CharacterName />
-          <Gender />
-          <StartingClass />
+          <CharacterName
+            value={build.character.name}
+            onChange={setCharacterName}
+            maxLength={16} // This is the character name limit in game
+            placeholder="Chosen Undead"
+          />
+          <Gender value={build.character.gender} onChange={setGender} options={['male', 'female']} />
+          <StartingClass value={build.character.startingClass} onChange={setStartingClass} options={STARTING_CLASSES} />
         </div>
         <div className="u-container">
-          <SoulLevel />
+          <SoulLevel
+            soulLevelBase={startingClassData.soulLevelBase}
+            basePoints={startingClassData.basePoints}
+            attributes={build.character.attributes}
+          />
           <MiniCaption />
-          {ATTRIBUTES.map((atrr) => (
-            <AttributeIO key={atrr} attribute={atrr} />
+          {ATTRIBUTES.map((attr) => (
+            <AttributeIO
+              key={attr}
+              character={build.character}
+              startingClasses={startingClasses}
+              attribute={attr}
+              updateAttributeValue={setAttribute}
+            />
           ))}
           <hr className="u-hr" />
           <Humanity />

@@ -39,6 +39,7 @@ const Login = () => {
       clearAnonymousUserId();
       buildService.setToken(userInfo.token);
       setAuthInfo(userInfo);
+      setFormData({ username: '', password: '' });
 
       navigate('/');
     } catch (error) {
