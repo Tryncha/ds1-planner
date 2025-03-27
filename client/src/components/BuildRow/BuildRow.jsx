@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import buildService from '../../services/builds';
 import './BuildRow.css';
 import { useContext } from 'react';
@@ -43,7 +43,13 @@ const BuildRow = ({ build }) => {
         <strong>{build.title}</strong>
         <span style={{ fontStyle: 'italic' }}>{build.character.name}</span>
       </td>
-      <td>{build.user ? build.user.username : <span style={{ fontStyle: 'italic' }}>Anonymous</span>}</td>
+      {build.user ? (
+        <td>
+          <Link to={`/profile/${build.user.id}`}>{build.user.username}</Link>
+        </td>
+      ) : (
+        <td style={{ fontStyle: 'italic' }}>Anonymous</td>
+      )}
       <td>{build.game}</td>
       <td>{build.tags}</td>
       <td>{createdAtDate.toLocaleString()}</td>

@@ -19,7 +19,8 @@ import { useContext, useEffect } from 'react';
 import AuthContext from './context/AuthContext';
 import buildsService from './services/builds';
 import { clearAnonymousUserId, getAnonymousUserId } from './services/anonymousUserId';
-import SelectPlanner from './pages/Planners/SelectPlanner/SelectPlanner';
+import SelectPlanner from './pages/SelectPlanner/SelectPlanner';
+import NoPage from './pages/NoPage/NoPage';
 
 const App = () => {
   const { setAuthInfo } = useContext(AuthContext);
@@ -42,28 +43,40 @@ const App = () => {
       <Routes>
         <Route index element={<Home />} />
         <Route path="register" element={<Register />} />
+
         <Route path="login" element={<Login />} />
-        <Route path="profile" element={<Profile />} />
+        <Route path="profile">
+          <Route index element={<Profile />} />
+          <Route path=":id" element={<Profile />} />
+        </Route>
+
         <Route path="planner">
           <Route index element={<SelectPlanner />} />
+
           <Route path="dark-souls-1" element={<DS1PlannerLayout />}>
             <Route index element={<DS1Planner />} />
             <Route path=":id" element={<DS1Planner />} />
           </Route>
+
           <Route path="dark-souls-2" element={<DS2PlannerLayout />}>
             <Route index element={<DS2Planner />} />
             <Route path=":id" element={<DS2Planner />} />
           </Route>
+
           <Route path="dark-souls-3" element={<DS3PlannerLayout />}>
             <Route index element={<DS3Planner />} />
             <Route path=":id" element={<DS3Planner />} />
           </Route>
+
           <Route path="elden-ring" element={<ERPlannerLayout />}>
             <Route index element={<ERPlanner />} />
             <Route path=":id" element={<ERPlanner />} />
           </Route>
         </Route>
-        <Route path="/explorer" element={<Explorer />} />
+
+        <Route path="explorer" element={<Explorer />} />
+
+        <Route path="*" element={<NoPage />} />
       </Routes>
     </>
   );

@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { getAnonymousUserId } from '../../../services/anonymousUserId.js';
@@ -26,78 +26,49 @@ const DS1Planner = () => {
   const navigate = useNavigate();
 
   const { authInfo } = useContext(AuthContext);
-  const { build, buildDispatch, setTitle, setCharacterName, setGender, setStartingClass, setAttribute } =
-    useContext(DS1BuildContext);
+  const {
+    build,
+    setTitle,
+    setCharacterName,
+    setGender,
+    setStartingClass,
+    setAttribute,
+    saveBuild,
+    updateBuild,
+    loadBuild,
+    resetBuild
+  } = useContext(DS1BuildContext);
 
   const [buildOwner, setBuildOwner] = useState({ username: null, id: null });
   const [isLoading, setIsLoading] = useState(true);
 
   const startingClassData = getStartingClassData(startingClasses, build.character.startingClass);
 
-  const checkOwner = useCallback(() => {
-    if (authInfo.id) {
-      setBuildOwner({ username: authInfo.username, id: authInfo.id });
-    } else {
-      const anonymousUserId = getAnonymousUserId();
-      setBuildOwner({ username: 'Anonymous', id: anonymousUserId });
-    }
-  }, [authInfo.id, authInfo.username]);
-
-  async function saveBuild(newBuild) {
-    try {
-      await buildService.saveGameBuild('dark-souls-1', newBuild);
-      console.log('Character saved successfully!');
-    } catch (error) {
-      console.error('Error saving character', error);
-    }
-  }
-
-  async function updateBuild(id, updatedBuild) {
-    try {
-      await buildService.updateGameBuild('dark-souls-1', id, updatedBuild);
-      console.log('Character updated successfully!');
-    } catch (error) {
-      console.error('Error updating character', error);
-    }
-  }
-
-  const loadBuild = useCallback(
-    async (id) => {
-      try {
-        const loadedBuild = await buildService.getBuildById('dark-souls-1', id);
+  useEffect(() => {
+    async function fetchBuild() {
+      if (id) {
+        const loadedBuild = await loadBuild(id);
 
         if (loadedBuild.user) {
           setBuildOwner({ username: loadedBuild.user.username, id: loadedBuild.user.id });
         } else {
           setBuildOwner({ username: 'Anonymous', id: loadedBuild.anonymousUserId });
         }
+      } else {
+        resetBuild();
 
-        const buildData = {
-          title: loadedBuild.title,
-          description: loadedBuild.description,
-          isPublic: loadedBuild.isPublic,
-          tags: loadedBuild.tags,
-          character: loadedBuild.character
-        };
-
-        buildDispatch({ type: 'LOAD_BUILD', payload: buildData });
-        setIsLoading(false);
-      } catch (error) {
-        console.log('There was an error loading the build:', error);
+        if (authInfo.id) {
+          setBuildOwner({ username: authInfo.username, id: authInfo.id });
+        } else {
+          const anonymousUserId = getAnonymousUserId();
+          setBuildOwner({ username: 'Anonymous', id: anonymousUserId });
+        }
       }
-    },
-    [buildDispatch]
-  );
+      setIsLoading(false);
+    }
 
-  const resetBuild = useCallback(() => {
-    buildDispatch({ type: 'RESET_BUILD' });
-    setIsLoading(false);
-  }, [buildDispatch]);
-
-  useEffect(() => {
-    checkOwner();
-    id ? loadBuild(id) : resetBuild();
-  }, [id, checkOwner, loadBuild, resetBuild]);
+    fetchBuild();
+  }, [authInfo.id, authInfo.username, id, loadBuild, resetBuild]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -116,14 +87,8 @@ const DS1Planner = () => {
     id ? navigate('/explorer') : navigate('/planner');
   }
 
-  let isUserOwner = false;
-
-  if (authInfo.id) {
-    isUserOwner = authInfo.id === buildOwner.id;
-  } else {
-    const anonymousUserId = getAnonymousUserId();
-    isUserOwner = anonymousUserId === buildOwner.id;
-  }
+  const anonymousUserId = getAnonymousUserId();
+  const isUserOwner = authInfo.id ? authInfo.id === buildOwner.id : anonymousUserId === buildOwner.id;
 
   if (isLoading)
     return (

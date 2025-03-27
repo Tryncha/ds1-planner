@@ -1,5 +1,6 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useCallback, useReducer } from 'react';
 import { buildReducer, initialState } from './reducers/darkSouls1Reducer';
+import buildService from '../services/builds.js';
 
 const DS1BuildContext = createContext();
 
@@ -28,6 +29,48 @@ export const DS1BuildProvider = ({ children }) => {
     buildDispatch({ type: 'SET_ATTRIBUTE', payload: { attribute, value: newValue } });
   }
 
+  async function saveBuild(newBuild) {
+    try {
+      await buildService.saveGameBuild('dark-souls-1', newBuild);
+      console.log('Character saved successfully!');
+    } catch (error) {
+      console.error('Error saving character', error);
+    }
+  }
+
+  async function updateBuild(id, updatedBuild) {
+    try {
+      await buildService.updateGameBuild('dark-souls-1', id, updatedBuild);
+      console.log('Character updated successfully!');
+    } catch (error) {
+      console.error('Error updating character', error);
+    }
+  }
+
+  const loadBuild = useCallback(async (id) => {
+    try {
+      const loadedBuild = await buildService.getBuildById('dark-souls-1', id);
+
+      const buildData = {
+        title: loadedBuild.title,
+        description: loadedBuild.description,
+        isPublic: loadedBuild.isPublic,
+        tags: loadedBuild.tags,
+        character: loadedBuild.character
+      };
+
+      buildDispatch({ type: 'LOAD_BUILD', payload: buildData });
+
+      return loadedBuild;
+    } catch (error) {
+      console.log('There was an error loading the build:', error);
+    }
+  }, []);
+
+  const resetBuild = useCallback(() => {
+    buildDispatch({ type: 'RESET_BUILD' });
+  }, []);
+
   console.log(build);
 
   return (
@@ -39,7 +82,11 @@ export const DS1BuildProvider = ({ children }) => {
         setCharacterName,
         setGender,
         setStartingClass,
-        setAttribute
+        setAttribute,
+        saveBuild,
+        updateBuild,
+        loadBuild,
+        resetBuild
       }}>
       {children}
     </DS1BuildContext.Provider>
