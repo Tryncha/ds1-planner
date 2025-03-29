@@ -41,7 +41,7 @@ const BuildRow = ({ build }) => {
     <tr className="BuildRow">
       <td className="BuildRow-title">
         <strong>{build.title}</strong>
-        <span style={{ fontStyle: 'italic' }}>{build.character.name}</span>
+        <div style={{ fontStyle: 'italic' }}>{build.character.name}</div>
       </td>
       {build.user ? (
         <td>

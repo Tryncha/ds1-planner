@@ -21,6 +21,9 @@ import buildsService from './services/builds';
 import { clearAnonymousUserId, getAnonymousUserId } from './services/anonymousUserId';
 import SelectPlanner from './pages/SelectPlanner/SelectPlanner';
 import NoPage from './pages/NoPage/NoPage';
+import DS1Create from './pages/Planners/DS1Planner/DS1Create';
+import DS1Edit from './pages/Planners/DS1Planner/DS1Edit';
+import { DS1BuildProvider } from './context/DS1BuildContext';
 
 const App = () => {
   const { setAuthInfo } = useContext(AuthContext);
@@ -53,9 +56,9 @@ const App = () => {
         <Route path="planner">
           <Route index element={<SelectPlanner />} />
 
-          <Route path="dark-souls-1" element={<DS1PlannerLayout />}>
-            <Route index element={<DS1Planner />} />
-            <Route path=":id" element={<DS1Planner />} />
+          <Route element={<DS1PlannerLayout />}>
+            <Route path="dark-souls-1" element={<DS1Create />} />
+            <Route path="dark-souls-1/:id" element={<DS1Edit />} />
           </Route>
 
           <Route path="dark-souls-2" element={<DS2PlannerLayout />}>

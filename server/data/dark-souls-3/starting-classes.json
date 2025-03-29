@@ -1,0 +1,162 @@
+[
+  {
+    "name": "knight",
+    "baseAttributes": {
+      "vigor": 12,
+      "attunement": 10,
+      "endurance": 11,
+      "vitality": 15,
+      "strength": 13,
+      "dexterity": 12,
+      "intelligence": 9,
+      "faith": 9,
+      "luck": 7
+    },
+    "soulLevelBase": 9,
+    "basePoints": 98
+  },
+  {
+    "name": "mercenary",
+    "baseAttributes": {
+      "vigor": 11,
+      "attunement": 12,
+      "endurance": 11,
+      "vitality": 10,
+      "strength": 10,
+      "dexterity": 16,
+      "intelligence": 10,
+      "faith": 8,
+      "luck": 9
+    },
+    "soulLevelBase": 8,
+    "basePoints": 97
+  },
+  {
+    "name": "warrior",
+    "baseAttributes": {
+      "vigor": 14,
+      "attunement": 6,
+      "endurance": 12,
+      "vitality": 11,
+      "strength": 16,
+      "dexterity": 9,
+      "intelligence": 8,
+      "faith": 9,
+      "luck": 11
+    },
+    "soulLevelBase": 7,
+    "basePoints": 96
+  },
+  {
+    "name": "herald",
+    "baseAttributes": {
+      "vigor": 12,
+      "attunement": 10,
+      "endurance": 9,
+      "vitality": 12,
+      "strength": 12,
+      "dexterity": 11,
+      "intelligence": 8,
+      "faith": 13,
+      "luck": 11
+    },
+    "soulLevelBase": 9,
+    "basePoints": 98
+  },
+  {
+    "name": "thief",
+    "baseAttributes": {
+      "vigor": 10,
+      "attunement": 11,
+      "endurance": 10,
+      "vitality": 9,
+      "strength": 9,
+      "dexterity": 13,
+      "intelligence": 10,
+      "faith": 8,
+      "luck": 14
+    },
+    "soulLevelBase": 5,
+    "basePoints": 94
+  },
+  {
+    "name": "assassin",
+    "baseAttributes": {
+      "vigor": 10,
+      "attunement": 14,
+      "endurance": 11,
+      "vitality": 10,
+      "strength": 10,
+      "dexterity": 14,
+      "intelligence": 11,
+      "faith": 9,
+      "luck": 10
+    },
+    "soulLevelBase": 10,
+    "basePoints": 99
+  },
+  {
+    "name": "sorcerer",
+    "baseAttributes": {
+      "vigor": 9,
+      "attunement": 16,
+      "endurance": 9,
+      "vitality": 7,
+      "strength": 7,
+      "dexterity": 12,
+      "intelligence": 16,
+      "faith": 7,
+      "luck": 12
+    },
+    "soulLevelBase": 6,
+    "basePoints": 95
+  },
+  {
+    "name": "pyromancer",
+    "baseAttributes": {
+      "vigor": 11,
+      "attunement": 12,
+      "endurance": 10,
+      "vitality": 8,
+      "strength": 12,
+      "dexterity": 9,
+      "intelligence": 14,
+      "faith": 14,
+      "luck": 7
+    },
+    "soulLevelBase": 8,
+    "basePoints": 97
+  },
+  {
+    "name": "cleric",
+    "baseAttributes": {
+      "vigor": 10,
+      "attunement": 14,
+      "endurance": 9,
+      "vitality": 7,
+      "strength": 12,
+      "dexterity": 8,
+      "intelligence": 7,
+      "faith": 16,
+      "luck": 13
+    },
+    "soulLevelBase": 7,
+    "basePoints": 96
+  },
+  {
+    "name": "deprived",
+    "baseAttributes": {
+      "vigor": 10,
+      "attunement": 10,
+      "endurance": 10,
+      "vitality": 10,
+      "strength": 10,
+      "dexterity": 10,
+      "intelligence": 10,
+      "faith": 10,
+      "luck": 10
+    },
+    "soulLevelBase": 1,
+    "basePoints": 90
+  }
+]

@@ -11,6 +11,10 @@ const darkSouls1Router = require('./routes/darkSouls1Router');
 const darkSouls2Router = require('./routes/darkSouls2Router');
 const darkSouls3Router = require('./routes/darkSouls3Router');
 const eldenRingRouter = require('./routes/eldenRingRouter');
+const darkSouls1DataRouter = require('./routes/data/darkSouls1');
+const darkSouls2DataRouter = require('./routes/data/darkSouls2');
+const darkSouls3DataRouter = require('./routes/data/darkSouls3');
+const eldenRingDataRouter = require('./routes/data/eldenRing');
 
 const app = express();
 
@@ -34,6 +38,11 @@ app.use(middleware.requestLogger);
 app.use(middleware.tokenExtractor);
 app.use(middleware.anonymousUserIdExtractor);
 app.use(middleware.authLogger);
+
+app.use('/api/data/dark-souls-1', darkSouls1DataRouter);
+app.use('/api/data/dark-souls-2', darkSouls2DataRouter);
+app.use('/api/data/dark-souls-3', darkSouls3DataRouter);
+app.use('/api/data/elden-ring', eldenRingDataRouter);
 
 app.use('/api/builds', gamesRouter);
 app.use('/api/builds/dark-souls-1', darkSouls1Router);

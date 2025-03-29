@@ -1,11 +1,20 @@
-import { createContext, useCallback, useReducer } from 'react';
+import { createContext, useCallback, useEffect, useReducer, useState } from 'react';
 import { buildReducer, initialState } from './reducers/darkSouls1Reducer';
 import buildService from '../services/builds.js';
+import startingClasses from '../assets/dark-souls-1/starting-classes.json';
+import { getStartingClassData } from '../utils/index.js';
 
 const DS1BuildContext = createContext();
 
 export const DS1BuildProvider = ({ children }) => {
   const [build, buildDispatch] = useReducer(buildReducer, initialState);
+
+  const [startingClassData, setStartingClassData] = useState(startingClasses[0]);
+
+  useEffect(() => {
+    const newStartingClassData = getStartingClassData(startingClasses, build.character.startingClass);
+    setStartingClassData(newStartingClassData);
+  }, [build.character.startingClass]);
 
   function setTitle(event) {
     buildDispatch({ type: 'SET_TITLE', payload: event.target.value });
@@ -77,6 +86,7 @@ export const DS1BuildProvider = ({ children }) => {
     <DS1BuildContext.Provider
       value={{
         build,
+        startingClassData,
         buildDispatch,
         setTitle,
         setCharacterName,

@@ -2,12 +2,10 @@ import { useEffect, useId, useState } from 'react';
 import { capitalizeWord } from '../../../../utils';
 import './AttributeIO.css';
 
-const AttributeIO = ({ character, startingClasses, attribute, updateAttributeValue }) => {
+const AttributeIO = ({ attribute, value, baseValue, setAttribute }) => {
   const id = useId();
-  const startingClassData = startingClasses.find((cls) => cls.name === character.startingClass);
 
-  const value = character.attributes[attribute];
-  const minValue = startingClassData.baseAttributes[attribute];
+  const minValue = baseValue;
   const maxValue = 99;
 
   const [inputValue, setInputValue] = useState(String(value));
@@ -20,20 +18,20 @@ const AttributeIO = ({ character, startingClasses, attribute, updateAttributeVal
     if (numValue < minValue) numValue = minValue;
     if (numValue > maxValue) numValue = maxValue;
 
-    updateAttributeValue(attribute, numValue);
+    setAttribute(attribute, numValue);
     setInputValue(String(numValue));
   }
 
   function decreaseValue(event) {
     event.preventDefault();
     if (value <= minValue) return;
-    updateAttributeValue(attribute, value - 1);
+    setAttribute(attribute, value - 1);
   }
 
   function increaseValue(event) {
     event.preventDefault();
     if (value >= maxValue) return;
-    updateAttributeValue(attribute, value + 1);
+    setAttribute(attribute, value + 1);
   }
 
   function handleChange(event) {

@@ -22,3 +22,5 @@ export const STARTING_CLASSES = [
   'cleric',
   'deprived'
 ];
+
+export const GENDERS = ['male', 'female'];

@@ -1,11 +1,13 @@
 .BuildsTable {
   text-align: center;
   border: 1px solid var(--borderColor);
-  border-spacing: 0;
+  border-radius: 5px;
+  border-collapse: collapse;
 }
 
 .BuildsTable th,
 .BuildsTable td {
   padding: 5px 10px;
+  border-radius: 5px;
   border: 1px solid var(--borderColor);
 }
