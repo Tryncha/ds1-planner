@@ -1,13 +1,29 @@
 .BuildsTable {
   text-align: center;
-  border: 1px solid var(--borderColor);
-  border-radius: 5px;
   border-collapse: collapse;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+}
+
+.BuildsTable thead tr {
+  background-color: #171a1c;
+  font-weight: bold;
 }
 
 .BuildsTable th,
 .BuildsTable td {
   padding: 5px 10px;
-  border-radius: 5px;
-  border: 1px solid var(--borderColor);
+}
+
+.BuildsTable td {
+  background-color: #0b0d0e;
+}
+
+.BuildsTable thead tr,
+.BuildsTable tbody tr {
+  border-bottom: 1px solid var(--borderColor);
+}
+
+.BuildsTable tbody tr:last-of-type {
+  border-bottom: 2px solid var(--borderColor);
 }
