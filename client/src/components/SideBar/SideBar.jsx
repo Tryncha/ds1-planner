@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 import AuthContext from '../../context/AuthContext';
 import './Sidebar.css';
@@ -14,38 +14,38 @@ const Sidebar = () => {
         <hr className="u-hr" />
       </div>
       <div className="Sidebar-mainContainer">
-        <Link to="/" className="Sidebar-Link">
+        <NavLink to="/" className="Sidebar-NavLink">
           Home
-        </Link>
-        <Link to="/profile" className="Sidebar-Link">
+        </NavLink>
+        <NavLink to="/profile" className="Sidebar-NavLink" end>
           Profile
-        </Link>
-        <Link to="/planner" className="Sidebar-Link">
-          Planner
-        </Link>
-        <Link to="/explorer" className="Sidebar-Link">
+        </NavLink>
+        <NavLink to="/planner" className="Sidebar-NavLink">
+          Planners
+        </NavLink>
+        <NavLink to="/explorer" className="Sidebar-NavLink">
           Explorer
-        </Link>
+        </NavLink>
       </div>
       <div className="Sidebar-container">
-        <Link to="/" className="Sidebar-Link">
+        <NavLink to="/" className="Sidebar-NavLink">
           Settings
-        </Link>
-        <Link to="/" className="Sidebar-Link">
+        </NavLink>
+        <NavLink to="/" className="Sidebar-NavLink">
           Help
-        </Link>
+        </NavLink>
       </div>
       <hr className="u-hr" />
       {authInfo.id ? (
         <UserInfo />
       ) : (
         <div className="Sidebar-container">
-          <Link to="/login" className="Sidebar-Link">
+          <NavLink to="/login" className="Sidebar-NavLink">
             Login
-          </Link>
-          <Link to="/register" className="Sidebar-Link">
+          </NavLink>
+          <NavLink to="/register" className="Sidebar-NavLink">
             Register
-          </Link>
+          </NavLink>
         </div>
       )}
     </nav>

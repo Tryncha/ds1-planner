@@ -8,7 +8,6 @@ const DS1BuildContext = createContext();
 
 export const DS1BuildProvider = ({ children }) => {
   const [build, buildDispatch] = useReducer(buildReducer, initialState);
-
   const [startingClassData, setStartingClassData] = useState(startingClasses[0]);
 
   useEffect(() => {
@@ -25,13 +24,11 @@ export const DS1BuildProvider = ({ children }) => {
   }
 
   function setGender(event) {
-    const newGender = event.target.value;
-    buildDispatch({ type: 'SET_GENDER', payload: newGender });
+    buildDispatch({ type: 'SET_GENDER', payload: event.target.value });
   }
 
   function setStartingClass(event) {
-    const newStartingClass = event.target.value;
-    buildDispatch({ type: 'SET_STARTING_CLASS', payload: newStartingClass });
+    buildDispatch({ type: 'SET_STARTING_CLASS', payload: event.target.value });
   }
 
   function setAttribute(attribute, newValue) {
