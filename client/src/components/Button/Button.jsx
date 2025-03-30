@@ -1,16 +1,8 @@
 import './Button.css';
 
-const Button = ({ children, onClick, modifier, type }) => {
-  if (type) {
-    return (
-      <button className={`Button Button-${modifier}`} onClick={onClick} type={type}>
-        {children}
-      </button>
-    );
-  }
-
+const Button = ({ children, onClick, modifier, type, disabled }) => {
   return (
-    <button className={`Button Button-${modifier}`} onClick={onClick}>
+    <button className={`Button Button-${modifier}`} onClick={onClick} type={type} disabled={disabled}>
       {children}
     </button>
   );

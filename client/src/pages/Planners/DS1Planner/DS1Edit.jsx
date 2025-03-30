@@ -80,15 +80,15 @@ const DS1Edit = () => {
           {isUserOwner ? (
             <>
               <Button modifier="success" type="submit">
-                UPDATE
+                Update
               </Button>
               <Button onClick={handleDelete} modifier="danger">
-                DELETE
+                Delete
               </Button>
             </>
           ) : null}
           <Button onClick={handleCancel} modifier="warning">
-            GO BACK
+            Go back
           </Button>
         </div>
       </form>

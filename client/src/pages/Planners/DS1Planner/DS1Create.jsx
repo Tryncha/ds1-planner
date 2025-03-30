@@ -30,10 +30,10 @@ const DS1Create = () => {
         <DS1Planner />
         <div className="u-buttonsFormContainer">
           <Button modifier="success" type="submit">
-            SAVE
+            Save
           </Button>
           <Button onClick={handleCancel} modifier="warning">
-            GO BACK
+            Go back
           </Button>
         </div>
       </form>

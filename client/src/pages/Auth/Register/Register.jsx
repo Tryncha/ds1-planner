@@ -1,7 +1,8 @@
 import { useEffect, useId, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import loginService from '../../../services/login';
 import './Register.css';
+import Button from '../../../components/Button/Button';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -105,8 +106,30 @@ const Register = () => {
   return (
     <main className="u-mainPage">
       <h2>Register</h2>
+
       <hr className="u-hr" />
-      <form onSubmit={handleSubmit}>
+
+      <div className="u-info">
+        <p>
+          Registration is not required to use this app, you will be using an <strong>anonymous session</strong>,
+          allowing you to:
+        </p>
+        <ul>
+          <li>View and vote on other users' builds.</li>
+          <li>
+            Save, edit and share your own builds,{' '}
+            <strong>but they are only kept for 30 days from the date they are created</strong>.
+          </li>
+          <p>This is ideal if you just want to test the app or have an automatic clean up.</p>
+        </ul>
+        <p>
+          If you register an account, <strong>your builds will be permanent</strong>.
+        </p>
+      </div>
+
+      <hr className="u-hr" />
+
+      <form className="u-authForm" onSubmit={handleSubmit}>
         <div className="u-authFormContainer">
           <label htmlFor={usernameInputId}>Username</label>
           <input
@@ -143,11 +166,14 @@ const Register = () => {
           />
           <span className="u-formError">{formErrors.confirmPassword}</span>
         </div>
+        <Link to="/login">You already have an accout? Log In</Link>
         <div className="u-authButtonsContainer">
-          <button type="submit" disabled={!isFormValid}>
+          <Button modifier="success" type="submit" disabled={!isFormValid}>
             Register
-          </button>
-          <button onClick={handleCancelClick}>Cancel</button>
+          </Button>
+          <Button onClick={handleCancelClick} modifier="warning">
+            Cancel
+          </Button>
         </div>
       </form>
     </main>

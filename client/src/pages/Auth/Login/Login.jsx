@@ -1,9 +1,10 @@
 import { useContext, useId, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import loginService from '../../../services/login';
 import buildService from '../../../services/builds';
 import AuthContext from '../../../context/AuthContext';
 import { clearAnonymousUserId } from '../../../services/anonymousUserId';
+import Button from '../../../components/Button/Button';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ const Login = () => {
       <h2>Login</h2>
       <hr className="u-hr" />
       <span className="u-formError">{formError}</span>
-      <form onSubmit={handleSubmit}>
+      <form className="u-authForm" onSubmit={handleSubmit}>
         <div className="u-authFormContainer">
           <label htmlFor={usernameInputId}>Username</label>
           <input
@@ -76,9 +77,19 @@ const Login = () => {
             required
           />
         </div>
+        <div className="u-authRadioContainer">
+          <div className="u-authRadio" />
+          Remember me
+        </div>
+        <Link to="/register">You don't have an accout? Register</Link>
+        <Link to="/">Forgot your password?</Link>
         <div className="u-authButtonsContainer">
-          <button type="submit">Login</button>
-          <button onClick={handleCancelClick}>Cancel</button>
+          <Button modifier="success" type="submit">
+            Login
+          </Button>
+          <Button onClick={handleCancelClick} modifier="warning">
+            Cancel
+          </Button>
         </div>
       </form>
     </main>

@@ -75,23 +75,69 @@ input::-webkit-inner-spin-button {
   margin: 10px 0;
 }
 
-.u-authFormContainer {
+.u-authForm {
+  width: 20%;
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  align-items: center;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.u-authFormContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 10px;
+}
+
+.u-authForm label {
+  font-weight: bold;
+  margin: 5px;
+}
+
+.u-authForm input {
+  width: 100%;
+  height: 25px;
+  padding: 10px;
+}
+
+.u-authForm a {
+  font-size: 14px;
+  color: #ffffff;
+  margin: 5px 0;
+}
+
+.u-authRadioContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 14px;
+  font-weight: bold;
+  gap: 5px;
+  padding: 5px 10px;
+  margin: 0 0 15px 10px;
+}
+
+.u-authRadio {
+  width: 15px;
+  height: 15px;
+  border: 1px solid var(--borderColor);
 }
 
 .u-authButtonsContainer {
   width: 250px;
   display: flex;
-  justify-content: space-around;
-  margin: 10px;
+  justify-content: space-evenly;
+  padding: 10px;
 }
 
 .u-formError {
-  color: rgb(245, 151, 151);
+  color: #f59797;
   font-size: 13px;
   font-style: italic;
+  margin: 2px 5px;
 }
 
 .u-buttonsFormContainer {
@@ -99,6 +145,25 @@ input::-webkit-inner-spin-button {
   display: flex;
   justify-content: flex-end;
   gap: 5px;
+}
+
+.u-info {
+  text-align: left;
+  line-height: 1.5rem;
+}
+
+.u-info ul {
+  margin: 10px 0;
+}
+
+.u-info ul li,
+.u-info ul p {
+  margin-left: 25px;
+}
+
+.u-info ul p {
+  color: #e9a456;
+  font-style: italic;
 }
 
 .Gender,
