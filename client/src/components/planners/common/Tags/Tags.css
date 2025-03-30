@@ -1,0 +1,35 @@
+.Tags {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.Tags-tag {
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 2px;
+  border: 1px solid var(--borderColor);
+}
+
+.Tags-tag.is-strActive {
+  background-color: #c56c6c;
+}
+
+.Tags-tag.is-dexActive {
+  background-color: #336e2e;
+}
+
+.Tags-tag.is-intActive {
+  background-color: #6c84c5;
+}
+
+.Tags-tag.is-faiActive {
+  background-color: #868b38;
+}

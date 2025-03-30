@@ -113,7 +113,7 @@ const DS1BuildSchema = new mongoose.Schema(
       // Build info or notes about build by author
       type: String,
       trim: true,
-      maxLength: 50 // Propense to changes
+      maxLength: 500 // Propense to changes
     },
     isPublic: {
       type: Boolean,

@@ -1,8 +1,16 @@
 .Title {
+  width: 100%;
   display: flex;
+  background-color: transparent;
+  border: none;
+  color: var(--textColor);
+  padding: 5px 10px;
+  border-bottom: 1px solid var(--borderColor);
+  font-weight: bold;
+  font-size: 18px;
   margin: 5px;
 }
 
-.Title-input {
-  width: 100%;
+.Title::placeholder {
+  font-style: italic;
 }

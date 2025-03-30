@@ -1,10 +1,15 @@
+import { useContext, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+
+import buildsService from './services/builds';
+import { clearAnonymousUserId, getAnonymousUserId } from './services/anonymousUserId';
+
+import AuthContext from './context/AuthContext';
+
 import Explorer from './pages/Explorer/Explorer';
 import Profile from './pages/Profile/Profile';
 import Register from './pages/Auth/Register/Register';
 import Login from './pages/Auth/Login/Login';
-
-import DS1Planner from './pages/Planners/DS1Planner/DS1Planner';
 import DS2Planner from './pages/Planners/DS2Planner/DS2Planner';
 import DS3Planner from './pages/Planners/DS3Planner/DS3Planner';
 import ERPlanner from './pages/Planners/ERPlanner/ERPlanner';
@@ -12,18 +17,12 @@ import DS1PlannerLayout from './components/layouts/DS1PlannerLayout';
 import DS2PlannerLayout from './components/layouts/DS2PlannerLayout';
 import DS3PlannerLayout from './components/layouts/DS3PlannerLayout';
 import ERPlannerLayout from './components/layouts/ERPlannerLayout';
-
 import Home from './pages/Home/Home';
 import SideBar from './components/SideBar/SideBar';
-import { useContext, useEffect } from 'react';
-import AuthContext from './context/AuthContext';
-import buildsService from './services/builds';
-import { clearAnonymousUserId, getAnonymousUserId } from './services/anonymousUserId';
 import SelectPlanner from './pages/SelectPlanner/SelectPlanner';
 import NoPage from './pages/NoPage/NoPage';
 import DS1Create from './pages/Planners/DS1Planner/DS1Create';
 import DS1Edit from './pages/Planners/DS1Planner/DS1Edit';
-import { DS1BuildProvider } from './context/DS1BuildContext';
 
 const App = () => {
   const { setAuthInfo } = useContext(AuthContext);

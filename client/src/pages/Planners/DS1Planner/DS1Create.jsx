@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import DS1BuildContext from '../../../context/DS1BuildContext.jsx';
 
 import DS1Planner from './DS1Planner.jsx';
+import Button from '../../../components/Button/Button.jsx';
 
 const DS1Create = () => {
   const navigate = useNavigate();
@@ -25,12 +26,16 @@ const DS1Create = () => {
     <main className="u-mainPage">
       <h2>Create DS1 Character</h2>
       <hr className="u-hr" />
-      <form onSubmit={handleSubmit}>
+      <form className="u-formPlanner" onSubmit={handleSubmit}>
         <DS1Planner />
-        <div>
-          <button type="submit">Save</button>
+        <div className="u-buttonsFormContainer">
+          <Button modifier="success" type="submit">
+            SAVE
+          </Button>
+          <Button onClick={handleCancel} modifier="warning">
+            GO BACK
+          </Button>
         </div>
-        <button onClick={handleCancel}>Go back</button>
       </form>
     </main>
   );

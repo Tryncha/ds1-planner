@@ -23,6 +23,14 @@ export const DS1BuildProvider = ({ children }) => {
     buildDispatch({ type: 'SET_NAME', payload: event.target.value });
   }
 
+  function setDescription(event) {
+    buildDispatch({ type: 'SET_DESCRIPTION', payload: event.target.value });
+  }
+
+  function toggleTag(tag) {
+    buildDispatch({ type: 'TOGGLE_TAG', payload: tag });
+  }
+
   function setGender(event) {
     buildDispatch({ type: 'SET_GENDER', payload: event.target.value });
   }
@@ -87,6 +95,8 @@ export const DS1BuildProvider = ({ children }) => {
         buildDispatch,
         setTitle,
         setCharacterName,
+        setDescription,
+        toggleTag,
         setGender,
         setStartingClass,
         setAttribute,

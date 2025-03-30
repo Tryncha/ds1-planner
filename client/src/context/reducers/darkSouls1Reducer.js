@@ -41,11 +41,19 @@ export function buildReducer(buildState, action) {
         isPublic: !buildState.isPublic
       };
 
-    case 'SET_TAG':
-      return {
-        ...buildState,
-        tags: buildState.tags.concat(action.payload)
-      };
+    case 'TOGGLE_TAG': {
+      if (!buildState.tags.includes(action.payload)) {
+        return {
+          ...buildState,
+          tags: buildState.tags.concat(action.payload)
+        };
+      } else {
+        return {
+          ...buildState,
+          tags: buildState.tags.filter((t) => t !== action.payload)
+        };
+      }
+    }
 
     case 'SET_NAME':
       return {

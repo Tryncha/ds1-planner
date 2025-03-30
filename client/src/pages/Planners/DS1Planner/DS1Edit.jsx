@@ -8,6 +8,7 @@ import AuthContext from '../../../context/AuthContext.jsx';
 import DS1BuildContext from '../../../context/DS1BuildContext.jsx';
 
 import DS1Planner from './DS1Planner.jsx';
+import Button from '../../../components/Button/Button.jsx';
 
 const DS1Edit = () => {
   const { id } = useParams();
@@ -73,15 +74,23 @@ const DS1Edit = () => {
           Viewing <strong>{buildOwner.username}</strong> build
         </span>
       )}
-      <form onSubmit={handleSubmit}>
+      <form className="u-formPlanner" onSubmit={handleSubmit}>
         <DS1Planner />
-        {isUserOwner ? (
-          <div>
-            <button type="submit">Update</button>
-            <button onClick={handleDelete}>Delete</button>
-          </div>
-        ) : null}
-        <button onClick={handleCancel}>Go back</button>
+        <div className="u-buttonsFormContainer">
+          {isUserOwner ? (
+            <>
+              <Button modifier="success" type="submit">
+                UPDATE
+              </Button>
+              <Button onClick={handleDelete} modifier="danger">
+                DELETE
+              </Button>
+            </>
+          ) : null}
+          <Button onClick={handleCancel} modifier="warning">
+            GO BACK
+          </Button>
+        </div>
       </form>
     </main>
   );

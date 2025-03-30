@@ -1,0 +1,24 @@
+.Button {
+  font-weight: bold;
+  color: white;
+  padding: 5px 10px;
+  border: 1px solid var(--borderColor);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.Button-primary {
+  background-color: #0d3888;
+}
+
+.Button-success {
+  background-color: #1d6b0d;
+}
+
+.Button-danger {
+  background-color: #880d0d;
+}
+
+.Button-warning {
+  background-color: #8d8512;
+}
