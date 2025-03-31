@@ -1,0 +1,26 @@
+.Humanity {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 2px 0;
+}
+
+.Humanity-label {
+  width: 100px;
+  text-align: initial;
+}
+
+.Humanity-input {
+  width: 40px;
+  height: 20px;
+  text-align: center;
+}
+
+.Humanity-button {
+  width: 20px;
+  height: 20px;
+}
+
+.Humanity-input {
+  width: 90px;
+}

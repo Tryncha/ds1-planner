@@ -1,3 +1,5 @@
+import './MiniCaption.css';
+
 const MiniCaption = () => (
   <div className="MiniCaption">
     <span className="MiniCaption-label">ATTRIBUTE</span>

@@ -1,6 +1,5 @@
+import { availableTags } from '../../../../constants/darkSouls1';
 import './Tags.css';
-
-const availableTags = ['dlc', 'str', 'dex', 'int', 'fai', 'melee', 'ranged'];
 
 const Tags = ({ tags, toggleTag }) => {
   return (

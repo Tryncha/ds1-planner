@@ -2,16 +2,16 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 4px;
 }
 
 .Tags-tag {
-  width: 50px;
+  width: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 10px;
   border-radius: 5px;
   cursor: pointer;
   padding: 2px;

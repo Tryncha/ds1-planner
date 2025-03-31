@@ -14,7 +14,6 @@ import Title from '../../../components/planners/common/Title/Title.jsx';
 import CharacterName from '../../../components/planners/common/CharacterName/CharacterName.jsx';
 import Gender from '../../../components/planners/common/Gender/Gender.jsx';
 import StartingClass from '../../../components/planners/common/StartingClass/StartingClass.jsx';
-import SoulLevel from '../../../components/planners/common/SoulLevel/SoulLevel.jsx';
 import MiniCaption from '../../../components/planners/common/MiniCaption/MiniCaption.jsx';
 import AttributeIO from '../../../components/planners/common/AttributeIO/AttributeIO.jsx';
 import { getStartingClassData } from '../../../utils/index.js';

@@ -34,6 +34,11 @@ input::-webkit-inner-spin-button {
   appearance: 0;
 }
 
+select {
+  appearance: none;
+  cursor: pointer;
+}
+
 .u-mainPage {
   width: auto;
   height: 100vh;
@@ -41,31 +46,7 @@ input::-webkit-inner-spin-button {
   flex-direction: column;
   align-items: center;
   padding: 20px 40px;
-}
-
-.u-formPlanner {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.u-container {
-  width: 300px;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--container-backgroundColor);
-  padding: 10px;
-  border: 1px solid var(--borderColor);
-  border-radius: 5px;
-  margin: 5px;
-}
-
-.u-innerContainer {
-  display: flex;
-  padding: 0 5px;
-  gap: 5px;
+  overflow: auto;
 }
 
 .u-hr {
@@ -76,7 +57,7 @@ input::-webkit-inner-spin-button {
 }
 
 .u-authForm {
-  width: 20%;
+  width: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -99,7 +80,7 @@ input::-webkit-inner-spin-button {
 .u-authForm input {
   width: 100%;
   height: 25px;
-  padding: 10px;
+  padding: 5px;
 }
 
 .u-authForm a {
@@ -164,79 +145,4 @@ input::-webkit-inner-spin-button {
 .u-info ul p {
   color: #e9a456;
   font-style: italic;
-}
-
-.Gender,
-.StartingClass,
-.SoulLevel,
-.AttributeIO,
-.Humanity {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 2px 0;
-}
-
-.Gender-label,
-.StartingClass-label,
-.SoulLevel-label {
-  width: 120px;
-}
-
-.Gender-select,
-.StartingClass-select {
-  width: 150px;
-  height: 20px;
-  text-align: center;
-  border: none;
-}
-
-.SoulLevel-level {
-  width: 150px;
-  text-align: center;
-  border: 1px solid var(--borderColor);
-}
-
-.MiniCaption {
-  display: flex;
-  justify-content: space-around;
-  font-size: 10px;
-  color: var(--fontColor--em);
-  text-align: center;
-  margin: 5px 0;
-}
-
-.MiniCaption-label,
-.AttributeIO-label,
-.Humanity-label {
-  width: 100px;
-  text-align: initial;
-}
-
-.MiniCaption-base,
-.MiniCaption-current {
-  width: 40px;
-}
-
-.MiniCaption-decrease,
-.MiniCaption-increase {
-  width: 20px;
-}
-
-.AttributeIO-output,
-.AttributeIO-input,
-.Humanity-input {
-  width: 40px;
-  height: 20px;
-  text-align: center;
-}
-
-.AttributeIO-button,
-.Humanity-button {
-  width: 20px;
-  height: 20px;
-}
-
-.Humanity-input {
-  width: 90px;
 }

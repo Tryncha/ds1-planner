@@ -1,0 +1,22 @@
+.Slot-select {
+  width: 100px;
+  height: 20px;
+  margin: 4px 0;
+}
+
+.Slot-upgrade {
+  display: flex;
+  gap: 2px;
+}
+
+.Slot-upgradeSelect {
+  width: 75px;
+  height: 20px;
+  margin: 4px 0;
+}
+
+.Slot-levelSelect {
+  width: 23px;
+  height: 20px;
+  margin: 4px 0;
+}

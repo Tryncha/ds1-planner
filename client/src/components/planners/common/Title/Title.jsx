@@ -21,7 +21,7 @@ const Title = ({ value, onChange, titlePlaceholders }) => {
       type="text"
       value={value}
       onChange={onChange}
-      placeholder={`${placeholder}...`}
+      placeholder={`Title of the build: e.g. ${placeholder}...`}
       autoComplete="off"
       required
     />

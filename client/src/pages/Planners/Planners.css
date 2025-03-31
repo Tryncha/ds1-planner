@@ -1,0 +1,118 @@
+.u-plannerForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.u-plannerColumns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.u-plannerButtons {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  padding: 10px;
+}
+
+.u-md-plannerColumn {
+  width: 350px;
+  height: 740px;
+}
+
+.u-lg-plannerColumn {
+  width: 550px;
+  height: 740px;
+}
+
+.u-plannerContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--container-backgroundColor);
+  padding: 10px;
+  border: 1px solid var(--borderColor);
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.u-innerContainer {
+  display: flex;
+  padding: 0 5px;
+  gap: 5px;
+}
+
+.u-ident {
+  margin-left: 10px;
+}
+
+.u-equipmentContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.u-spellsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 0 50px;
+}
+
+.LabelInput,
+.LabelOutput,
+.IconLabelOutput {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2px 5px;
+}
+
+.LabelInput-label,
+.LabelOutput-label,
+.IconLabelOutput-label {
+  width: 140px;
+}
+
+.LabelInput-input,
+.LabelInput-select,
+.LabelOutput-output,
+.IconLabelOutput-output {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 160px;
+  height: 20px;
+  text-align: center;
+  border: none;
+}
+
+.LabelOutput-output,
+.IconLabelOutput-output {
+  border: 1px solid var(--borderColor);
+}
+
+.LabelInput-input::placeholder {
+  font-style: italic;
+}
+
+.IconLabel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.IconLabelOutput-icon {
+  width: 28px;
+  height: 28px;
+}

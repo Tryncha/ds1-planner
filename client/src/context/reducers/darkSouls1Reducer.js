@@ -17,7 +17,8 @@ export const initialState = {
     gender: 'male',
     startingClass: startingClassData.name,
     attributes: { ...startingClassData.baseAttributes },
-    humanity: 0
+    humanity: 0,
+    covenant: 'noCovenant'
   }
 };
 
@@ -125,6 +126,15 @@ export function buildReducer(buildState, action) {
         character: {
           ...buildState.character,
           humanity: action.payload
+        }
+      };
+
+    case 'SET_COVENANT':
+      return {
+        ...buildState,
+        character: {
+          ...buildState.character,
+          covenant: action.payload
         }
       };
 

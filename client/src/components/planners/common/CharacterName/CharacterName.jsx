@@ -5,18 +5,19 @@ const CharacterName = ({ value, onChange, maxLength, placeholder }) => {
   const id = useId();
 
   return (
-    <div className="CharacterName">
-      <label htmlFor={id} className="CharacterName-label">
+    <div className="LabelInput">
+      <label htmlFor={id} className="LabelInput-label">
         Character Name
       </label>
       <input
         id={id}
-        className="CharacterName-input"
+        className="LabelInput-input"
         type="text"
         maxLength={maxLength}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        autoComplete="off"
       />
     </div>
   );

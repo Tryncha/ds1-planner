@@ -18,7 +18,7 @@ import DS2PlannerLayout from './components/layouts/DS2PlannerLayout';
 import DS3PlannerLayout from './components/layouts/DS3PlannerLayout';
 import ERPlannerLayout from './components/layouts/ERPlannerLayout';
 import Home from './pages/Home/Home';
-import SideBar from './components/SideBar/SideBar';
+import Sidebar from './components/Sidebar/Sidebar';
 import SelectPlanner from './pages/SelectPlanner/SelectPlanner';
 import NoPage from './pages/NoPage/NoPage';
 import DS1Create from './pages/Planners/DS1Planner/DS1Create';
@@ -41,7 +41,7 @@ const App = () => {
 
   return (
     <>
-      <SideBar />
+      <Sidebar />
       <Routes>
         <Route index element={<Home />} />
         <Route path="register" element={<Register />} />

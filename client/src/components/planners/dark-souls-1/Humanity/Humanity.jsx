@@ -1,7 +1,8 @@
 import { useContext, useEffect, useId, useState } from 'react';
 import DS1BuildContext from '../../../../context/DS1BuildContext';
+import './Humanity.css';
 
-const Humanity = () => {
+const Humanity = ({ icon }) => {
   const id = useId();
   const { build, buildDispatch } = useContext(DS1BuildContext);
 
@@ -58,6 +59,7 @@ const Humanity = () => {
 
   return (
     <div className="Humanity">
+      <img className="u-plannerIcon" src={icon} />
       <label htmlFor={id} className="Humanity-label">
         Humanity
       </label>

@@ -1,0 +1,23 @@
+.MiniCaption {
+  display: flex;
+  justify-content: space-around;
+  font-size: 10px;
+  color: var(--fontColor--em);
+  text-align: center;
+  margin: 5px 0;
+}
+
+.MiniCaption-label {
+  width: 100px;
+  text-align: initial;
+}
+
+.MiniCaption-base,
+.MiniCaption-current {
+  width: 40px;
+}
+
+.MiniCaption-decrease,
+.MiniCaption-increase {
+  width: 20px;
+}

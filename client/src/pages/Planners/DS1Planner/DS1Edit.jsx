@@ -74,9 +74,9 @@ const DS1Edit = () => {
           Viewing <strong>{buildOwner.username}</strong> build
         </span>
       )}
-      <form className="u-formPlanner" onSubmit={handleSubmit}>
+      <form className="u-plannerForm" onSubmit={handleSubmit}>
         <DS1Planner />
-        <div className="u-buttonsFormContainer">
+        <div className="u-plannerButtons">
           {isUserOwner ? (
             <>
               <Button modifier="success" type="submit">

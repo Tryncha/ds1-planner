@@ -2,7 +2,7 @@ import { useEffect, useId, useState } from 'react';
 import { capitalizeWord } from '../../../../utils';
 import './AttributeIO.css';
 
-const AttributeIO = ({ attribute, value, baseValue, setAttribute }) => {
+const AttributeIO = ({ icon, attribute, value, baseValue, setAttribute }) => {
   const id = useId();
 
   const minValue = baseValue;
@@ -53,6 +53,7 @@ const AttributeIO = ({ attribute, value, baseValue, setAttribute }) => {
 
   return (
     <div className="AttributeIO">
+      <img className="u-plannerIcon" src={icon} />
       <label htmlFor={id} className="AttributeIO-label">
         {capitalizeWord(attribute)}
       </label>

@@ -1,0 +1,11 @@
+.sm-EquipmentSlot {
+  width: 70px;
+  height: 70px;
+  border: 1px solid white;
+}
+
+.md-EquipmentSlot {
+  width: 100px;
+  height: 100px;
+  border: 1px solid white;
+}

@@ -5,11 +5,11 @@ const StartingClass = ({ value, onChange, options }) => {
   const id = useId();
 
   return (
-    <div className="StartingClass">
-      <label htmlFor={id} className="StartingClass-label">
+    <div className="LabelInput">
+      <label htmlFor={id} className="LabelInput-label">
         Starting Class
       </label>
-      <select id={id} className="StartingClass-select" value={value} onChange={onChange}>
+      <select id={id} className="LabelInput-select" value={value} onChange={onChange}>
         {options.map((cls) => (
           <option key={cls} value={cls}>
             {capitalizeWord(cls)}

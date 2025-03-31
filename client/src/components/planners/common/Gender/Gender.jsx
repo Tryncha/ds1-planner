@@ -5,11 +5,11 @@ const Gender = ({ value, onChange, options }) => {
   const id = useId();
 
   return (
-    <div className="Gender">
-      <label htmlFor={id} className="Gender-label">
+    <div className="LabelInput">
+      <label htmlFor={id} className="LabelInput-label">
         Gender
       </label>
-      <select id={id} className="Gender-select" value={value} onChange={onChange}>
+      <select id={id} className="LabelInput-select" value={value} onChange={onChange}>
         {options.map((opt) => (
           <option key={opt} value={opt}>
             {capitalizeWord(opt)}

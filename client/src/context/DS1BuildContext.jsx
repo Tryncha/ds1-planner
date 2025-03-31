@@ -43,6 +43,10 @@ export const DS1BuildProvider = ({ children }) => {
     buildDispatch({ type: 'SET_ATTRIBUTE', payload: { attribute, value: newValue } });
   }
 
+  function setCovenant(event) {
+    buildDispatch({ type: 'SET_COVENANT', payload: event.target.value });
+  }
+
   async function saveBuild(newBuild) {
     try {
       await buildService.saveGameBuild('dark-souls-1', newBuild);
@@ -100,6 +104,7 @@ export const DS1BuildProvider = ({ children }) => {
         setGender,
         setStartingClass,
         setAttribute,
+        setCovenant,
         saveBuild,
         updateBuild,
         loadBuild,
