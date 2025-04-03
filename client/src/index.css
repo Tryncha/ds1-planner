@@ -146,3 +146,9 @@ select {
   color: #e9a456;
   font-style: italic;
 }
+
+.u-textWithIcon {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

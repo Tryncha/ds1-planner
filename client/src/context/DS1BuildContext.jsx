@@ -47,20 +47,28 @@ export const DS1BuildProvider = ({ children }) => {
     buildDispatch({ type: 'SET_COVENANT', payload: event.target.value });
   }
 
-  function setWeapon(slot, weapon) {
-    buildDispatch({ type: 'SET_WEAPON', payload: { slot, weapon } });
+  function createSetWeapon(slot) {
+    return (weapon) => {
+      buildDispatch({ type: 'SET_WEAPON', payload: { slot, weapon } });
+    };
   }
 
-  function setArmor(slot, armor) {
-    buildDispatch({ type: 'SET_ARMOR', payload: { slot, armor } });
+  function createSetArmor(slot) {
+    return (armor) => {
+      buildDispatch({ type: 'SET_ARMOR', payload: { slot, armor } });
+    };
   }
 
-  function setRing(slot, ring) {
-    buildDispatch({ type: 'SET_RING', payload: { slot, ring } });
+  function createSetRing(slot) {
+    return (ring) => {
+      buildDispatch({ type: 'SET_RING', payload: { slot, ring } });
+    };
   }
 
-  function setSpell(slot, spell) {
-    buildDispatch({ type: 'SET_SPELL', payload: { slot, spell } });
+  function createSetSpell(slot) {
+    return (spell) => {
+      buildDispatch({ type: 'SET_SPELL', payload: { slot, spell } });
+    };
   }
 
   function setAttunementSlots(slots) {
@@ -125,10 +133,10 @@ export const DS1BuildProvider = ({ children }) => {
         setStartingClass,
         setAttribute,
         setCovenant,
-        setWeapon,
-        setArmor,
-        setRing,
-        setSpell,
+        createSetWeapon,
+        createSetArmor,
+        createSetRing,
+        createSetSpell,
         setAttunementSlots,
         saveBuild,
         updateBuild,

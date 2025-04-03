@@ -24,8 +24,8 @@ const DS1Create = () => {
 
   return (
     <main className="u-mainPage">
-      {/* <h2>Create DS1 Character</h2>
-      <hr className="u-hr" /> */}
+      <h2>Create DS1 Character</h2>
+      <hr className="u-hr" />
       <form className="u-plannerForm" onSubmit={handleSubmit}>
         <DS1Planner />
         <div className="u-plannerButtons">

@@ -18,10 +18,20 @@ export const initialState = {
     startingClass: startingClassData.name,
     attributes: { ...startingClassData.baseAttributes },
     humanity: 0,
-    covenant: 'noCovenant',
+    covenant: 'No covenant',
     equipment: {
-      weapons: ['none', 'none', 'none', 'none'],
-      armor: ['none', 'none', 'none', 'none'],
+      weapons: [
+        { name: 'none', upgrade: 'none', upgradeLevel: 0 },
+        { name: 'none', upgrade: 'none', upgradeLevel: 0 },
+        { name: 'none', upgrade: 'none', upgradeLevel: 0 },
+        { name: 'none', upgrade: 'none', upgradeLevel: 0 }
+      ],
+      armor: [
+        { name: 'none', upgradeLevel: 0 },
+        { name: 'none', upgradeLevel: 0 },
+        { name: 'none', upgradeLevel: 0 },
+        { name: 'none', upgradeLevel: 0 }
+      ],
       rings: ['none', 'none'],
       spells: ['none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none']
     }
@@ -148,9 +158,53 @@ export function buildReducer(buildState, action) {
       const currentWeapons = buildState.character.equipment.weapons;
       const newWeapons = currentWeapons.map((wpn, i) => {
         if (action.payload.slot === i) {
-          return action.payload.weapon;
+          return { ...wpn, name: action.payload.weapon };
         } else {
-          return wpn;
+          return { ...wpn };
+        }
+      });
+
+      return {
+        ...buildState,
+        character: {
+          ...buildState.character,
+          equipment: {
+            ...buildState.character.equipment,
+            weapons: newWeapons
+          }
+        }
+      };
+    }
+
+    case 'SET_WEAPON_UPGRADE': {
+      const currentWeapons = buildState.character.equipment.weapons;
+      const newWeapons = currentWeapons.map((wpn, i) => {
+        if (action.payload.slot === i) {
+          return { ...wpn, upgrade: action.payload.upgrade };
+        } else {
+          return { ...wpn };
+        }
+      });
+
+      return {
+        ...buildState,
+        character: {
+          ...buildState.character,
+          equipment: {
+            ...buildState.character.equipment,
+            weapons: newWeapons
+          }
+        }
+      };
+    }
+
+    case 'SET_WEAPON_UPGRADE_LEVEL': {
+      const currentWeapons = buildState.character.equipment.weapons;
+      const newWeapons = currentWeapons.map((wpn, i) => {
+        if (action.payload.slot === i) {
+          return { ...wpn, level: action.payload.level };
+        } else {
+          return { ...wpn };
         }
       });
 
@@ -170,9 +224,9 @@ export function buildReducer(buildState, action) {
       const currentArmor = buildState.character.equipment.armor;
       const newArmor = currentArmor.map((arm, i) => {
         if (action.payload.slot === i) {
-          return action.payload.armor;
+          return { ...arm, name: action.payload.armor };
         }
-        return arm;
+        return { ...arm };
       });
 
       return {

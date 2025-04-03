@@ -1,20 +1,38 @@
 [
   {
-    "name": "none"
+    "name": "none",
+    "type": "helm"
   },
   {
-    "name": "tattered_cloth_hood"
+    "name": "none",
+    "type": "chest"
   },
   {
-    "name": "tattered_cloth_manchette"
+    "name": "none",
+    "type": "gauntlet"
   },
   {
-    "name": "tattered_cloth_robe"
+    "name": "none",
+    "type": "leggings"
   },
   {
-    "name": "heavy_boots"
+    "name": "tattered_cloth_hood",
+    "type": "helm"
   },
   {
-    "name": "heavy_boots_female"
+    "name": "tattered_cloth_robe",
+    "type": "chest"
+  },
+  {
+    "name": "tattered_cloth_manchette",
+    "type": "gauntlet"
+  },
+  {
+    "name": "heavy_boots",
+    "type": "leggings"
+  },
+  {
+    "name": "heavy_boots_female",
+    "type": "leggings"
   }
 ]
