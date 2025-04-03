@@ -18,7 +18,13 @@ export const initialState = {
     startingClass: startingClassData.name,
     attributes: { ...startingClassData.baseAttributes },
     humanity: 0,
-    covenant: 'noCovenant'
+    covenant: 'noCovenant',
+    equipment: {
+      weapons: ['none', 'none', 'none', 'none'],
+      armor: ['none', 'none', 'none', 'none'],
+      rings: ['none', 'none'],
+      spells: ['none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none']
+    }
   }
 };
 
@@ -135,6 +141,103 @@ export function buildReducer(buildState, action) {
         character: {
           ...buildState.character,
           covenant: action.payload
+        }
+      };
+
+    case 'SET_WEAPON': {
+      const currentWeapons = buildState.character.equipment.weapons;
+      const newWeapons = currentWeapons.map((wpn, i) => {
+        if (action.payload.slot === i) {
+          return action.payload.weapon;
+        } else {
+          return wpn;
+        }
+      });
+
+      return {
+        ...buildState,
+        character: {
+          ...buildState.character,
+          equipment: {
+            ...buildState.character.equipment,
+            weapons: newWeapons
+          }
+        }
+      };
+    }
+
+    case 'SET_ARMOR': {
+      const currentArmor = buildState.character.equipment.armor;
+      const newArmor = currentArmor.map((arm, i) => {
+        if (action.payload.slot === i) {
+          return action.payload.armor;
+        }
+        return arm;
+      });
+
+      return {
+        ...buildState,
+        character: {
+          ...buildState.character,
+          equipment: {
+            ...buildState.character.equipment,
+            armor: newArmor
+          }
+        }
+      };
+    }
+
+    case 'SET_RING': {
+      const currentRings = buildState.character.equipment.rings;
+      const newRings = currentRings.map((rng, i) => {
+        if (action.payload.slot === i) {
+          return action.payload.ring;
+        }
+        return rng;
+      });
+
+      return {
+        ...buildState,
+        character: {
+          ...buildState.character,
+          equipment: {
+            ...buildState.character.equipment,
+            rings: newRings
+          }
+        }
+      };
+    }
+
+    case 'SET_SPELL': {
+      const currentSpells = buildState.character.equipment.spells;
+      const newSpells = currentSpells.map((spl, i) => {
+        if (action.payload.slot === i) {
+          return action.payload.spell;
+        }
+        return spl;
+      });
+
+      return {
+        ...buildState,
+        character: {
+          ...buildState.character,
+          equipment: {
+            ...buildState.character.equipment,
+            spells: newSpells
+          }
+        }
+      };
+    }
+
+    case 'SET_ATTUNEMENT_SLOTS':
+      return {
+        ...buildState,
+        character: {
+          ...buildState.character,
+          equipment: {
+            ...buildState.character.equipment,
+            spells: Array(action.payload).fill('none')
+          }
         }
       };
 

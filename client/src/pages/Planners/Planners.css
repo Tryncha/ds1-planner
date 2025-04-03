@@ -9,7 +9,6 @@
 .u-plannerColumns {
   display: flex;
   justify-content: center;
-  align-items: center;
   gap: 5px;
 }
 
@@ -22,13 +21,13 @@
 }
 
 .u-md-plannerColumn {
-  width: 350px;
-  height: 740px;
+  width: 380px;
+  /* height: 740px; */
 }
 
 .u-lg-plannerColumn {
   width: 550px;
-  height: 740px;
+  /* height: 740px; */
 }
 
 .u-plannerContainer {

@@ -47,6 +47,26 @@ export const DS1BuildProvider = ({ children }) => {
     buildDispatch({ type: 'SET_COVENANT', payload: event.target.value });
   }
 
+  function setWeapon(slot, weapon) {
+    buildDispatch({ type: 'SET_WEAPON', payload: { slot, weapon } });
+  }
+
+  function setArmor(slot, armor) {
+    buildDispatch({ type: 'SET_ARMOR', payload: { slot, armor } });
+  }
+
+  function setRing(slot, ring) {
+    buildDispatch({ type: 'SET_RING', payload: { slot, ring } });
+  }
+
+  function setSpell(slot, spell) {
+    buildDispatch({ type: 'SET_SPELL', payload: { slot, spell } });
+  }
+
+  function setAttunementSlots(slots) {
+    buildDispatch({ type: 'SET_ATTUNEMENT_SLOTS', payload: slots });
+  }
+
   async function saveBuild(newBuild) {
     try {
       await buildService.saveGameBuild('dark-souls-1', newBuild);
@@ -105,6 +125,11 @@ export const DS1BuildProvider = ({ children }) => {
         setStartingClass,
         setAttribute,
         setCovenant,
+        setWeapon,
+        setArmor,
+        setRing,
+        setSpell,
+        setAttunementSlots,
         saveBuild,
         updateBuild,
         loadBuild,

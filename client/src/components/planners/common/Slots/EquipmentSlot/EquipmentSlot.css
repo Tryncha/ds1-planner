@@ -1,11 +1,44 @@
-.sm-EquipmentSlot {
-  width: 70px;
-  height: 70px;
+.EquipmentSlot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid white;
 }
 
-.md-EquipmentSlot {
+.EquipmentSlot--sm {
+  width: 70px;
+  height: 70px;
+}
+
+.EquipmentSlot--md {
   width: 100px;
   height: 100px;
-  border: 1px solid white;
+}
+
+.EquipmentSlot-select {
+  text-align: center;
+}
+
+.EquipmentSlot-select--sm {
+  width: 70px;
+  height: 20px;
+  margin: 2px 0;
+  /* height: 70px; */
+}
+
+.EquipmentSlot-select--md {
+  width: 100px;
+  height: 20px;
+  margin: 2px 0;
+  /* height: 100px; */
+}
+
+.EquipmentSlot-img--sm {
+  width: 60px;
+  height: 60px;
+}
+
+.EquipmentSlot-img--md {
+  width: 90px;
+  height: 90px;
 }

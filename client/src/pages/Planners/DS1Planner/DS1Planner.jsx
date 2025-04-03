@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import DS1BuildContext from '../../../context/DS1BuildContext';
 import {
   ATTRIBUTES,
@@ -19,7 +19,13 @@ import Tags from '../../../components/planners/common/Tags/Tags';
 import Description from '../../../components/planners/common/Description/Description';
 import StaticStat from '../../../components/planners/common/Stats/StaticStat/StaticStat';
 import DynamicStat from '../../../components/planners/common/Stats/DynamicStat/DynamicStat';
-import { getHealth, getStamina } from '../../../utils/darkSouls1';
+import {
+  calculateAttunementSlots,
+  calculateHealth,
+  calculateSoulsToLevel,
+  calculateStamina,
+  calculateTotalSoulsSpent
+} from '../../../utils/darkSouls1';
 import EquipLoad from '../../../components/planners/common/Stats/EquipLoad/EquipLoad';
 
 import '../Planners.css';
@@ -29,6 +35,9 @@ import EquipmentSlot from '../../../components/planners/common/Slots/EquipmentSl
 import WeaponSlot from '../../../components/planners/common/Slots/WeaponSlot/WeaponSlot';
 import ArmorSlot from '../../../components/planners/common/Slots/ArmorSlot/ArmorSlot';
 import Fieldset from '../../../components/planners/common/Fieldset/Fieldset';
+
+import weaponsData from '../../../assets/dark-souls-1/weapons.json';
+import armorData from '../../../assets/dark-souls-1/armor.json';
 
 const DS1Planner = () => {
   const {
@@ -41,8 +50,38 @@ const DS1Planner = () => {
     setGender,
     setStartingClass,
     setAttribute,
-    setCovenant
+    setCovenant,
+    setWeapon,
+    setArmor,
+    setRing,
+    setSpell
   } = useContext(DS1BuildContext);
+
+  const [stats, setStats] = useState({});
+
+  useEffect(() => {
+    const newSoulLevel = calculateSoulLevel(
+      startingClassData.soulLevelBase,
+      startingClassData.basePoints,
+      build.character.attributes
+    );
+
+    const newStats = {
+      health: calculateHealth(build.character.attributes.vitality),
+      stamina: calculateStamina(build.character.attributes.endurance),
+      soulLevel: newSoulLevel,
+      soulsToNextLevel: calculateSoulsToLevel(newSoulLevel + 1),
+      totalSoulsSpent: calculateTotalSoulsSpent(startingClassData.soulLevelBase, newSoulLevel),
+      attunementSlots: calculateAttunementSlots(build.character.attributes.attunement)
+    };
+
+    setStats(newStats);
+  }, [build, startingClassData]);
+
+  const weaponsNames = weaponsData.map((wpn) => wpn.name);
+  const armor = armorData.map((arm) => arm.name);
+  const rings = ['none', 'opt1', 'opt2', 'opt3'];
+  const spells = ['none', 'opt1', 'opt2', 'opt3'];
 
   return (
     <>
@@ -52,7 +91,7 @@ const DS1Planner = () => {
           <Fieldset legend="Tags">
             <Tags tags={build.tags} toggleTag={toggleTag} />
           </Fieldset>
-          <div className="u-plannerContainer">
+          <Fieldset legend="Character">
             <CharacterName
               value={build.character.name}
               onChange={setCharacterName}
@@ -66,15 +105,7 @@ const DS1Planner = () => {
               options={STARTING_CLASSES}
             />
             <hr className="u-hr" />
-            <StaticStat
-              icon={statIcons.soulLevel}
-              stat="Soul Level"
-              value={calculateSoulLevel(
-                startingClassData.soulLevelBase,
-                startingClassData.basePoints,
-                build.character.attributes
-              )}
-            />
+            <StaticStat icon={statIcons.soulLevel} stat="Soul Level" value={stats.soulLevel} />
             <MiniCaption />
             {ATTRIBUTES.map((attr) => (
               <AttributeIO
@@ -89,22 +120,8 @@ const DS1Planner = () => {
             <hr className="u-hr" />
             <Humanity icon={statIcons.humanity} />
             <hr className="u-hr" />
-            <StaticStat
-              stat="Souls to Next Level"
-              value={calculateSoulLevel(
-                startingClassData.soulLevelBase,
-                startingClassData.basePoints,
-                build.character.attributes
-              )}
-            />
-            <StaticStat
-              stat="Total Souls Spent"
-              value={calculateSoulLevel(
-                startingClassData.soulLevelBase,
-                startingClassData.basePoints,
-                build.character.attributes
-              )}
-            />
+            <StaticStat stat="Souls to Next Level" value={stats.soulsToNextLevel} />
+            <StaticStat stat="Total Souls Spent" value={stats.totalSoulsSpent} />
             <hr className="u-hr" />
             <PlannerSelect
               label="Covenant"
@@ -112,7 +129,7 @@ const DS1Planner = () => {
               onChange={setCovenant}
               options={COVENANTS}
             />
-          </div>
+          </Fieldset>
           <Fieldset legend="Description">
             <Description value={build.description} onChange={setDescription} />
           </Fieldset>
@@ -120,41 +137,79 @@ const DS1Planner = () => {
         <div className="u-lg-plannerColumn">
           <Fieldset legend="Weapons">
             <div className="u-equipmentContainer">
-              <WeaponSlot />
-              <WeaponSlot />
+              <WeaponSlot
+                slot={0}
+                value={build.character.equipment.weapons[0]}
+                setEquipment={setWeapon}
+                options={weaponsNames}
+              />
+              <WeaponSlot
+                slot={1}
+                value={build.character.equipment.weapons[1]}
+                setEquipment={setWeapon}
+                options={weaponsNames}
+              />
             </div>
             <hr className="u-hr" />
             <div className="u-equipmentContainer">
-              <WeaponSlot />
-              <WeaponSlot />
+              <WeaponSlot
+                slot={2}
+                value={build.character.equipment.weapons[2]}
+                setEquipment={setWeapon}
+                options={weaponsNames}
+              />
+              <WeaponSlot
+                slot={3}
+                value={build.character.equipment.weapons[3]}
+                setEquipment={setWeapon}
+                options={weaponsNames}
+              />
             </div>
           </Fieldset>
           <Fieldset legend="Armor">
             <div className="u-equipmentContainer">
-              <ArmorSlot />
-              <ArmorSlot />
-              <ArmorSlot />
-              <ArmorSlot />
+              <ArmorSlot slot={0} value={build.character.equipment.armor[0]} setEquipment={setArmor} options={armor} />
+              <ArmorSlot slot={1} value={build.character.equipment.armor[1]} setEquipment={setArmor} options={armor} />
+              <ArmorSlot slot={2} value={build.character.equipment.armor[2]} setEquipment={setArmor} options={armor} />
+              <ArmorSlot slot={3} value={build.character.equipment.armor[3]} setEquipment={setArmor} options={armor} />
             </div>
           </Fieldset>
           <Fieldset legend="Rings">
             <div className="u-equipmentContainer">
-              <EquipmentSlot size="sm" />
-              <EquipmentSlot size="sm" />
+              <EquipmentSlot
+                size="sm"
+                slot={0}
+                value={build.character.equipment.rings[0]}
+                setEquipment={setRing}
+                options={rings}
+              />
+              <EquipmentSlot
+                size="sm"
+                slot={1}
+                value={build.character.equipment.rings[1]}
+                setEquipment={setRing}
+                options={rings}
+              />
             </div>
           </Fieldset>
-          <Fieldset legend="Spells">
+          <Fieldset legend={`Spells ${stats.attunementSlots ? stats.attunementSlots : 0}/10`}>
             <div className="u-spellsContainer">
-              <EquipmentSlot size="sm" />
-              <EquipmentSlot size="sm" />
-              <EquipmentSlot size="sm" />
-              <EquipmentSlot size="sm" />
-              <EquipmentSlot size="sm" />
-              <EquipmentSlot size="sm" />
-              <EquipmentSlot size="sm" />
-              <EquipmentSlot size="sm" />
-              <EquipmentSlot size="sm" />
-              <EquipmentSlot size="sm" />
+              {stats.attunementSlots > 0 ? (
+                Array(stats.attunementSlots)
+                  .fill('none')
+                  .map((slt, i) => (
+                    <EquipmentSlot
+                      key={`${slt}${i}`}
+                      size="sm"
+                      slot={i}
+                      value={build.character.equipment.spells[i]}
+                      setEquipment={setSpell}
+                      options={spells}
+                    />
+                  ))
+              ) : (
+                <p>Not enough Attunement</p>
+              )}
             </div>
           </Fieldset>
         </div>
@@ -163,21 +218,22 @@ const DS1Planner = () => {
             <DynamicStat
               icon={statIcons.health}
               stat="Health"
-              value={getHealth(build.character.attributes.vitality)}
-              percentage={(getHealth(build.character.attributes.vitality) * 100) / 1900}
+              value={stats.health}
+              percentage={(stats.health * 100) / 1900}
               color="#491818"
             />
             <DynamicStat
               icon={statIcons.stamina}
               stat="Stamina"
-              value={getStamina(build.character.attributes.endurance)}
-              percentage={(getStamina(build.character.attributes.endurance) * 100) / 160}
+              value={stats.stamina}
+              percentage={(stats.stamina * 100) / 160}
               color="#0c2c0c"
             />
             <EquipLoad />
             <StaticStat icon={statIcons.poise} stat="Poise" value={50} />
             <StaticStat icon={statIcons.itemDiscovery} stat="item Discovery" value={50} />
-            <hr className="u-hr" />
+          </Fieldset>
+          <Fieldset legend="Defenses">
             <StaticStat icon={statIcons.physicalDefense} stat="Physical Defense" value={50} />
             <StaticStat icon={statIcons.strikeDefense} stat="Strike Defense" value={50} />
             <StaticStat icon={statIcons.slashDefense} stat="Slash Defense" value={50} />
@@ -186,7 +242,8 @@ const DS1Planner = () => {
             <StaticStat icon={statIcons.magicDefense} stat="Magic Defense" value={50} />
             <StaticStat icon={statIcons.fireDefense} stat="Fire Defense" value={50} />
             <StaticStat icon={statIcons.lightningDefense} stat="Lightning Defense" value={50} />
-            <hr className="u-hr" />
+          </Fieldset>
+          <Fieldset legend="Resistances">
             <StaticStat icon={statIcons.bleedResistance} stat="Bleed Resistance" value={50} />
             <StaticStat icon={statIcons.poisonResistance} stat="Poison Resistance" value={50} />
             <StaticStat icon={statIcons.curseResistance} stat="Curse Resistance" value={50} />

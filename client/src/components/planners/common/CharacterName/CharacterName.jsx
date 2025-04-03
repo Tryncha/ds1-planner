@@ -7,7 +7,7 @@ const CharacterName = ({ value, onChange, maxLength, placeholder }) => {
   return (
     <div className="LabelInput">
       <label htmlFor={id} className="LabelInput-label">
-        Character Name
+        Name
       </label>
       <input
         id={id}

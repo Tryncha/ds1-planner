@@ -1,0 +1,44 @@
+[
+  {
+    "name": "none",
+    "type": "other",
+    "damage": { "physical": 87, "magical": 0, "fire": 0, "lightning": 0 },
+    "damage_type": "strike",
+    "critical": 100,
+    "durability": 250,
+    "weight": 3.0,
+    "attributes_needed": { "strength": 10, "dexterity": 0, "intelligence": 0, "faith": 0 },
+    "attributes_bonuses": { "strength": "A", "dexterity": "", "intelligence": "", "faith": "" },
+    "damage_reduction": { "physical": 45, "magical": 10, "fire": 30, "lightning": 30 },
+    "stability": 30,
+    "frampt_souls": 50
+  },
+  {
+    "name": "club",
+    "type": "hammer",
+    "damage": { "physical": 87, "magical": 0, "fire": 0, "lightning": 0 },
+    "damage_type": "strike",
+    "critical": 100,
+    "durability": 250,
+    "weight": 3.0,
+    "attributes_needed": { "strength": 10, "dexterity": 0, "intelligence": 0, "faith": 0 },
+    "attributes_bonuses": { "strength": "A", "dexterity": "", "intelligence": "", "faith": "" },
+    "damage_reduction": { "physical": 45, "magical": 10, "fire": 30, "lightning": 30 },
+    "stability": 30,
+    "frampt_souls": 50
+  },
+  {
+    "name": "hand_axe",
+    "type": "axe",
+    "damage": { "physical": 80, "magical": 0, "fire": 0, "lightning": 0 },
+    "damage_type": "normal",
+    "critical": 100,
+    "durability": 250,
+    "weight": 2.0,
+    "attributes_needed": { "strength": 8, "dexterity": 8, "intelligence": 0, "faith": 0 },
+    "attributes_bonuses": { "strength": 1.2, "dexterity": "D", "intelligence": "", "faith": "" },
+    "damage_reduction": { "physical": 55, "magical": 10, "fire": 40, "lightning": 40 },
+    "stability": 36,
+    "frampt_souls": 50
+  }
+]

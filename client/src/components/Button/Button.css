@@ -7,6 +7,11 @@
   cursor: pointer;
 }
 
+.Button:disabled {
+  background-color: #222222;
+  cursor: default;
+}
+
 .Button-primary {
   background-color: #0d3888;
 }
