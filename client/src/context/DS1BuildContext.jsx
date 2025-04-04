@@ -53,6 +53,18 @@ export const DS1BuildProvider = ({ children }) => {
     };
   }
 
+  function createSetWeaponUpgrade(slot) {
+    return (upgrade) => {
+      buildDispatch({ type: 'SET_WEAPON_UPGRADE', payload: { slot, upgrade } });
+    };
+  }
+
+  function createSetWeaponUpgradeLevel(slot) {
+    return (upgradeLevel) => {
+      buildDispatch({ type: 'SET_WEAPON_UPGRADE_LEVEL', payload: { slot, upgradeLevel } });
+    };
+  }
+
   function createSetArmor(slot) {
     return (armor) => {
       buildDispatch({ type: 'SET_ARMOR', payload: { slot, armor } });
@@ -117,7 +129,7 @@ export const DS1BuildProvider = ({ children }) => {
     buildDispatch({ type: 'RESET_BUILD' });
   }, []);
 
-  console.log(build);
+  console.log('build: ', build);
 
   return (
     <DS1BuildContext.Provider
@@ -134,6 +146,8 @@ export const DS1BuildProvider = ({ children }) => {
         setAttribute,
         setCovenant,
         createSetWeapon,
+        createSetWeaponUpgrade,
+        createSetWeaponUpgradeLevel,
         createSetArmor,
         createSetRing,
         createSetSpell,

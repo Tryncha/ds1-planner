@@ -6,7 +6,6 @@ const ArmorSlot = ({ value, setArmor, options }) => {
     <div>
       <EquipmentSlot size="md" type="armor" value={value} setEquipment={setArmor} options={options} />
       <div className="Slot-upgrade">
-        <select className="Slot-upgradeSelect" name="" id=""></select>
         <select className="Slot-levelSelect" name="" id=""></select>
       </div>
     </div>

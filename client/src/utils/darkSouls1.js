@@ -54,6 +54,13 @@ export function calculateAttunementSlots(attunement) {
 }
 
 export function calculatePoise(armor) {
-  const armorPoise = armor.reduce((acc, sum) => acc + sum, 0);
-  return armorPoise || 0;
+  return armor.reduce((acc, arm) => acc + arm.poise, 0).toFixed(1);
+}
+
+export function calculateArmorDefense(armor, type, stat) {
+  return armor.reduce((acc, arm) => acc + arm.defenses[type][stat], 0).toFixed(1);
+}
+
+export function calculateArmorResistance(armor, stat) {
+  return armor.reduce((acc, arm) => acc + arm.resistances[stat], 0).toFixed(1);
 }

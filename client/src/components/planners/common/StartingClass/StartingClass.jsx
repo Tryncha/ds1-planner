@@ -1,5 +1,5 @@
 import { useId } from 'react';
-import { capitalizeWord } from '../../../../utils/index.js';
+import { capitalizeText } from '../../../../utils/index.js';
 
 const StartingClass = ({ value, onChange, options }) => {
   const id = useId();
@@ -12,7 +12,7 @@ const StartingClass = ({ value, onChange, options }) => {
       <select id={id} className="LabelInput-select" value={value} onChange={onChange}>
         {options.map((cls) => (
           <option key={cls} value={cls}>
-            {capitalizeWord(cls)}
+            {capitalizeText(cls)}
           </option>
         ))}
       </select>

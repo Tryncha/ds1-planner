@@ -21,10 +21,10 @@ export const initialState = {
     covenant: 'No covenant',
     equipment: {
       weapons: [
-        { name: 'none', upgrade: 'none', upgradeLevel: 0 },
-        { name: 'none', upgrade: 'none', upgradeLevel: 0 },
-        { name: 'none', upgrade: 'none', upgradeLevel: 0 },
-        { name: 'none', upgrade: 'none', upgradeLevel: 0 }
+        { name: '', upgrade: '', upgradeLevel: 0 },
+        { name: '', upgrade: '', upgradeLevel: 0 },
+        { name: '', upgrade: '', upgradeLevel: 0 },
+        { name: '', upgrade: '', upgradeLevel: 0 }
       ],
       armor: [
         { name: 'none', upgradeLevel: 0 },
@@ -158,7 +158,7 @@ export function buildReducer(buildState, action) {
       const currentWeapons = buildState.character.equipment.weapons;
       const newWeapons = currentWeapons.map((wpn, i) => {
         if (action.payload.slot === i) {
-          return { ...wpn, name: action.payload.weapon };
+          return { name: action.payload.weapon, upgrade: '', upgradeLevel: 0 };
         } else {
           return { ...wpn };
         }
@@ -202,7 +202,7 @@ export function buildReducer(buildState, action) {
       const currentWeapons = buildState.character.equipment.weapons;
       const newWeapons = currentWeapons.map((wpn, i) => {
         if (action.payload.slot === i) {
-          return { ...wpn, level: action.payload.level };
+          return { ...wpn, upgradeLevel: Number(action.payload.upgradeLevel) };
         } else {
           return { ...wpn };
         }

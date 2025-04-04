@@ -1,5 +1,17 @@
-export function capitalizeWord(word) {
-  return word[0].toUpperCase() + word.slice(1);
+export function capitalizeText(text) {
+  const excludedWords = ['of', 'and', 'to', 'the'];
+
+  return text
+    .split('-')
+    .map((word) => {
+      const lowerCaseWord = word.toLowerCase();
+      if (!excludedWords.includes(lowerCaseWord)) {
+        return lowerCaseWord[0].toUpperCase() + lowerCaseWord.slice(1);
+      } else {
+        return lowerCaseWord;
+      }
+    })
+    .join(' ');
 }
 
 export function getStartingClassData(startingClasses, startingClassName) {

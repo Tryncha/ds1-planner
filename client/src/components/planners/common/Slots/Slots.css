@@ -2,6 +2,7 @@
   width: 100px;
   height: 20px;
   margin: 4px 0;
+  text-align: center;
 }
 
 .Slot-upgrade {
@@ -13,10 +14,12 @@
   width: 75px;
   height: 20px;
   margin: 4px 0;
+  text-align: center;
 }
 
 .Slot-levelSelect {
   width: 23px;
   height: 20px;
   margin: 4px 0;
+  text-align: center;
 }

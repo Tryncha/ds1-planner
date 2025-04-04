@@ -1,11 +1,12 @@
+import { capitalizeText } from '../../../../../utils';
 import '../Stat.css';
 
-const DynamicStat = ({ icon, stat, value, color, percentage }) => {
+const DynamicStat = ({ stat, value, color, percentage }) => {
   return (
     <div className="IconLabelOutput">
       <div className="IconLabel">
-        <img className="IconLabelOutput-icon" src={icon} />
-        <label className="IconLabelOutput-label">{stat}</label>
+        <img className="IconLabelOutput-icon" src={`/dark-souls-1/images/stat-icons/${stat}.png`} />
+        <label className="IconLabelOutput-label">{capitalizeText(stat)}</label>
       </div>
       <output
         className="IconLabelOutput-output"

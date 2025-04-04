@@ -1,38 +1,302 @@
 [
   {
     "name": "none",
-    "type": "helm"
+    "type": "helm",
+    "set": "none",
+    "defenses": {
+      "physical": {
+        "normal": 0,
+        "strike": 0,
+        "slash": 0,
+        "thrust": 0
+      },
+      "elemental": {
+        "magic": 0,
+        "fire": 0,
+        "lightning": 0
+      }
+    },
+    "resistances": {
+      "bleed": 0,
+      "poison": 0,
+      "curse": 0
+    },
+    "poise": 0,
+    "weight": 0
   },
   {
     "name": "none",
-    "type": "chest"
+    "type": "chest",
+    "set": "none",
+    "defenses": {
+      "physical": {
+        "normal": 0,
+        "strike": 0,
+        "slash": 0,
+        "thrust": 0
+      },
+      "elemental": {
+        "magic": 0,
+        "fire": 0,
+        "lightning": 0
+      }
+    },
+    "resistances": {
+      "bleed": 0,
+      "poison": 0,
+      "curse": 0
+    },
+    "poise": 0,
+    "weight": 0
   },
   {
     "name": "none",
-    "type": "gauntlet"
+    "type": "gauntlets",
+    "set": "none",
+    "defenses": {
+      "physical": {
+        "normal": 0,
+        "strike": 0,
+        "slash": 0,
+        "thrust": 0
+      },
+      "elemental": {
+        "magic": 0,
+        "fire": 0,
+        "lightning": 0
+      }
+    },
+    "resistances": {
+      "bleed": 0,
+      "poison": 0,
+      "curse": 0
+    },
+    "poise": 0,
+    "weight": 0
   },
   {
     "name": "none",
-    "type": "leggings"
+    "type": "leggings",
+    "set": "none",
+    "defenses": {
+      "physical": {
+        "normal": 0,
+        "strike": 0,
+        "slash": 0,
+        "thrust": 0
+      },
+      "elemental": {
+        "magic": 0,
+        "fire": 0,
+        "lightning": 0
+      }
+    },
+    "resistances": {
+      "bleed": 0,
+      "poison": 0,
+      "curse": 0
+    },
+    "poise": 0,
+    "weight": 0
   },
   {
-    "name": "tattered_cloth_hood",
-    "type": "helm"
+    "name": "tattered-cloth-hood",
+    "type": "helm",
+    "set": "pyromancer",
+    "defenses": {
+      "physical": {
+        "normal": 8,
+        "strike": 8.9,
+        "slash": 8,
+        "thrust": 8
+      },
+      "elemental": {
+        "magic": 9,
+        "fire": 12,
+        "lightning": 6
+      }
+    },
+    "resistances": {
+      "bleed": 9,
+      "poison": 23,
+      "curse": 1
+    },
+    "poise": 0,
+    "weight": 1.1
   },
   {
-    "name": "tattered_cloth_robe",
-    "type": "chest"
+    "name": "tattered-cloth-robe",
+    "type": "chest",
+    "set": "pyromancer",
+    "defenses": {
+      "physical": {
+        "normal": 21,
+        "strike": 23.3,
+        "slash": 21,
+        "thrust": 21
+      },
+      "elemental": {
+        "magic": 23,
+        "fire": 30,
+        "lightning": 17
+      }
+    },
+    "resistances": {
+      "bleed": 23,
+      "poison": 59,
+      "curse": 2
+    },
+    "poise": 0,
+    "weight": 2.7
   },
   {
-    "name": "tattered_cloth_manchette",
-    "type": "gauntlet"
+    "name": "tattered-cloth-manchette",
+    "type": "gauntlets",
+    "set": "pyromancer",
+    "defenses": {
+      "physical": {
+        "normal": 12,
+        "strike": 13.3,
+        "slash": 12,
+        "thrust": 12
+      },
+      "elemental": {
+        "magic": 14,
+        "fire": 18,
+        "lightning": 10
+      }
+    },
+    "resistances": {
+      "bleed": 14,
+      "poison": 35,
+      "curse": 1
+    },
+    "poise": 0,
+    "weight": 1.6
   },
   {
-    "name": "heavy_boots",
-    "type": "leggings"
+    "name": "heavy-boots",
+    "type": "leggings",
+    "set": "pyromancer",
+    "defenses": {
+      "physical": {
+        "normal": 12,
+        "strike": 13.3,
+        "slash": 12,
+        "thrust": 12
+      },
+      "elemental": {
+        "magic": 14,
+        "fire": 18,
+        "lightning": 10
+      }
+    },
+    "resistances": {
+      "bleed": 14,
+      "poison": 35,
+      "curse": 1
+    },
+    "poise": 0,
+    "weight": 1.6
   },
   {
-    "name": "heavy_boots_female",
-    "type": "leggings"
+    "name": "standard-helm",
+    "type": "helm",
+    "set": "warrior",
+    "defenses": {
+      "physical": {
+        "normal": 14,
+        "strike": 8,
+        "slash": 16,
+        "thrust": 14
+      },
+      "elemental": {
+        "magic": 8,
+        "fire": 8,
+        "lightning": 3
+      }
+    },
+    "resistances": {
+      "bleed": 9,
+      "poison": 8,
+      "curse": 0
+    },
+    "poise": 5,
+    "weight": 3.5
+  },
+  {
+    "name": "hard-leather-armor",
+    "type": "chest",
+    "set": "warrior",
+    "defenses": {
+      "physical": {
+        "normal": 26,
+        "strike": 27.6,
+        "slash": 26,
+        "thrust": 26
+      },
+      "elemental": {
+        "magic": 20,
+        "fire": 13,
+        "lightning": 23
+      }
+    },
+    "resistances": {
+      "bleed": 23,
+      "poison": 20,
+      "curse": 0
+    },
+    "poise": 0,
+    "weight": 5.9
+  },
+  {
+    "name": "hard-leather-gauntlets",
+    "type": "gauntlets",
+    "set": "warrior",
+    "defenses": {
+      "physical": {
+        "normal": 13,
+        "strike": 13.8,
+        "slash": 13,
+        "thrust": 13
+      },
+      "elemental": {
+        "magic": 12,
+        "fire": 7,
+        "lightning": 13
+      }
+    },
+    "resistances": {
+      "bleed": 14,
+      "poison": 12,
+      "curse": 0
+    },
+    "poise": 0,
+    "weight": 3.5
+  },
+  {
+    "name": "hard-leather-boots",
+    "type": "leggings",
+    "set": "warrior",
+    "defenses": {
+      "physical": {
+        "normal": 13,
+        "strike": 13.8,
+        "slash": 13,
+        "thrust": 13
+      },
+      "elemental": {
+        "magic": 12,
+        "fire": 7,
+        "lightning": 13
+      }
+    },
+    "resistances": {
+      "bleed": 14,
+      "poison": 12,
+      "curse": 0
+    },
+    "poise": 0,
+    "weight": 3.5
   }
 ]

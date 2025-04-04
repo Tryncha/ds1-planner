@@ -5,7 +5,6 @@ import {
   GENDERS,
   STARTING_CLASSES,
   // titlePlaceholders,
-  statIcons,
   COVENANTS
 } from '../../../constants/darkSouls1';
 import CharacterName from '../../../components/planners/common/CharacterName/CharacterName';
@@ -20,8 +19,11 @@ import Tags from '../../../components/planners/common/Tags/Tags';
 import StaticStat from '../../../components/planners/common/Stats/StaticStat/StaticStat';
 import DynamicStat from '../../../components/planners/common/Stats/DynamicStat/DynamicStat';
 import {
+  calculateArmorDefense,
+  calculateArmorResistance,
   calculateAttunementSlots,
   calculateHealth,
+  calculatePoise,
   calculateSoulsToLevel,
   calculateStamina,
   calculateTotalSoulsSpent
@@ -38,6 +40,8 @@ import Fieldset from '../../../components/planners/common/Fieldset/Fieldset';
 
 import weaponsData from '../../../assets/dark-souls-1/weapons.json';
 import armorData from '../../../assets/dark-souls-1/armor.json';
+import ringsData from '../../../assets/dark-souls-1/rings.json';
+
 import RingSlot from '../../../components/planners/common/Slots/RingSlot/RingSlot';
 import SpellSlot from '../../../components/planners/common/Slots/SpellSlot/SpellSlot';
 
@@ -54,11 +58,29 @@ const DS1Planner = () => {
     setAttribute,
     setCovenant,
     createSetWeapon,
+    createSetWeaponUpgrade,
+    createSetWeaponUpgradeLevel,
     createSetArmor,
     createSetRing,
     createSetSpell
   } = useContext(DS1BuildContext);
 
+  const initialEquipmentData = {
+    weapons: [
+      weaponsData.find((wpn) => wpn.name === build.character.equipment.weapons[0].name),
+      weaponsData.find((wpn) => wpn.name === build.character.equipment.weapons[1].name),
+      weaponsData.find((wpn) => wpn.name === build.character.equipment.weapons[2].name),
+      weaponsData.find((wpn) => wpn.name === build.character.equipment.weapons[3].name)
+    ],
+    armor: [
+      armorData.find((arm) => arm.name === build.character.equipment.armor[0].name),
+      armorData.find((arm) => arm.name === build.character.equipment.armor[1].name),
+      armorData.find((arm) => arm.name === build.character.equipment.armor[2].name),
+      armorData.find((arm) => arm.name === build.character.equipment.armor[3].name)
+    ]
+  };
+
+  const [equipmentData, setEquipmentData] = useState(initialEquipmentData);
   const [stats, setStats] = useState({});
 
   useEffect(() => {
@@ -74,17 +96,50 @@ const DS1Planner = () => {
       soulLevel: newSoulLevel,
       soulsToNextLevel: calculateSoulsToLevel(newSoulLevel + 1),
       totalSoulsSpent: calculateTotalSoulsSpent(startingClassData.soulLevelBase, newSoulLevel),
-      attunementSlots: calculateAttunementSlots(build.character.attributes.attunement)
+      attunementSlots: calculateAttunementSlots(build.character.attributes.attunement),
+      poise: calculatePoise(equipmentData.armor),
+      defenses: {
+        physical: {
+          normal: calculateArmorDefense(equipmentData.armor, 'physical', 'normal'),
+          strike: calculateArmorDefense(equipmentData.armor, 'physical', 'strike'),
+          slash: calculateArmorDefense(equipmentData.armor, 'physical', 'slash'),
+          thrust: calculateArmorDefense(equipmentData.armor, 'physical', 'thrust')
+        },
+        elemental: {
+          magic: calculateArmorDefense(equipmentData.armor, 'elemental', 'magic'),
+          fire: calculateArmorDefense(equipmentData.armor, 'elemental', 'fire'),
+          lightning: calculateArmorDefense(equipmentData.armor, 'elemental', 'lightning')
+        }
+      },
+      resistances: {
+        bleed: calculateArmorResistance(equipmentData.armor, 'bleed'),
+        poison: calculateArmorResistance(equipmentData.armor, 'poison'),
+        curse: calculateArmorResistance(equipmentData.armor, 'curse')
+      }
     };
 
     setStats(newStats);
-  }, [build, startingClassData]);
+  }, [build, startingClassData, equipmentData]);
 
   const weaponsNames = weaponsData.map((wpn) => wpn.name);
+  const weaponUpgrades = [
+    'regular',
+    'divine',
+    'occult',
+    'magic',
+    'enchanted',
+    'crystal',
+    'raw',
+    'fire',
+    'chaos',
+    'lightning'
+  ];
+
+  const weaponUpgradesLevels = Array.from({ length: 16 }, (_, i) => i);
 
   const helmsData = armorData.filter((arm) => arm.type === 'helm');
   const chestsData = armorData.filter((arm) => arm.type === 'chest');
-  const gauntletsData = armorData.filter((arm) => arm.type === 'gauntlet');
+  const gauntletsData = armorData.filter((arm) => arm.type === 'gauntlets');
   const leggingsData = armorData.filter((arm) => arm.type === 'leggings');
 
   const helmsNames = helmsData.map((hlm) => hlm.name);
@@ -92,25 +147,29 @@ const DS1Planner = () => {
   const gauntletsNames = gauntletsData.map((gnt) => gnt.name);
   const leggingsNames = leggingsData.map((leg) => leg.name);
 
-  const rings = ['none', 'opt1', 'opt2', 'opt3'];
+  const rings = ringsData.map((rng) => rng.name);
   const spells = ['none', 'opt1', 'opt2', 'opt3'];
 
-  const currentEquipmentData = {
-    weapons: [
-      weaponsData.find((wpn) => wpn.name === build.character.equipment.weapons[0].name),
-      weaponsData.find((wpn) => wpn.name === build.character.equipment.weapons[1].name),
-      weaponsData.find((wpn) => wpn.name === build.character.equipment.weapons[2].name),
-      weaponsData.find((wpn) => wpn.name === build.character.equipment.weapons[3].name)
-    ],
-    armor: [
-      armorData.find((arm) => arm.name === build.character.equipment.armor[0].name),
-      armorData.find((arm) => arm.name === build.character.equipment.armor[1].name),
-      armorData.find((arm) => arm.name === build.character.equipment.armor[2].name),
-      armorData.find((arm) => arm.name === build.character.equipment.armor[3].name)
-    ]
-  };
+  useEffect(() => {
+    const newEquipmentData = {
+      weapons: [
+        weaponsData.find((wpn) => wpn.name === build.character.equipment.weapons[0].name),
+        weaponsData.find((wpn) => wpn.name === build.character.equipment.weapons[1].name),
+        weaponsData.find((wpn) => wpn.name === build.character.equipment.weapons[2].name),
+        weaponsData.find((wpn) => wpn.name === build.character.equipment.weapons[3].name)
+      ],
+      armor: [
+        armorData.find((arm) => arm.name === build.character.equipment.armor[0].name),
+        armorData.find((arm) => arm.name === build.character.equipment.armor[1].name),
+        armorData.find((arm) => arm.name === build.character.equipment.armor[2].name),
+        armorData.find((arm) => arm.name === build.character.equipment.armor[3].name)
+      ]
+    };
 
-  console.log(currentEquipmentData);
+    setEquipmentData(newEquipmentData);
+  }, [build.character.equipment]);
+
+  console.log('equipmentData:', equipmentData);
 
   return (
     <>
@@ -134,12 +193,12 @@ const DS1Planner = () => {
               options={STARTING_CLASSES}
             />
             <hr className="u-hr" />
-            <StaticStat icon={statIcons.soulLevel} stat="Soul Level" value={stats.soulLevel} />
+            <StaticStat icon stat="soul-level" value={stats.soulLevel} />
             <MiniCaption />
             {ATTRIBUTES.map((attr) => (
               <AttributeIO
                 key={attr.slice(0, 3)}
-                icon={statIcons[attr]}
+                iconSrc={`/dark-souls-1/images/stat-icons/${attr}.png`}
                 attribute={attr}
                 value={build.character.attributes[attr]}
                 baseValue={startingClassData.baseAttributes[attr]}
@@ -147,10 +206,10 @@ const DS1Planner = () => {
               />
             ))}
             <hr className="u-hr" />
-            <Humanity icon={statIcons.humanity} />
+            <Humanity iconSrc="/dark-souls-1/images/stat-icons/humanity.png" />
             <hr className="u-hr" />
-            <StaticStat stat="Souls to Next Level" value={stats.soulsToNextLevel} />
-            <StaticStat stat="Total Souls Spent" value={stats.totalSoulsSpent} />
+            <StaticStat stat="souls-to-next-level" value={stats.soulsToNextLevel} />
+            <StaticStat stat="total-souls-spent" value={stats.totalSoulsSpent} />
             <hr className="u-hr" />
             <PlannerSelect
               label="Covenant"
@@ -166,45 +225,35 @@ const DS1Planner = () => {
         <div className="u-lg-plannerColumn">
           <Fieldset legend="Weapons">
             <div className="u-equipmentContainer">
-              <WeaponSlot
-                value={build.character.equipment.weapons[0].name}
-                setWeapon={createSetWeapon(0)}
-                // upgrade={}
-                // setUpgrade={}
-                // upgradeLevel={}
-                // setUpgradeLevel={}
-                options={weaponsNames}
-              />
-              <WeaponSlot
-                value={build.character.equipment.weapons[1].name}
-                setWeapon={createSetWeapon(1)}
-                // upgrade={}
-                // setUpgrade={}
-                // upgradeLevel={}
-                // setUpgradeLevel={}
-                options={weaponsNames}
-              />
+              {Array.from({ length: 2 }, (_, i) => (
+                <WeaponSlot
+                  value={build.character.equipment.weapons[i].name}
+                  setWeapon={createSetWeapon(i)}
+                  upgrade={build.character.equipment.weapons[i].upgrade}
+                  setUpgrade={createSetWeaponUpgrade(i)}
+                  upgradeLevel={build.character.equipment.weapons[i].upgradeLevel}
+                  setUpgradeLevel={createSetWeaponUpgradeLevel(i)}
+                  options={weaponsNames}
+                  upgradeOptions={weaponUpgrades}
+                  upgradeLevelOptions={weaponUpgradesLevels}
+                />
+              ))}
             </div>
             <hr className="u-hr" />
             <div className="u-equipmentContainer">
-              <WeaponSlot
-                value={build.character.equipment.weapons[2].name}
-                setWeapon={createSetWeapon(2)}
-                // upgrade={}
-                // setUpgrade={}
-                // upgradeLevel={}
-                // setUpgradeLevel={}
-                options={weaponsNames}
-              />
-              <WeaponSlot
-                value={build.character.equipment.weapons[3].name}
-                setWeapon={createSetWeapon(3)}
-                // upgrade={}
-                // setUpgrade={}
-                // upgradeLevel={}
-                // setUpgradeLevel={}
-                options={weaponsNames}
-              />
+              {Array.from({ length: 2 }, (_, i) => (
+                <WeaponSlot
+                  value={build.character.equipment.weapons[i + 2].name}
+                  setWeapon={createSetWeapon(i + 2)}
+                  upgrade={build.character.equipment.weapons[i + 2].upgrade}
+                  setUpgrade={createSetWeaponUpgrade(i + 2)}
+                  upgradeLevel={build.character.equipment.weapons[i + 2].upgradeLevel}
+                  setUpgradeLevel={createSetWeaponUpgradeLevel(i + 2)}
+                  options={weaponsNames}
+                  upgradeOptions={weaponUpgrades}
+                  upgradeLevelOptions={weaponUpgradesLevels}
+                />
+              ))}
             </div>
           </Fieldset>
           <Fieldset legend="Armor">
@@ -233,27 +282,25 @@ const DS1Planner = () => {
           </Fieldset>
           <Fieldset legend="Rings">
             <div className="u-equipmentContainer">
-              <RingSlot value={build.character.equipment.rings[0]} setRing={createSetRing(0)} options={rings} />
-              <RingSlot value={build.character.equipment.rings[1]} setRing={createSetRing(1)} options={rings} />
+              {Array.from({ length: 2 }, (_, i) => (
+                <RingSlot value={build.character.equipment.rings[i]} setRing={createSetRing(i)} options={rings} />
+              ))}
             </div>
           </Fieldset>
           <Fieldset legend={`Spells ${stats.attunementSlots ? stats.attunementSlots : 0}/10`}>
             <div className="u-spellsContainer">
               {stats.attunementSlots > 0 ? (
-                Array(stats.attunementSlots)
-                  .fill('none')
-                  .map((slt, i) => (
-                    <SpellSlot
-                      key={`${slt}${i}`}
-                      value={build.character.equipment.spells[i]}
-                      setSpell={createSetSpell(i)}
-                      options={spells}
-                    />
-                  ))
+                Array.from({ length: stats.attunementSlots }, (_, i) => (
+                  <SpellSlot
+                    value={build.character.equipment.spells[i]}
+                    setSpell={createSetSpell(i)}
+                    options={spells}
+                  />
+                ))
               ) : (
                 <span className="u-textWithIcon">
                   Not enough
-                  <img src={statIcons.attunement} alt="Attunement" />
+                  <img src="/dark-souls-1/images/stat-icons/attunement.png" alt="Attunement" />
                   Attunement
                 </span>
               )}
@@ -263,37 +310,37 @@ const DS1Planner = () => {
         <div className="u-md-plannerColumn">
           <Fieldset legend="Stats">
             <DynamicStat
-              icon={statIcons.health}
-              stat="Health"
+              icon
+              stat="health"
               value={stats.health}
               percentage={(stats.health * 100) / 1900}
               color="#491818"
             />
             <DynamicStat
-              icon={statIcons.stamina}
-              stat="Stamina"
+              icon
+              stat="stamina"
               value={stats.stamina}
               percentage={(stats.stamina * 100) / 160}
               color="#0c2c0c"
             />
             <EquipLoad />
-            <StaticStat icon={statIcons.poise} stat="Poise" value={50} />
-            <StaticStat icon={statIcons.itemDiscovery} stat="item Discovery" value={50} />
+            <StaticStat icon stat="poise" value={stats.poise} />
+            <StaticStat icon stat="item-discovery" value={100} />
           </Fieldset>
           <Fieldset legend="Defenses">
-            <StaticStat icon={statIcons.physicalDefense} stat="Physical Defense" value={50} />
-            <StaticStat icon={statIcons.strikeDefense} stat="Strike Defense" value={50} />
-            <StaticStat icon={statIcons.slashDefense} stat="Slash Defense" value={50} />
-            <StaticStat icon={statIcons.thrustDefense} stat="Thrust Defense" value={50} />
+            <StaticStat icon stat="normal-defense" value={stats.defenses?.physical.normal} />
+            <StaticStat icon stat="strike-defense" value={stats.defenses?.physical.strike} />
+            <StaticStat icon stat="slash-defense" value={stats.defenses?.physical.slash} />
+            <StaticStat icon stat="thrust-defense" value={stats.defenses?.physical.thrust} />
             <hr className="u-hr" />
-            <StaticStat icon={statIcons.magicDefense} stat="Magic Defense" value={50} />
-            <StaticStat icon={statIcons.fireDefense} stat="Fire Defense" value={50} />
-            <StaticStat icon={statIcons.lightningDefense} stat="Lightning Defense" value={50} />
+            <StaticStat icon stat="magic-defense" value={stats.defenses?.elemental.magic} />
+            <StaticStat icon stat="fire-defense" value={stats.defenses?.elemental.fire} />
+            <StaticStat icon stat="lightning-defense" value={stats.defenses?.elemental.lightning} />
           </Fieldset>
           <Fieldset legend="Resistances">
-            <StaticStat icon={statIcons.bleedResistance} stat="Bleed Resistance" value={50} />
-            <StaticStat icon={statIcons.poisonResistance} stat="Poison Resistance" value={50} />
-            <StaticStat icon={statIcons.curseResistance} stat="Curse Resistance" value={50} />
+            <StaticStat icon stat="bleed-resistance" value={stats.resistances?.bleed} />
+            <StaticStat icon stat="poison-resistance" value={stats.resistances?.poison} />
+            <StaticStat icon stat="curse-resistance" value={stats.resistances?.curse} />
           </Fieldset>
         </div>
       </div>
